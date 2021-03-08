@@ -62,14 +62,15 @@ export default function Recipe({ recipe }) {
                     <div className={styles.intro}>
                         <h1>{recipe.name}</h1>
                         <div className={styles.icons}>
-                            <i className="icon-share" onClick={() => handleRecipeShare(recipe.name, recipe.description, recipe.id)}></i>
+                            <i className="icon-share" onClick={() => handleRecipeShare(recipe.name, recipe.id)}></i>
                             <i className="icon-favorite_outline"></i>
                         </div>
                     </div>
-                    <div className={styles.tags}>
-                        <p>Vegetarian</p>
-                        <p>Curry</p>
-                    </div>
+                    <ul className={styles.tags}>
+                        <li>Vegetarian</li>
+                        <li>Curry</li>
+                        <li>Spinach</li>
+                    </ul>
                     <div className={styles.description}>
                         <h3>Description</h3>
                         <p>{recipe.description}</p>

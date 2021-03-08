@@ -3,11 +3,11 @@ export const convertImage = (image: string, width: number): string => {
     return covertedImage
 }
 
-export const handleRecipeShare = (title: string, text: string, id: string) => {
+export const handleRecipeShare = (title: string, id: string) => {
     if (navigator.share) {
         navigator.share({
             title: title,
-            text: text,
+            text: "Check out this awesome recipe on The Mish Dish!",
             url: `https://themishdish.co.za/recipes/${id}`,
         })
             .then(() => console.log('Successful share'))
