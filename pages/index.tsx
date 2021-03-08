@@ -1,13 +1,16 @@
 import Link from "next/link";
+import { GetStaticProps } from 'next';
+
 
 // Components
 import Layout from "../components/Layout/Layout";
 import Search from "../components/UI/Search/Search";
+import Carousel from '../components/Carousel/Carousel'
 
 // Styles
 import styles from '../styles/pages/home.module.scss';
 
-export default function Home() {
+export default function Home({ recipes }) {
   return (
     <Layout
       head={{
@@ -27,6 +30,7 @@ export default function Home() {
           </Link>
         </div>
         <div className={styles.carousel}>
+          <Carousel type="Recommended" recipes={recipes} />
         </div>
       </section>
 
@@ -63,4 +67,16 @@ export default function Home() {
 
     </Layout >
   )
+}
+
+
+export const getStaticProps: GetStaticProps = async () => {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/recipes`);
+  const recipes = await response.json();
+
+  return {
+    props: {
+      recipes
+    },
+  }
 }

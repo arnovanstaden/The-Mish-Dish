@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { convertImage } from "../../utils/utils";
+import ClassNames from "classnames";
 
 // Styles
 import styles from "./recipe.module.scss";
@@ -12,18 +13,24 @@ interface IRecipe {
     recipeThumbnailUrl: string;
     ingredients: {
         [key: number]: string[]
-    }
-
+    };
+    key: number;
+    carouselItem: boolean
 }
 
 export default function Recipe(recipe: IRecipe) {
     // const recipeImage = convertImage(recipe.recipeThumbnailUrl, 400);
     const recipeImage = recipe.recipeThumbnailUrl;
 
+    const recipeClasses = ClassNames(
+        styles.recipe,
+        recipe.carouselItem ? styles.carouselItem : null
+    )
+
     return (
         <Link href={`/recipes/${recipe.id}`}>
             <a>
-                <article className={styles.recipe}>
+                <article className={recipeClasses}>
                     <div className={styles.image}>
                         <img loading="lazy" src={recipeImage} alt={`${recipe.name} Thumbnail`} />
                     </div>
