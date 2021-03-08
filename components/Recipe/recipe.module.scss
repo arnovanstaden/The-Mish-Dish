@@ -1,0 +1,58 @@
+@import "../../styles//variables.scss";
+
+.recipe {
+
+    background-color: $light-grey;
+    border-radius: 1rem;
+    overflow: hidden;
+
+    .image {
+        width: 100%;
+        height: 30vh;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center center;
+        }
+    }
+
+    .details {
+        padding: 1rem;
+
+        .name {
+            font-weight: 600;
+            font-size: 1rem;
+            margin: 0;
+        }
+
+        .info {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 0.5rem;
+
+            p {
+                margin: 0;
+                font-size: 0.8rem;
+                color: $blue-grey;
+            }
+
+            .stats {
+                display: flex;
+                column-gap: 0.5rem;
+
+                .stat {
+                    display: flex;
+                    align-items: center;
+
+                    i {
+                        color: $yellow;
+                        margin-right: 0.25rem;
+                    }
+                }
+            }
+        }
+    }
+}

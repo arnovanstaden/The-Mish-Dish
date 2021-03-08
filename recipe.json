@@ -1,0 +1,49 @@
+{
+    "recipeImageUrls": [
+        "https://res.cloudinary.com/dhnnaqb9p/image/upload/v1588501649/The-Mish-Dish/MD4/1.jpg"
+    ],
+    "_id": "5eae9c89a2a86a191881d6f8",
+    "name": "Thai Green Chicken Curry",
+    "description": "A hearty, spicy, and super tasty Thai green curry! ",
+    "recipeType": "meat",
+    "ingredients": {
+        "0": [
+            "4 cloves of garlic",
+            "1 tablespoon of fresh ginger",
+            "1 white onion",
+            "1 red pepper",
+            "1 yellow pepper",
+            "1 orange/green pepper",
+            "4 chicken breasts",
+            "Thai green curry paste",
+            "1 can of coconut milk ",
+            "2 cups of frozen peas",
+            "3 cups of basmati rice"
+        ]
+    },
+    "method": {
+        "0": [
+            "Slice up your onion and start to fry in your pot. [Side note, from beginning to start you should keep your pot on low heat]. ",
+            "Finely chop your garlic and ginger and add to your onions. ",
+            "Cook for about 5-10 minutes until the onions are slightly browning. ",
+            "Julienne your peppers (the thinner the slices the better as then they will ‘cook away’ and add a lot of sweetness and flavour to your dish). ",
+            "Add to your onions and stir thoroughly. ",
+            "Cut your chicken into small slices/chunks and season with salt & pepper. ",
+            "Add to your onions & peppers and stir thoroughly. ",
+            "Cook until your chicken pieces are white (no red in sight) but not until brown. ",
+            "Add your Thai green curry paste and stir through thoroughly. ",
+            "Add your coconut milk and frozen peas, stir thoroughly and allow to simmer for app 20 minutes. ",
+            "Cook your rice while your curry is simmering. ",
+            "In a bowl, serve rice, curry and your sambals - viola!"
+        ]
+    },
+    "servings": "3-4",
+    "prepTime": 10,
+    "cookTime": 30,
+    "servingSuggestion": "",
+    "recipeNo": 4,
+    "__v": 0,
+    "recipeCode": "MD4",
+    "recipeThumbnailUrl": "https://res.cloudinary.com/dhnnaqb9p/image/upload/v1588501646/The-Mish-Dish/MD4/thumbnail.jpg",
+    "id": "5eae9c89a2a86a191881d6f8"
+}
