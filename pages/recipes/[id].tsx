@@ -43,6 +43,20 @@ export default function Recipe({ recipe }) {
         }
     }
 
+    const Tags = () => {
+        if (recipe.tags.length > 0) {
+            return (
+                recipe.tags.map((tag, index) => (
+                    <li key={index}>
+                        {tag}
+                    </li>
+                ))
+            )
+        } else {
+            return null
+        }
+    }
+
 
     return (
         <Layout
@@ -67,9 +81,7 @@ export default function Recipe({ recipe }) {
                         </div>
                     </div>
                     <ul className={styles.tags}>
-                        <li>Vegetarian</li>
-                        <li>Curry</li>
-                        <li>Spinach</li>
+                        <Tags />
                     </ul>
                     <div className={styles.description}>
                         <h3>Description</h3>

@@ -24,6 +24,20 @@ export default function Filter({ showFilter, handleFilterShow }: IFilter) {
                 <h2>Filter Recipes</h2>
                 <div className={styles.group}>
                     <h3>Meal Type</h3>
+                    <ul className={styles.options}>
+                        <li>
+                            Main Meal
+                        </li>
+                        <li>
+                            Light Meal
+                        </li>
+                        <li>
+                            Breakfast
+                        </li>
+                        <li>
+                            Dessert
+                        </li>
+                    </ul>
                 </div>
                 <div className={styles.group}>
                     <h3>Dietary Requirements</h3>

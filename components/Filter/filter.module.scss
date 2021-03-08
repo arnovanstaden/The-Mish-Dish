@@ -59,6 +59,7 @@
             margin: 0;
             padding: 0;
             gap: 0.75rem;
+            flex-wrap: wrap;
 
             li {
                 border: $blue solid 1px;
