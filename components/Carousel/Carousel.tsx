@@ -10,7 +10,7 @@ import "slick-carousel/slick/slick-theme.css";
 
 interface ISlider {
     type: "Recommended" | "Meal Types" | "Recently Added" | "Recently Viewed";
-    recipes: object[]
+    recipes: any[]
 }
 
 
@@ -34,7 +34,7 @@ export default function Carousel({ type, recipes }: ISlider) {
         <div className={styles.carousel}>
             <Slider {...settings}>
                 {recipes.map((recipe, index) => (
-                    index <= 5 ? <Recipe {...recipe} key={index} carouselItem={true} /> : null
+                    index <= 5 ? <Recipe {...recipe} key={index} /> : null
                 ))}
             </Slider>
         </div>

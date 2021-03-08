@@ -14,17 +14,15 @@ interface IRecipe {
     ingredients: {
         [key: number]: string[]
     };
-    key: number;
-    carouselItem: boolean
 }
 
-export default function Recipe(recipe: IRecipe) {
+export default function Recipe(recipe: IRecipe, carouselItem?: boolean) {
     // const recipeImage = convertImage(recipe.recipeThumbnailUrl, 400);
     const recipeImage = recipe.recipeThumbnailUrl;
 
     const recipeClasses = ClassNames(
         styles.recipe,
-        recipe.carouselItem ? styles.carouselItem : null
+        carouselItem ? styles.carouselItem : null
     )
 
     return (
