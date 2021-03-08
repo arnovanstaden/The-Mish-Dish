@@ -8,7 +8,7 @@ export const handleRecipeShare = (title: string, text: string, id: string) => {
         navigator.share({
             title: title,
             text: text,
-            url: `https://themishdish.co.za/recipes/${recipe.id}`,
+            url: `https://themishdish.co.za/recipes/${id}`,
         })
             .then(() => console.log('Successful share'))
             .catch((error) => console.log('Error sharing', error));
