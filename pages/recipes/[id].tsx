@@ -23,13 +23,13 @@ export default function Recipe({ recipe }) {
     }
 
     const Method = () => {
-        if (Object.keys(recipe.ingredients).length === 1) {
+        if (Object.keys(recipe.method).length === 1) {
             return (
                 <ul>
-                    {recipe.method[0].map((ingredient, index) => (
+                    {recipe.method[0].map((step, index) => (
                         <li key={index}>
                             <i>{index}</i>
-                            {ingredient}
+                            {step}
                         </li>
                     ))}
                 </ul>
