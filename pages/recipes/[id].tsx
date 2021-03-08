@@ -18,7 +18,7 @@ export default function Recipe({ recipe }) {
                 </ul>
             )
         } else {
-
+            return null
         }
     }
 
@@ -35,7 +35,7 @@ export default function Recipe({ recipe }) {
                 </ul>
             )
         } else {
-
+            return null
         }
     }
 
