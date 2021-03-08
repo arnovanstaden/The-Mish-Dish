@@ -8,17 +8,21 @@ interface ILayout {
         canonical: string;
         robots?: boolean;
     };
-    classNameProp?: string
+    classNameProp?: string;
+    noContainer?: boolean
 }
 
-export default function Layout({ head, children, classNameProp }: ILayout) {
+export default function Layout(props: ILayout) {
     return (
         <>
-            <Head {...head} />
-            <main className={classNameProp}>
-                <div className="container">
-                    {children}
-                </div>
+            <Head {...props.head} />
+            <main className={props.classNameProp}>
+                {props.noContainer
+                    ? props.children
+                    : <div className="container">
+                        {props.children}
+                    </div>
+                }
             </main>
         </>
     )

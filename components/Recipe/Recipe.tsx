@@ -17,8 +17,8 @@ interface IRecipe {
 }
 
 export default function Recipe(recipe: IRecipe) {
-
-    const recipeImage = convertImage(recipe.recipeThumbnailUrl, 400)
+    // const recipeImage = convertImage(recipe.recipeThumbnailUrl, 400);
+    const recipeImage = recipe.recipeThumbnailUrl;
 
     return (
         <Link href={`/recipes/${recipe.id}`}>

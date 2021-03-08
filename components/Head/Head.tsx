@@ -23,6 +23,7 @@ export default function Head(props: THead) {
             <meta name="author" content="Webdacity" />
             <meta name="copyright" content={`C-DOC © ${currentYear}`} />
             <meta name="theme-color" content="#ffffff" />
+            <link rel="manifest" href="/manifest.json" />
 
             {/* Open Graph */}
             <meta property="og:site_name" content="C-DOC" />

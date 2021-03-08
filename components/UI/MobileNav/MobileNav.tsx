@@ -10,8 +10,10 @@ export default function MobileNav() {
 
     const setActiveLink = () => {
         // Remove old active link
-        const activeLink = document.getElementsByClassName(`${styles.active}`) as HTMLCollection;
-        activeLink[0].classList.remove(styles.active);
+        const activeLinks = Array.from(document.getElementsByClassName(`${styles.link}`) as HTMLCollection);
+        activeLinks.forEach(link => {
+            link.classList.remove(styles.active)
+        })
 
         // Add new active link
         const currentPath = router.pathname;

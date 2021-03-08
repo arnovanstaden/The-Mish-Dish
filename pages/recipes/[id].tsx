@@ -1,5 +1,8 @@
 import { GetStaticProps, GetStaticPaths } from 'next';
 
+// Components
+import Layout from "../../components/Layout/Layout"
+
 // Styles
 import styles from "../../styles/pages/recipes/[id].module.scss"
 
@@ -41,50 +44,60 @@ export default function Recipe({ recipe }) {
 
 
     return (
-        <section className={styles.recipe}>
+        <Layout
+            head={{
+                title: recipe.name,
+                description: recipe.description,
+                canonical: `/recipes/${recipe.id}`
+            }}
+            classNameProp={styles.recipe}
+            noContainer={true}
+        >
             <div className={styles.image}>
                 <img src={recipe.recipeImageUrls[0]} alt="" />
             </div>
             <div className={styles.content}>
-                <div className={styles.intro}>
-                    <h1>{recipe.name}</h1>
-                    <div className={styles.icons}>
-                        <i className="icon-share"></i>
-                        <i className="icon-favorite_outline"></i>
+                <div className="container">
+                    <div className={styles.intro}>
+                        <h1>{recipe.name}</h1>
+                        <div className={styles.icons}>
+                            <i className="icon-share"></i>
+                            <i className="icon-favorite_outline"></i>
+                        </div>
                     </div>
-                </div>
-                <div className={styles.tags}>
-                    <p>Vegetarian</p>
-                    <p>Curry</p>
-                </div>
-                <div className={styles.description}>
-                    <h3>Description</h3>
-                    <p>{recipe.description}</p>
-                </div>
-                <div className={styles.stats}>
-                    <div className={styles.stat}>
-                        <i className="icon-servings"></i>
-                        <p>{recipe.servings} Servings</p>
+                    <div className={styles.tags}>
+                        <p>Vegetarian</p>
+                        <p>Curry</p>
                     </div>
-                    <div className={styles.stat}>
-                        <i className="icon-servings"></i>
-                        <p>{recipe.cookTime + recipe.prepTime} Minutes</p>
+                    <div className={styles.description}>
+                        <h3>Description</h3>
+                        <p>{recipe.description}</p>
                     </div>
-                    <div className={styles.stat}>
-                        <i className="icon-favorite_outline"></i>
-                        <p>10 Favourites</p>
+                    <div className={styles.stats}>
+                        <div className={styles.stat}>
+                            <i className="icon-servings"></i>
+                            <p>{recipe.servings} Servings</p>
+                        </div>
+                        <div className={styles.stat}>
+                            <i className="icon-servings"></i>
+                            <p>{recipe.cookTime + recipe.prepTime} Minutes</p>
+                        </div>
+                        <div className={styles.stat}>
+                            <i className="icon-favorite_outline"></i>
+                            <p>10 Favourites</p>
+                        </div>
                     </div>
-                </div>
-                <div className={styles.ingredients}>
-                    <h3>Ingredients</h3>
-                    <Ingredients />
-                </div>
-                <div className={styles.method}>
-                    <h3>Method</h3>
-                    <Method />
+                    <div className={styles.ingredients}>
+                        <h3>Ingredients</h3>
+                        <Ingredients />
+                    </div>
+                    <div className={styles.method}>
+                        <h3>Method</h3>
+                        <Method />
+                    </div>
                 </div>
             </div>
-        </section>
+        </Layout>
     )
 }
 

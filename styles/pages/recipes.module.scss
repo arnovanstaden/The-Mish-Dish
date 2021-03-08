@@ -1,6 +1,8 @@
 @import "../variables.scss";
 
 .recipes {
+    padding-top: 3rem;
+
     h1 {
         font-weight: 600;
         margin: 0;
@@ -15,12 +17,12 @@
 
         .option {
             display: flex;
-            font-size: 0.75rem;
+            font-size: 0.8rem;
             align-items: center;
             column-gap: 0.25rem;
             border-radius: 0.25rem;
             background-color: $light-grey;
-            padding: 0.5rem 0.25rem;
+            padding: 0.5rem;
 
             p {
                 margin: 0;
