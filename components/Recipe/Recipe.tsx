@@ -1,4 +1,5 @@
-import Link from "next/link"
+import Link from "next/link";
+import { convertImage } from "../../utils/utils";
 
 // Styles
 import styles from "./recipe.module.scss";
@@ -16,12 +17,14 @@ interface IRecipe {
 
 export default function Recipe(recipe: IRecipe) {
 
+    const recipeImage = convertImage(recipe.recipeThumbnailUrl, 400)
+
     return (
-        <Link href={`recipes/${recipe.id}`}>
+        <Link href={`/recipes/${recipe.id}`}>
             <a>
                 <article className={styles.recipe}>
                     <div className={styles.image}>
-                        <img src={recipe.recipeThumbnailUrl} alt={`${recipe.name} Thumbnail`} />
+                        <img loading="lazy" src={recipeImage} alt={`${recipe.name} Thumbnail`} />
                     </div>
                     <div className={styles.details}>
                         <h3 className={styles.name}>{recipe.name}</h3>

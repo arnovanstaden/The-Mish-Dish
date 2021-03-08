@@ -1,0 +1,23 @@
+@import "../../../styles/variables.scss";
+
+.nav {
+    width: 100%;
+    position: fixed;
+    display: flex;
+    background-color: $white;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+    padding: 1rem;
+    justify-content: space-around;
+    width: 100%;
+    box-sizing: border-box;
+
+    .item {
+
+        i {
+            color: $blue;
+            font-size: 1.75rem;
+        }
+    }
+}
