@@ -1,4 +1,5 @@
 import { GetStaticProps, GetStaticPaths } from 'next';
+import { handleRecipeShare } from "../../utils/utils"
 
 // Components
 import Layout from "../../components/Layout/Layout"
@@ -61,7 +62,7 @@ export default function Recipe({ recipe }) {
                     <div className={styles.intro}>
                         <h1>{recipe.name}</h1>
                         <div className={styles.icons}>
-                            <i className="icon-share"></i>
+                            <i className="icon-share" onClick={() => handleRecipeShare(recipe.name, recipe.description, recipe.id)}></i>
                             <i className="icon-favorite_outline"></i>
                         </div>
                     </div>

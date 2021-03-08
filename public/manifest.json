@@ -1,9 +1,8 @@
 {
     "name": "The Mish Dish",
-    "short_name": "TMD",
+    "short_name": "The Mish Dish",
     "theme_color": "#213242",
     "background_color": "#ffffff",
-    "display": "fullscreen",
     "orientation": "portrait",
     "scope": "/",
     "start_url": "/",
