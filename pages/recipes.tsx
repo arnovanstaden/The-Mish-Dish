@@ -15,8 +15,7 @@ export default function Recipes({ recipes }) {
     const [showFilter, setShowFilter] = useState(false);
 
     // Initial Sort; Recently Added
-    // const allRecipes = recipes.reverse();
-    // console.log(allRecipes);
+    const allRecipes = [...recipes].reverse();
 
     // Handlers
     const handleFilterShow = () => {
@@ -47,7 +46,7 @@ export default function Recipes({ recipes }) {
             </div>
 
             <div className={styles.grid}>
-                {recipes.map((recipe, index) => (
+                {allRecipes.map((recipe, index) => (
                     <Recipe {...recipe} key={index} />
                 ))}
             </div>

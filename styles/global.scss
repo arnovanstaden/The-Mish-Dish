@@ -96,3 +96,14 @@ input {
     max-width: 1500px;
   }
 }
+
+
+// Slick
+.slick-track {
+  display: flex !important;
+  height: 100%;
+}
+
+.slick-slide {
+  height: auto;
+}

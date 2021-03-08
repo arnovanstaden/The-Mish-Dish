@@ -53,6 +53,7 @@ export default function Home({ recipes }) {
           </Link>
         </div>
         <div className={styles.carousel}>
+          <Carousel type="Recently Added" recipes={recipes} />
         </div>
       </section>
 

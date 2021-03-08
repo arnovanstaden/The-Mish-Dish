@@ -16,25 +16,40 @@ interface ISlider {
 
 export default function Carousel({ type, recipes }: ISlider) {
 
+    let recipesToRender = [];
+
+    switch (type) {
+        case "Recommended":
+            recipesToRender = recipes.filter(recipe => recipe.recommended === true)
+            break;
+        case "Meal Types":
+
+            break;
+        case "Recently Added":
+            recipesToRender = [...recipes].reverse().splice(0, 6);
+            break;
+    }
+
+
     const settings = {
         dots: false,
         arrows: false,
-        infinite: true,
+        infinite: false,
         slidesToShow: 1.25,
         slidesToScroll: 1,
         swipeToSlide: true,
         draggable: true,
-        autoplay: true,
-        autoplaySpeed: 5000,
+        autoplay: false,
         cssEase: "linear",
         pauseOnHover: true,
         speed: 500,
+        initialSlide: 0,
     };
     return (
         <div className={styles.carousel}>
             <Slider {...settings}>
-                {recipes.map((recipe, index) => (
-                    index <= 5 ? <Recipe {...recipe} key={index} /> : null
+                {recipesToRender.map((recipe, index) => (
+                    <Recipe {...recipe} key={index} />
                 ))}
             </Slider>
         </div>
