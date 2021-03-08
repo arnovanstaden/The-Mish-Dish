@@ -7,12 +7,13 @@ import styles from "./recipe.module.scss";
 interface IRecipe {
     name: string;
     id: string;
-    cooktTime: number;
+    cookTime: number;
     prepTime: number;
     recipeThumbnailUrl: string;
     ingredients: {
         [key: number]: string[]
     }
+
 }
 
 export default function Recipe(recipe: IRecipe) {
@@ -33,7 +34,7 @@ export default function Recipe(recipe: IRecipe) {
                             <div className={styles.stats}>
                                 <div className={styles.stat}>
                                     <i className="icon-timer"></i>
-                                    <p>30</p>
+                                    <p>{recipe.cookTime + recipe.prepTime}</p>
                                 </div>
                                 <div className={styles.stat}>
                                     <i className="icon-favorite_outline"></i>

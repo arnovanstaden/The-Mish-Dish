@@ -13,11 +13,18 @@
     width: 100%;
     box-sizing: border-box;
 
-    .item {
+    .link {
 
         i {
             color: $blue;
-            font-size: 1.75rem;
+            font-size: 1.5rem;
+            transition: 0.3s ease;
+        }
+
+        &.active {
+            i {
+                color: $yellow;
+            }
         }
     }
 }
