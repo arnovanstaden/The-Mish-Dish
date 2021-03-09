@@ -1,6 +1,7 @@
 import { GetStaticProps, GetStaticPaths } from 'next';
 import { handleRecipeShare, recentlyViewed } from "../../utils/utils";
-import { useEffect } from "react"
+import { useEffect } from "react";
+import { useRouter } from "next/router"
 
 // Components
 import Layout from "../../components/Layout/Layout"
@@ -9,6 +10,7 @@ import Layout from "../../components/Layout/Layout"
 import styles from "../../styles/pages/recipes/[id].module.scss"
 
 export default function Recipe({ recipe }) {
+    const router = useRouter()
     useEffect(() => {
         recentlyViewed.set(recipe.id)
     }, [])
@@ -91,6 +93,11 @@ export default function Recipe({ recipe }) {
         }
     }
 
+    // Handlers
+    const navigateBack = () => {
+        router.back()
+    }
+
 
     return (
         <Layout
@@ -104,6 +111,7 @@ export default function Recipe({ recipe }) {
             noContainer={true}
         >
             <div className={styles.image}>
+                <i className="icon-carrot_down" onClick={navigateBack}></i>
                 <img src={recipe.recipeImageUrls[0]} alt="" />
             </div>
             <div className={styles.content}>
@@ -146,7 +154,7 @@ export default function Recipe({ recipe }) {
                     </div>
                 </div>
             </div>
-        </Layout>
+        </Layout >
     )
 }
 
