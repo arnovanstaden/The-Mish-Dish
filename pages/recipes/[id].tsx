@@ -14,8 +14,9 @@ export default function Recipe({ recipe }) {
     }, [])
 
     const Ingredients = () => {
+        let ingredients = null;
         if (Object.keys(recipe.ingredients).length === 1) {
-            return (
+            ingredients =
                 <ul>
                     {recipe.ingredients[0].map((ingredient, index) => (
                         <li key={index}>
@@ -24,27 +25,56 @@ export default function Recipe({ recipe }) {
                         </li>
                     ))}
                 </ul>
-            )
         } else {
-            return null
+            let recipeParts = Object.keys(recipe.ingredients);
+            ingredients =
+                recipeParts.map((part, index) => (
+                    <div key={index}>
+                        <h4>{part}:</h4>
+                        <ul>
+                            {recipe.ingredients[part].map((ingredient, index) => (
+                                <li key={index}>
+                                    <i className="icon-check"></i>
+                                    {ingredient}
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                ))
         }
+        return ingredients
     }
 
     const Method = () => {
+        let method = null;
         if (Object.keys(recipe.method).length === 1) {
-            return (
+            method =
                 <ul>
                     {recipe.method[0].map((step, index) => (
                         <li key={index}>
-                            <i>{index}</i>
+                            <i>{index + 1}</i>
                             {step}
                         </li>
                     ))}
                 </ul>
-            )
         } else {
-            return null
+            let recipeParts = Object.keys(recipe.method);
+            method =
+                recipeParts.map((part, index) => (
+                    <div key={index}>
+                        <h4>{part}:</h4>
+                        <ul>
+                            {recipe.method[part].map((step, index) => (
+                                <li key={index}>
+                                    <i>{index + 1}</i>
+                                    {step}
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                ))
         }
+        return method
     }
 
     const Tags = () => {
