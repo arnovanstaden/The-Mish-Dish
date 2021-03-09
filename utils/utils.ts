@@ -113,5 +113,6 @@ export const filterSearch = (allRecipes: any[], searchTerm: string) => {
 
     // Remove Duplicates
     results = [...new Set(results)]
+
     return results
 }
