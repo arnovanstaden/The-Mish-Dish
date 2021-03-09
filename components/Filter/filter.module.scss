@@ -67,6 +67,13 @@
                 border-radius: 0.25rem;
                 padding: 0.25rem 0.75rem;
                 font-size: 0.9rem;
+                cursor: pointer;
+                transition: 0.3s ease;
+
+                &.active {
+                    color: $white;
+                    background-color: $blue;
+                }
             }
         }
     }

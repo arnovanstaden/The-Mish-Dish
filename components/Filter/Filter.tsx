@@ -1,4 +1,5 @@
 import ClassNames from "classnames";
+import { useState } from "react";
 
 // Components
 import FilterSlider from "../UI/FilterSlider/FilterSlider";
@@ -13,8 +14,16 @@ interface IFilter {
 }
 
 export default function Filter({ recipes, showFilter, handleFilterShow }: IFilter) {
+    const [filters, setFilters] = useState()
+
+    const toggleActive = (e) => {
+        let item = e.target as HTMLElement;
+        item.classList.toggle(styles.active);
+
+    }
 
     const mealTypes = ["Main Meal", "Light Meal", "Side Dish", "Breakfast"];
+    const dietRequirements = ["Vegetarian", "Vegan"];
 
     const filterClasses = ClassNames(
         styles.filter,
@@ -26,7 +35,6 @@ export default function Filter({ recipes, showFilter, handleFilterShow }: IFilte
         recipes.forEach(recipe => {
             if (recipe.tags) {
                 recipe.tags.forEach(tag => {
-                    console.log(tag)
                     tags.includes(tag) || mealTypes.includes(tag) ? null : tags.push(tag)
                 })
             }
@@ -34,7 +42,7 @@ export default function Filter({ recipes, showFilter, handleFilterShow }: IFilte
         return (
             <ul className={styles.options}>
                 {tags.map((tag, index) => (
-                    <li key={index}>{tag}</li>
+                    <li key={index} onClick={(e) => toggleActive(e)}>{tag}</li>
                 ))}
             </ul>
         )
@@ -51,18 +59,17 @@ export default function Filter({ recipes, showFilter, handleFilterShow }: IFilte
                 <div className={styles.group}>
                     <h3>Meal Type</h3>
                     <ul className={styles.options}>
-                        {mealTypes.map((type, index) => (<li key={index}>{type}</li>))}
+                        {mealTypes.map((type, index) => (
+                            <li key={index} onClick={(e) => toggleActive(e)}>{type}</li>
+                        ))}
                     </ul>
                 </div>
                 <div className={styles.group}>
                     <h3>Dietary Requirements</h3>
                     <ul className={styles.options}>
-                        <li>
-                            Vegetarian
-                        </li>
-                        <li>
-                            Vegan
-                        </li>
+                        {dietRequirements.map((tiem, index) => (
+                            <li key={index} onClick={(e) => toggleActive(e)}>{tiem}</li>
+                        ))}
                     </ul>
                 </div>
                 <div className={styles.group}>

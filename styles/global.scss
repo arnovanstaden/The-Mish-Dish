@@ -22,6 +22,8 @@ body {
 a {
   text-decoration: none;
   color: inherit;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
 main {
