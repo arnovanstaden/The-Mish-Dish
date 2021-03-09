@@ -37,7 +37,7 @@ export default function Carousel({ type, recipes }: ISlider) {
         arrows: false,
         infinite: false,
         slidesToShow: 1.25,
-        slidesToScroll: 1,
+        // slidesToScroll: 1,
         swipeToSlide: true,
         draggable: true,
         autoplay: false,
