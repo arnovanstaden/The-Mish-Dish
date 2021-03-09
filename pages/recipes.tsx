@@ -1,8 +1,5 @@
 import { GetStaticProps } from 'next';
-import Link from "next/link";
-import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
-import queryString from "query-string"
 import { filterSearch } from "../utils/utils"
 
 // Components

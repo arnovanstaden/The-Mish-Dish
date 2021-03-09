@@ -16,7 +16,7 @@ interface IFilter {
 export default function Filter({ recipes, showFilter, handleFilterShow }: IFilter) {
     const [filters, setFilters] = useState()
 
-    const toggleActive = (e) => {
+    const toggleFilter = (e) => {
         let item = e.target as HTMLElement;
         item.classList.toggle(styles.active);
 
@@ -42,7 +42,7 @@ export default function Filter({ recipes, showFilter, handleFilterShow }: IFilte
         return (
             <ul className={styles.options}>
                 {tags.map((tag, index) => (
-                    <li key={index} onClick={(e) => toggleActive(e)}>{tag}</li>
+                    <li key={index} onClick={(e) => toggleFilter(e)}>{tag}</li>
                 ))}
             </ul>
         )
@@ -51,34 +51,39 @@ export default function Filter({ recipes, showFilter, handleFilterShow }: IFilte
     return (
         <section className={filterClasses}>
             <div className="container">
-                <div className={styles.nav}>
-                    <i className="icon-carrot_down" onClick={handleFilterShow}></i>
-                    <p>Clear</p>
+                <div className={styles.upper}>
+                    <div className={styles.nav}>
+                        <i className="icon-carrot_down" onClick={handleFilterShow}></i>
+                        <p>Clear</p>
+                    </div>
+                    <h2>Filter Recipes</h2>
+                    <div className={styles.group}>
+                        <h3>Meal Type</h3>
+                        <ul className={styles.options}>
+                            {mealTypes.map((type, index) => (
+                                <li key={index} onClick={(e) => toggleFilter(e)}>{type}</li>
+                            ))}
+                        </ul>
+                    </div>
+                    <div className={styles.group}>
+                        <h3>Dietary Requirements</h3>
+                        <ul className={styles.options}>
+                            {dietRequirements.map((tiem, index) => (
+                                <li key={index} onClick={(e) => toggleFilter(e)}>{tiem}</li>
+                            ))}
+                        </ul>
+                    </div>
+                    <div className={styles.group}>
+                        <h3>Cooking Time</h3>
+                        <FilterSlider recipes={recipes} />
+                    </div>
+                    <div className={styles.group}>
+                        <h3>Additional Preferences</h3>
+                        <Tags />
+                    </div>
                 </div>
-                <h2>Filter Recipes</h2>
-                <div className={styles.group}>
-                    <h3>Meal Type</h3>
-                    <ul className={styles.options}>
-                        {mealTypes.map((type, index) => (
-                            <li key={index} onClick={(e) => toggleActive(e)}>{type}</li>
-                        ))}
-                    </ul>
-                </div>
-                <div className={styles.group}>
-                    <h3>Dietary Requirements</h3>
-                    <ul className={styles.options}>
-                        {dietRequirements.map((tiem, index) => (
-                            <li key={index} onClick={(e) => toggleActive(e)}>{tiem}</li>
-                        ))}
-                    </ul>
-                </div>
-                <div className={styles.group}>
-                    <h3>Cooking Time</h3>
-                    <FilterSlider recipes={recipes} />
-                </div>
-                <div className={styles.group}>
-                    <h3>Additional Preferences</h3>
-                    <Tags />
+                <div className={styles.lower}>
+                    <button>Apply Filters</button>
                 </div>
             </div>
         </section >

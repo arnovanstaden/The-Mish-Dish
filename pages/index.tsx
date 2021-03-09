@@ -27,7 +27,8 @@ export default function Home({ recipes }) {
       }}
       classNameProp={styles.home}
     >
-      <Search home />
+      <img src="/Logo-wide.svg" alt="" />
+      <Search reroute />
 
       <section className={styles.group}>
         <div className={styles.options}>

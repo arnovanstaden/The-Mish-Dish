@@ -4,18 +4,17 @@ import { useRouter } from 'next/router'
 import styles from "./search.module.scss";
 
 interface ISearchProps {
-    home?: boolean,
+    reroute?: boolean,
     handleSearch?: (searchTerm: string) => void
 }
 
-export default function Search({ home, handleSearch }: ISearchProps) {
+export default function Search({ reroute, handleSearch }: ISearchProps) {
     const router = useRouter()
 
     const submitSearch = (e) => {
-        let input = document.getElementById("search-bar") as HTMLInputElement;
-        let searchTerm = input.value.toLowerCase()
+        let searchTerm = e.target.value.toLowerCase();
 
-        if (home) {
+        if (reroute) {
             if (e.key === "Enter") {
                 router.push(`/recipes/?${searchTerm}`)
             }
@@ -25,12 +24,10 @@ export default function Search({ home, handleSearch }: ISearchProps) {
 
     }
 
-
-
     return (
         <div className={styles.search}>
             <i className="icon-search"></i>
-            <input id="search-bar" type="text" placeholder="What are you in the mood for?" onKeyDown={(e) => submitSearch(e)} />
+            <input id="search-bar" type="text" placeholder="What are you in the mood for?" onChange={(e) => submitSearch(e)} />
         </div>
     )
 }

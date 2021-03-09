@@ -83,18 +83,35 @@ export const filterSearch = (allRecipes: any[], searchTerm: string) => {
             }
         })
 
-        // Iterate through arrays
-
-        // Tags
+        // Iterate through Tags
+        if (recipe.tags) {
+            recipe.tags.forEach(tag => {
+                if (tag && tag.toLowerCase().includes(searchTerm)) {
+                    results.push(recipe)
+                }
+            });
+        }
 
         // Ingredients
-
-
+        let ingredientKeys = Object.keys(recipe.ingredients)
+        if (ingredientKeys.length === 1) {
+            recipe.ingredients[0].forEach(ingredient => {
+                if (ingredient.toLowerCase().includes(searchTerm)) {
+                    results.push(recipe)
+                }
+            });
+        } else {
+            ingredientKeys.forEach(key => {
+                recipe.ingredients[key].forEach(ingredient => {
+                    if (ingredient.toLowerCase().includes(searchTerm)) {
+                        results.push(recipe)
+                    }
+                });
+            })
+        }
     });
 
     // Remove Duplicates
     results = [...new Set(results)]
-
-
     return results
 }
