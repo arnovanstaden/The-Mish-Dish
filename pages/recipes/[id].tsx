@@ -104,8 +104,6 @@ export default function Recipe({ recipe }) {
         const imageArray = recipe.recipeImageUrls
         const imageCount = imageArray.length;
         const currentImagePosition = imageArray.indexOf(currentImage);
-        console.log(imageCount);
-        console.log(currentImagePosition)
         if (currentImagePosition < (imageCount - 1)) {
             setCurrentImage(imageArray[currentImagePosition + 1])
         } else {
@@ -127,7 +125,7 @@ export default function Recipe({ recipe }) {
         >
             <div className={styles.image}>
                 <i className="icon-carrot_down" onClick={handleNavigateBack}></i>
-                <img src={currentImage} alt={recipe.name} onClick={handleNextImage} />
+                <img src={currentImage} alt={recipe.name} onClick={handleNextImage} onTouchEnd={handleNextImage} />
             </div>
             <div className={styles.content}>
                 <div className="container">
