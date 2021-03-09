@@ -1,13 +1,9 @@
 import Head from "../Head/Head";
+import { IHead } from "../Head/Head"
 
 interface ILayout {
     children: React.ReactNode;
-    head: {
-        title: string;
-        description: string;
-        canonical: string;
-        robots?: boolean;
-    };
+    head: IHead;
     classNameProp?: string;
     noContainer?: boolean
 }

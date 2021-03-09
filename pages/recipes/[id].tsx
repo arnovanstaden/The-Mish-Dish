@@ -63,7 +63,8 @@ export default function Recipe({ recipe }) {
             head={{
                 title: recipe.name,
                 description: recipe.description,
-                canonical: `/recipes/${recipe.id}`
+                canonical: `/recipes/${recipe.id}`,
+                image: recipe.recipeThumbnailUrl
             }}
             classNameProp={styles.recipe}
             noContainer={true}

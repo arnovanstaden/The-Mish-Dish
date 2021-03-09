@@ -17,7 +17,7 @@ interface IRecipe {
 }
 
 export default function Recipe(recipe: IRecipe, carouselItem?: boolean) {
-    // const recipeImage = convertImage(recipe.recipeThumbnailUrl, 400);
+    // const recipeImage = convertImage(recipe.recipeThumbnailUrl, 600);
     const recipeImage = recipe.recipeThumbnailUrl;
 
     const recipeClasses = ClassNames(
