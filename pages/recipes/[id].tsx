@@ -1,5 +1,6 @@
 import { GetStaticProps, GetStaticPaths } from 'next';
-import { handleRecipeShare } from "../../utils/utils"
+import { handleRecipeShare, recentlyViewed } from "../../utils/utils";
+import { useEffect } from "react"
 
 // Components
 import Layout from "../../components/Layout/Layout"
@@ -8,6 +9,9 @@ import Layout from "../../components/Layout/Layout"
 import styles from "../../styles/pages/recipes/[id].module.scss"
 
 export default function Recipe({ recipe }) {
+    useEffect(() => {
+        recentlyViewed.set(recipe.id)
+    }, [])
 
     const Ingredients = () => {
         if (Object.keys(recipe.ingredients).length === 1) {
@@ -44,7 +48,7 @@ export default function Recipe({ recipe }) {
     }
 
     const Tags = () => {
-        if (recipe.tags.length > 0) {
+        if (recipe.tags && recipe.tags.length > 0) {
             return (
                 recipe.tags.map((tag, index) => (
                     <li key={index}>

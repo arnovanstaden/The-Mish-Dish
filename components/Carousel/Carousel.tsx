@@ -15,7 +15,6 @@ interface ISlider {
 
 
 export default function Carousel({ type, recipes }: ISlider) {
-
     let recipesToRender = [];
 
     switch (type) {
@@ -28,8 +27,10 @@ export default function Carousel({ type, recipes }: ISlider) {
         case "Recently Added":
             recipesToRender = [...recipes].reverse().splice(0, 6);
             break;
+        case "Recently Viewed":
+            recipesToRender = [...recipes]
+            break;
     }
-
 
     const settings = {
         dots: false,
