@@ -3,15 +3,29 @@ import { useRouter } from 'next/router'
 // Styles
 import styles from "./search.module.scss";
 
-export default function Search() {
+interface ISearchProps {
+    home?: boolean,
+    handleSearch?: (searchTerm: string) => void
+}
+
+export default function Search({ home, handleSearch }: ISearchProps) {
     const router = useRouter()
 
     const submitSearch = (e) => {
-        if (e.key === "Enter") {
-            const searchTerm = document.getElementById("search-bar") as HTMLInputElement;
-            router.push(`/recipes/?${searchTerm.value}`)
+        let input = document.getElementById("search-bar") as HTMLInputElement;
+        let searchTerm = input.value.toLowerCase()
+
+        if (home) {
+            if (e.key === "Enter") {
+                router.push(`/recipes/?${searchTerm}`)
+            }
+        } else {
+            handleSearch(searchTerm)
         }
+
     }
+
+
 
     return (
         <div className={styles.search}>

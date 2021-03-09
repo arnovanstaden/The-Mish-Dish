@@ -1,6 +1,9 @@
 import { GetStaticProps } from 'next';
 import Link from "next/link";
-import { useState } from "react";
+import { useRouter } from "next/router";
+import { useState, useEffect } from "react";
+import queryString from "query-string"
+import { filterSearch } from "../utils/utils"
 
 // Components
 import Layout from "../components/Layout/Layout";
@@ -11,16 +14,34 @@ import Filter from "../components/Filter/Filter";
 // Styles
 import styles from "../styles/pages/recipes.module.scss"
 
-export default function Recipes({ recipes }) {
+export default function Recipes({ allRecipes }) {
     const [showFilter, setShowFilter] = useState(false);
-
-    // Initial Sort; Recently Added
-    const allRecipes = [...recipes].reverse();
+    const [recipes, setRecipes] = useState(allRecipes);
 
     // Handlers
     const handleFilterShow = () => {
         setShowFilter(!showFilter)
     }
+
+    // Search
+    const executeSearch = () => {
+        if (location.search) {
+            const searchTerm = location.search.replace("?", "").toLowerCase();
+            const result = filterSearch(allRecipes, searchTerm);
+            setRecipes(result);
+        }
+    }
+
+    const handleSearch = (searchTerm: string) => {
+        const result = filterSearch(allRecipes, searchTerm);
+        setRecipes(result);
+    }
+
+    useEffect(() => {
+        executeSearch();
+    }, []);
+
+
 
     return (
         <Layout
@@ -32,7 +53,7 @@ export default function Recipes({ recipes }) {
             classNameProp={styles.recipes}
         >
             <h1>Find Recipes</h1>
-            <Search />
+            <Search handleSearch={(searchTerm) => handleSearch(searchTerm)} />
 
             <div className={styles.options}>
                 <div className={styles.option} onClick={handleFilterShow}>
@@ -46,7 +67,7 @@ export default function Recipes({ recipes }) {
             </div>
 
             <div className={styles.grid}>
-                {allRecipes.map((recipe, index) => (
+                {recipes.map((recipe, index) => (
                     <Recipe recipe={recipe} key={index} />
                 ))}
             </div>
@@ -57,11 +78,12 @@ export default function Recipes({ recipes }) {
 
 export const getStaticProps: GetStaticProps = async () => {
     const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/recipes`);
-    const recipes = await response.json();
+    let allRecipes = await response.json();
+    allRecipes = [...allRecipes].reverse()
 
     return {
         props: {
-            recipes
+            allRecipes
         },
     }
 }

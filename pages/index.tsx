@@ -27,7 +27,7 @@ export default function Home({ recipes }) {
       }}
       classNameProp={styles.home}
     >
-      <Search />
+      <Search home />
 
       <section className={styles.group}>
         <div className={styles.options}>

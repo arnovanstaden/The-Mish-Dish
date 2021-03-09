@@ -1,3 +1,4 @@
+
 // Image Conversion
 export const convertImage = (image: string, width: number): string => {
     const covertedImage = image.replace("upload/v", `upload/w_${width},c_scale/f_auto/v`);
@@ -63,4 +64,37 @@ export const getCookingTimes = (recipes) => {
         times.max = recipe.cookTime > times.max ? recipe.cookTime : times.max
     });
     return times
+}
+
+
+// Search
+
+export const filterSearch = (allRecipes: any[], searchTerm: string) => {
+    let results = [];
+    const searchKeys = ["name", "description", "recipeType"];
+
+    allRecipes.forEach(recipe => {
+
+        // Iterate through search keys
+        searchKeys.forEach(key => {
+            let toSearch = recipe[key];
+            if (toSearch && toSearch.toLowerCase().includes(searchTerm)) {
+                results.push(recipe)
+            }
+        })
+
+        // Iterate through arrays
+
+        // Tags
+
+        // Ingredients
+
+
+    });
+
+    // Remove Duplicates
+    results = [...new Set(results)]
+
+
+    return results
 }
