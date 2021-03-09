@@ -19,7 +19,6 @@ interface IRecipeProps {
 }
 
 export default function Recipe({ recipe, carouselItem }: IRecipeProps) {
-    console.log(carouselItem)
     // const recipeImage = convertImage(recipe.recipeThumbnailUrl, 600);
     const recipeImage = recipe.recipeThumbnailUrl;
 

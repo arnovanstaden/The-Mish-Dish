@@ -1,5 +1,4 @@
 import ClassNames from "classnames";
-import { useState } from "react"
 
 // Components
 import FilterSlider from "../UI/FilterSlider/FilterSlider";
@@ -8,17 +7,38 @@ import FilterSlider from "../UI/FilterSlider/FilterSlider";
 import styles from "./filter.module.scss";
 
 interface IFilter {
+    recipes: any
     showFilter?: boolean,
     handleFilterShow: () => void
 }
 
-export default function Filter({ showFilter, handleFilterShow }: IFilter) {
-    const [state, setState] = useState({ x: 10 });
+export default function Filter({ recipes, showFilter, handleFilterShow }: IFilter) {
+
+    const mealTypes = ["Main Meal", "Light Meal", "Side Dish", "Breakfast"];
 
     const filterClasses = ClassNames(
         styles.filter,
         showFilter ? styles.show : null
     );
+
+    const Tags = () => {
+        let tags = [];
+        recipes.forEach(recipe => {
+            if (recipe.tags) {
+                recipe.tags.forEach(tag => {
+                    console.log(tag)
+                    tags.includes(tag) || mealTypes.includes(tag) ? null : tags.push(tag)
+                })
+            }
+        })
+        return (
+            <ul className={styles.options}>
+                {tags.map((tag, index) => (
+                    <li key={index}>{tag}</li>
+                ))}
+            </ul>
+        )
+    }
 
     return (
         <section className={filterClasses}>
@@ -31,18 +51,7 @@ export default function Filter({ showFilter, handleFilterShow }: IFilter) {
                 <div className={styles.group}>
                     <h3>Meal Type</h3>
                     <ul className={styles.options}>
-                        <li>
-                            Main Meal
-                        </li>
-                        <li>
-                            Light Meal
-                        </li>
-                        <li>
-                            Breakfast
-                        </li>
-                        <li>
-                            Dessert
-                        </li>
+                        {mealTypes.map((type, index) => (<li key={index}>{type}</li>))}
                     </ul>
                 </div>
                 <div className={styles.group}>
@@ -50,18 +59,19 @@ export default function Filter({ showFilter, handleFilterShow }: IFilter) {
                     <ul className={styles.options}>
                         <li>
                             Vegetarian
-                            </li>
+                        </li>
                         <li>
                             Vegan
-                            </li>
+                        </li>
                     </ul>
                 </div>
                 <div className={styles.group}>
                     <h3>Cooking Time</h3>
-                    <FilterSlider />
+                    <FilterSlider recipes={recipes} />
                 </div>
                 <div className={styles.group}>
                     <h3>Additional Preferences</h3>
+                    <Tags />
                 </div>
             </div>
         </section >

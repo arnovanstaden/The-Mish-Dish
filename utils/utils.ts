@@ -53,6 +53,14 @@ export const getIngredientCount = (ingredients) => {
 
 
 // Get Cooking Times
-const getCookingTimesRange = (recipes) => {
-    let times = {}
+export const getCookingTimes = (recipes) => {
+    let times = {
+        min: 100,
+        max: 0
+    };
+    recipes.forEach(recipe => {
+        times.min = recipe.cookTime < times.min ? recipe.cookTime : times.min
+        times.max = recipe.cookTime > times.max ? recipe.cookTime : times.max
+    });
+    return times
 }

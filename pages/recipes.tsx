@@ -50,7 +50,7 @@ export default function Recipes({ recipes }) {
                     <Recipe recipe={recipe} key={index} />
                 ))}
             </div>
-            <Filter showFilter={showFilter} handleFilterShow={handleFilterShow} />
+            <Filter recipes={recipes} showFilter={showFilter} handleFilterShow={handleFilterShow} />
         </Layout >
     )
 }
