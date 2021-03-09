@@ -1,6 +1,6 @@
 import { GetStaticProps, GetStaticPaths } from 'next';
 import { handleRecipeShare, recentlyViewed } from "../../utils/utils";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/router"
 
 // Components
@@ -10,7 +10,9 @@ import Layout from "../../components/Layout/Layout"
 import styles from "../../styles/pages/recipes/[id].module.scss"
 
 export default function Recipe({ recipe }) {
-    const router = useRouter()
+    const router = useRouter();
+    const [currentImage, setCurrentImage] = useState(recipe.recipeImageUrls[0]);
+
     useEffect(() => {
         recentlyViewed.set(recipe.id)
     }, [])
@@ -94,8 +96,21 @@ export default function Recipe({ recipe }) {
     }
 
     // Handlers
-    const navigateBack = () => {
+    const handleNavigateBack = () => {
         router.back()
+    }
+
+    const handleNextImage = () => {
+        const imageArray = recipe.recipeImageUrls
+        const imageCount = imageArray.length;
+        const currentImagePosition = imageArray.indexOf(currentImage);
+        console.log(imageCount);
+        console.log(currentImagePosition)
+        if (currentImagePosition < (imageCount - 1)) {
+            setCurrentImage(imageArray[currentImagePosition + 1])
+        } else {
+            setCurrentImage(imageArray[0])
+        }
     }
 
 
@@ -111,8 +126,8 @@ export default function Recipe({ recipe }) {
             noContainer={true}
         >
             <div className={styles.image}>
-                <i className="icon-carrot_down" onClick={navigateBack}></i>
-                <img src={recipe.recipeImageUrls[0]} alt="" />
+                <i className="icon-carrot_down" onClick={handleNavigateBack}></i>
+                <img src={currentImage} alt={recipe.name} onClick={handleNextImage} />
             </div>
             <div className={styles.content}>
                 <div className="container">
