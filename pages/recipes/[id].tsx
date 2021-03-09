@@ -1,7 +1,8 @@
 import { GetStaticProps, GetStaticPaths } from 'next';
 import { handleRecipeShare, recentlyViewed } from "../../utils/utils";
 import { useEffect, useState } from "react";
-import { useRouter } from "next/router"
+import { useRouter } from "next/router";
+import Link from "next/link"
 
 // Components
 import Layout from "../../components/Layout/Layout"
@@ -85,8 +86,10 @@ export default function Recipe({ recipe }) {
         if (recipe.tags && recipe.tags.length > 0) {
             return (
                 recipe.tags.map((tag, index) => (
-                    <li key={index}>
-                        {tag}
+                    <li key={index} >
+                        <Link href={`/recipes?${tag.toLowerCase()}`}>
+                            {tag}
+                        </Link>
                     </li>
                 ))
             )
