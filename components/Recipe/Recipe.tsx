@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { convertImage } from "../../utils/utils";
+import { convertImage, getIngredientCount } from "../../utils/utils";
 import ClassNames from "classnames";
 
 // Styles
@@ -35,7 +35,7 @@ export default function Recipe(recipe: IRecipe, carouselItem?: boolean) {
                     <div className={styles.details}>
                         <h3 className={styles.name}>{recipe.name}</h3>
                         <div className={styles.info}>
-                            <p>10 Ingredients</p>
+                            <p>{getIngredientCount(recipe.ingredients)} Ingredients</p>
                             <div className={styles.stats}>
                                 <div className={styles.stat}>
                                     <i className="icon-timer"></i>

@@ -134,7 +134,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     }
 }
 
-export async function getStaticPaths() {
+export const getStaticPaths: GetStaticPaths = async () => {
     const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/recipes`);
     const recipes = await response.json();
     const paths = recipes.map(recipe => `/recipes/${recipe.id}`);

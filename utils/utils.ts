@@ -18,16 +18,6 @@ export const handleRecipeShare = (name: string, id: string) => {
 }
 
 // Recently Viewed
-export const updateRecentlyViewedRecipes = (id: string) => {
-    const recipes = localStorage.getItem("recentlyViewed");
-
-}
-
-// export const getRecentlyViewedRecipes = (id: string) => {
-//     const recipes = localStorage.getItem("recentlyViewed");
-//     return JSON.parse(recipes);
-// }
-
 export const recentlyViewed = {
     get: () => {
         return JSON.parse(localStorage.getItem("recentlyViewed"));
@@ -43,5 +33,20 @@ export const recentlyViewed = {
             recipes = [id]
         }
         localStorage.setItem("recentlyViewed", JSON.stringify(recipes))
+    }
+}
+
+// Get Ingredient Count
+export const getIngredientCount = (ingredients) => {
+    let count = 0;
+    if (Object.keys(ingredients).length === 1) {
+        count = ingredients[0].length
+        return count
+    } else {
+        let recipeParts = Object.keys(ingredients);
+        recipeParts.forEach(part => {
+            count += ingredients[part].length
+        });
+        return count
     }
 }
