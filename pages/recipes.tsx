@@ -47,7 +47,7 @@ export default function Recipes({ recipes }) {
 
             <div className={styles.grid}>
                 {allRecipes.map((recipe, index) => (
-                    <Recipe {...recipe} key={index} />
+                    <Recipe recipe={recipe} key={index} />
                 ))}
             </div>
             <Filter showFilter={showFilter} handleFilterShow={handleFilterShow} />

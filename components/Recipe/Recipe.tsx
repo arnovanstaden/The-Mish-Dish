@@ -5,18 +5,21 @@ import ClassNames from "classnames";
 // Styles
 import styles from "./recipe.module.scss";
 
-interface IRecipe {
-    name: string;
-    id: string;
-    cookTime: number;
-    prepTime: number;
-    recipeThumbnailUrl: string;
-    ingredients: {
-        [key: number]: string[]
-    };
+interface IRecipeProps {
+    recipe: {
+        name: string
+        id: string
+        cookTime: number
+        recipeThumbnailUrl: string
+        ingredients: {
+            [key: number]: string[]
+        }
+    }
+    carouselItem?: boolean
 }
 
-export default function Recipe(recipe: IRecipe, carouselItem?: boolean) {
+export default function Recipe({ recipe, carouselItem }: IRecipeProps) {
+    console.log(carouselItem)
     // const recipeImage = convertImage(recipe.recipeThumbnailUrl, 600);
     const recipeImage = recipe.recipeThumbnailUrl;
 
@@ -39,7 +42,7 @@ export default function Recipe(recipe: IRecipe, carouselItem?: boolean) {
                             <div className={styles.stats}>
                                 <div className={styles.stat}>
                                     <i className="icon-timer"></i>
-                                    <p>{recipe.cookTime + recipe.prepTime}</p>
+                                    <p>{recipe.cookTime}</p>
                                 </div>
                                 <div className={styles.stat}>
                                     <i className="icon-favorite_outline"></i>

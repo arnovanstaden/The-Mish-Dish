@@ -1,4 +1,8 @@
 import ClassNames from "classnames";
+import { useState } from "react"
+
+// Components
+import FilterSlider from "../UI/FilterSlider/FilterSlider";
 
 // Styles
 import styles from "./filter.module.scss";
@@ -9,6 +13,8 @@ interface IFilter {
 }
 
 export default function Filter({ showFilter, handleFilterShow }: IFilter) {
+    const [state, setState] = useState({ x: 10 });
+
     const filterClasses = ClassNames(
         styles.filter,
         showFilter ? styles.show : null
@@ -52,7 +58,7 @@ export default function Filter({ showFilter, handleFilterShow }: IFilter) {
                 </div>
                 <div className={styles.group}>
                     <h3>Cooking Time</h3>
-
+                    <FilterSlider />
                 </div>
                 <div className={styles.group}>
                     <h3>Additional Preferences</h3>

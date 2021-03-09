@@ -50,3 +50,9 @@ export const getIngredientCount = (ingredients) => {
         return count
     }
 }
+
+
+// Get Cooking Times
+const getCookingTimesRange = (recipes) => {
+    let times = {}
+}

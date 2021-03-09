@@ -50,7 +50,7 @@ export default function Carousel({ type, recipes }: ISlider) {
         <div className={styles.carousel}>
             <Slider {...settings}>
                 {recipesToRender.map((recipe, index) => (
-                    <Recipe {...recipe} key={index} />
+                    <Recipe recipe={recipe} key={index} carouselItem />
                 ))}
             </Slider>
         </div>

@@ -129,7 +129,7 @@ export default function Recipe({ recipe }) {
                         </div>
                         <div className={styles.stat}>
                             <i className="icon-servings"></i>
-                            <p>{recipe.cookTime + recipe.prepTime} Minutes</p>
+                            <p>{recipe.cookTime} Minutes</p>
                         </div>
                         <div className={styles.stat}>
                             <i className="icon-favorite_outline"></i>
