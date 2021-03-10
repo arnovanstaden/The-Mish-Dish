@@ -145,6 +145,7 @@ export default function Recipe({ recipe }) {
                     <div className={styles.description}>
                         <h3>Description</h3>
                         <p>{recipe.description}</p>
+                        {recipe.servingSuggestion ? <p className={styles.suggestion}> {recipe.servingSuggestion} </p> : null}
                     </div>
                     <div className={styles.stats}>
                         <div className={styles.stat}>

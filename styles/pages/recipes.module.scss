@@ -29,6 +29,19 @@
                 margin: 0;
             }
         }
+
+        .sort {
+            display: flex;
+
+            .option {
+                min-width: 7rem;
+            }
+
+            >p {
+                font-size: 0.8rem;
+                margin-right: 0.25rem;
+            }
+        }
     }
 
     .grid {

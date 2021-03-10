@@ -1,0 +1,24 @@
+@import "../../../styles/variables.scss";
+
+
+.dropdown {
+    position: relative;
+    width: 100%;
+
+
+    .menu {
+        position: absolute;
+        z-index: 5;
+        margin-top: 0.5rem;
+        background-color: $light-grey;
+        width: 115%;
+        left: -7.5%;
+        padding: 0.5rem;
+        box-sizing: border-box;
+        border-radius: 0 0.25rem 0.25rem;
+
+        >div {
+            margin: 0.25rem 0;
+        }
+    }
+}

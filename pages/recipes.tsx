@@ -1,10 +1,11 @@
 import { GetStaticProps } from 'next';
 import { useState, useEffect } from "react";
-import { filterSearch } from "../utils/utils"
+import { filterSearch, sortRecipes } from "../utils/utils"
 
 // Components
 import Layout from "../components/Layout/Layout";
 import Search from "../components/UI/Search/Search";
+import Sort from "../components/UI/Sort/Sort";
 import Recipe from "../components/Recipe/Recipe";
 import Filter from "../components/Filter/Filter";
 
@@ -34,6 +35,15 @@ export default function Recipes({ allRecipes }) {
         setRecipes(result);
     }
 
+    // Sort
+    const handleSort = (sortBy: string) => {
+        const sortedRecipes = sortRecipes([...recipes], sortBy);
+        console.log(sortedRecipes);
+        if (sortedRecipes) {
+            setRecipes(sortedRecipes)
+        }
+    }
+
     useEffect(() => {
         executeSearch();
     }, []);
@@ -55,11 +65,15 @@ export default function Recipes({ allRecipes }) {
             <div className={styles.options}>
                 <div className={styles.option} onClick={handleFilterShow}>
                     <i className="icon-filter"></i>
-                    <p>Filter Recipes</p>
+                    <p>Filter</p>
                 </div>
-                <div className={styles.option}>
-                    <p>Sort by: <span>Recently Added</span></p>
-                    <i className="icon-carrot_down"></i>
+                <div className={styles.sort}>
+                    <p>Sort By:</p>
+                    <div className={styles.option}>
+                        <Sort
+                            handleSort={(sortBy) => handleSort(sortBy)}
+                        />
+                    </div>
                 </div>
             </div>
 

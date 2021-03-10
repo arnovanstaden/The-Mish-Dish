@@ -1,5 +1,7 @@
 import ClassNames from "classnames";
 import { useState } from "react";
+import { getCookingTimes } from "../../utils/utils";
+
 
 // Components
 import FilterSlider from "../UI/FilterSlider/FilterSlider";
@@ -14,7 +16,12 @@ interface IFilter {
 }
 
 export default function Filter({ recipes, showFilter, handleFilterShow }: IFilter) {
-    const [filters, setFilters] = useState()
+    const recipeTimes = getCookingTimes(recipes);
+
+    const [filters, setFilters] = useState();
+    const [sliderValue, setSliderValue] = useState(recipeTimes.min)
+
+
 
     const toggleFilter = (e) => {
         let item = e.target as HTMLElement;
@@ -48,13 +55,30 @@ export default function Filter({ recipes, showFilter, handleFilterShow }: IFilte
         )
     }
 
+    // Handlers
+    const handleFilter = () => {
+        // Get all Filter Values
+
+    }
+
+
+    const handleClear = () => {
+        let activeFilters = Array.from(document.getElementsByClassName(styles.active) as HTMLCollection);
+        activeFilters.forEach(element => element.classList.remove(styles.active))
+        setSliderValue(recipeTimes.min)
+    }
+
+    const handleSliderChange = (value) => {
+        setSliderValue(value);
+    }
+
     return (
         <section className={filterClasses}>
             <div className="container">
                 <div className={styles.upper}>
                     <div className={styles.nav}>
                         <i className="icon-carrot_down" onClick={handleFilterShow}></i>
-                        <p>Clear</p>
+                        <p onClick={handleClear}>Clear</p>
                     </div>
                     <h2>Filter Recipes</h2>
                     <div className={styles.group}>
@@ -68,22 +92,25 @@ export default function Filter({ recipes, showFilter, handleFilterShow }: IFilte
                     <div className={styles.group}>
                         <h3>Dietary Requirements</h3>
                         <ul className={styles.options}>
-                            {dietRequirements.map((tiem, index) => (
-                                <li key={index} onClick={(e) => toggleFilter(e)}>{tiem}</li>
+                            {dietRequirements.map((item, index) => (
+                                <li key={index} onClick={(e) => toggleFilter(e)}>{item}</li>
                             ))}
                         </ul>
                     </div>
                     <div className={styles.group}>
                         <h3>Cooking Time</h3>
-                        <FilterSlider recipes={recipes} />
+                        <FilterSlider
+                            recipeTimes={recipeTimes}
+                            value={sliderValue}
+                            handleSliderChange={(value) => handleSliderChange(value)} />
                     </div>
                     <div className={styles.group}>
                         <h3>Additional Preferences</h3>
                         <Tags />
                     </div>
                 </div>
-                <div className={styles.lower}>
-                    <button>Apply Filters</button>
+                <div className={styles.button}>
+                    <button onClick={handleFilter}>Apply Filter</button>
                 </div>
             </div>
         </section >

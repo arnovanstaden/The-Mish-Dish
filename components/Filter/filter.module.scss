@@ -11,7 +11,7 @@
     display: none;
 
     &.show {
-        display: block;
+        display: flex;
     }
 
     .nav {
@@ -77,6 +77,21 @@
                     background-color: $blue;
                 }
             }
+        }
+    }
+
+    .button {
+        display: flex;
+        justify-content: center;
+
+        button {
+            border: 0;
+            background-color: $blue;
+            font-size: 1.1rem;
+            padding: 0.5rem 2.5rem;
+            border-radius: 0.25rem;
+            font-weight: 500;
+            color: $white;
         }
     }
 }

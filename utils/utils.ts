@@ -115,3 +115,42 @@ export const filterSearch = (allRecipes: any[], searchTerm: string) => {
 
     return results
 }
+
+
+// Sort
+
+export const sortRecipes = (recipes: any[], sortBy: string) => {
+    let sortedRecipes;
+
+    switch (sortBy) {
+        case "Recently Added":
+            break;
+        case "Name A-Z":
+            sortedRecipes = recipes.sort((a, b) => {
+                if (a.name < b.name) {
+                    return -1;
+                }
+                if (a.name > b.name) {
+                    return 1;
+                }
+                return 0;
+            })
+            break;
+        case "Popularity":
+
+            break;
+        case "Cooking Time":
+            sortedRecipes = recipes.sort((a, b) => {
+                if (a.cookTime < b.cookTime) {
+                    return -1;
+                }
+                if (a.cookTime > b.cookTime) {
+                    return 1;
+                }
+                return 0;
+            })
+            break;
+    }
+
+    return sortedRecipes
+}
