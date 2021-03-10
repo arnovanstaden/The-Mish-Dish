@@ -17,7 +17,7 @@
 
         .option {
             display: flex;
-            font-size: 0.8rem;
+            font-size: 0.9rem;
             align-items: center;
             column-gap: 0.25rem;
             border-radius: 0.25rem;
@@ -32,6 +32,7 @@
 
         .sort {
             display: flex;
+            align-items: center;
 
             .option {
                 min-width: 7rem;
@@ -39,6 +40,7 @@
 
             >p {
                 font-size: 0.8rem;
+                margin: 0;
                 margin-right: 0.25rem;
             }
         }
