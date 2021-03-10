@@ -2,7 +2,8 @@ import { GetStaticProps, GetStaticPaths } from 'next';
 import { handleRecipeShare, recentlyViewed } from "../../utils/utils";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import Link from "next/link"
+import Link from "next/link";
+import { useMediaQuery } from 'react-responsive'
 
 // Components
 import Layout from "../../components/Layout/Layout"

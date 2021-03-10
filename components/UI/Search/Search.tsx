@@ -44,6 +44,7 @@ export default function Search({ reroute, handleSearch }: ISearchProps) {
     return (
         <div className={styles.search}>
             <i className="icon-search"></i>
+            <label hidden>Search</label>
             <input
                 id="search-bar"
                 type="text"
