@@ -1,6 +1,8 @@
-import PageTemplate from "../components/PageTemplate/PageTemplate";
-
 import ReactGA from 'react-ga';
+import { useEffect } from "react"
+
+// Components
+import PageTemplate from "../components/PageTemplate/PageTemplate";
 
 // Styles, Fonts, Icons
 import '../styles/global.scss';
@@ -9,10 +11,11 @@ import "../assets/icons/style.css";
 
 
 function MyApp({ Component, pageProps }) {
-
-  // Google Analytics
   ReactGA.initialize('G-H9ZZFL2TRP');
-  ReactGA.pageview(window.location.pathname + window.location.search);
+  // Google Analytics
+  useEffect(() => {
+    ReactGA.pageview(window.location.pathname + window.location.search);
+  }, [])
 
   return (
     <PageTemplate>
