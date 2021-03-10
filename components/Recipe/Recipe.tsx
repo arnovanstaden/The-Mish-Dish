@@ -10,7 +10,7 @@ interface IRecipeProps {
         name: string
         id: string
         cookTime: number
-        recipeThumbnailUrl: string
+        thumbnail: string
         ingredients: {
             [key: number]: string[]
         }
@@ -19,8 +19,7 @@ interface IRecipeProps {
 }
 
 export default function Recipe({ recipe, carouselItem }: IRecipeProps) {
-    // const recipeImage = convertImage(recipe.recipeThumbnailUrl, 600);
-    const recipeImage = recipe.recipeThumbnailUrl;
+    const recipeImage = convertImage(recipe.thumbnail, 600);
 
     const recipeClasses = ClassNames(
         styles.recipe,

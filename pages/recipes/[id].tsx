@@ -12,7 +12,7 @@ import styles from "../../styles/pages/recipes/[id].module.scss"
 
 export default function Recipe({ recipe }) {
     const router = useRouter();
-    const [currentImage, setCurrentImage] = useState(recipe.recipeImageUrls[0]);
+    const [currentImage, setCurrentImage] = useState(recipe.images[0]);
 
     useEffect(() => {
         recentlyViewed.set(recipe.id)
@@ -104,7 +104,7 @@ export default function Recipe({ recipe }) {
     }
 
     const handleNextImage = () => {
-        const imageArray = recipe.recipeImageUrls
+        const imageArray = recipe.images
         const imageCount = imageArray.length;
         const currentImagePosition = imageArray.indexOf(currentImage);
         if (currentImagePosition < (imageCount - 1)) {
@@ -121,7 +121,7 @@ export default function Recipe({ recipe }) {
                 title: recipe.name,
                 description: recipe.description,
                 canonical: `/recipes/${recipe.id}`,
-                image: recipe.recipeThumbnailUrl
+                image: recipe.thumbnail
             }}
             classNameProp={styles.recipe}
             noContainer={true}

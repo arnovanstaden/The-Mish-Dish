@@ -15,10 +15,27 @@ import styles from "../styles/pages/recipes.module.scss"
 export default function Recipes({ allRecipes }) {
     const [showFilter, setShowFilter] = useState(false);
     const [recipes, setRecipes] = useState(allRecipes);
+    const [filters, setFilters] = useState(null);
 
     // Handlers
+
+    // Filters
     const handleFilterShow = () => {
         setShowFilter(!showFilter)
+    }
+
+    const handleFilterApply = (activeFilters) => {
+        // Apply Filters
+        let matchingRecipes = [];
+        let options = Object.keys(activeFilters);
+
+        options.forEach(option => {
+            options[option].forEach(item => {
+                if (item) {
+
+                }
+            })
+        })
     }
 
     // Search
@@ -43,6 +60,7 @@ export default function Recipes({ allRecipes }) {
             setRecipes(sortedRecipes)
         }
     }
+
 
     useEffect(() => {
         executeSearch();
@@ -82,7 +100,7 @@ export default function Recipes({ allRecipes }) {
                     <Recipe recipe={recipe} key={index} />
                 ))}
             </div>
-            <Filter recipes={recipes} showFilter={showFilter} handleFilterShow={handleFilterShow} />
+            <Filter recipes={recipes} showFilter={showFilter} handleFilterShow={handleFilterShow} handleFilterApply={handleFilterApply} />
         </Layout >
     )
 }

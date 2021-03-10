@@ -1,5 +1,5 @@
 {
-    "recipeImageUrls": [
+    "images": [
         "https://res.cloudinary.com/dhnnaqb9p/image/upload/v1588501649/The-Mish-Dish/MD4/1.jpg"
     ],
     "_id": "5eae9c89a2a86a191881d6f8",
@@ -44,6 +44,6 @@
     "recipeNo": 4,
     "__v": 0,
     "recipeCode": "MD4",
-    "recipeThumbnailUrl": "https://res.cloudinary.com/dhnnaqb9p/image/upload/v1588501646/The-Mish-Dish/MD4/thumbnail.jpg",
+    "thumbnail": "https://res.cloudinary.com/dhnnaqb9p/image/upload/v1588501646/The-Mish-Dish/MD4/thumbnail.jpg",
     "id": "5eae9c89a2a86a191881d6f8"
 }

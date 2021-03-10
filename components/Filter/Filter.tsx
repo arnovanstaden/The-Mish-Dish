@@ -12,16 +12,13 @@ import styles from "./filter.module.scss";
 interface IFilter {
     recipes: any
     showFilter?: boolean,
-    handleFilterShow: () => void
+    handleFilterShow: () => void,
+    handleFilterApply: (filters) => void
 }
 
-export default function Filter({ recipes, showFilter, handleFilterShow }: IFilter) {
+export default function Filter({ recipes, showFilter, handleFilterShow, handleFilterApply }: IFilter) {
     const recipeTimes = getCookingTimes(recipes);
-
-    const [filters, setFilters] = useState();
     const [sliderValue, setSliderValue] = useState(recipeTimes.min)
-
-
 
     const toggleFilter = (e) => {
         let item = e.target as HTMLElement;
@@ -49,7 +46,7 @@ export default function Filter({ recipes, showFilter, handleFilterShow }: IFilte
         return (
             <ul className={styles.options}>
                 {tags.map((tag, index) => (
-                    <li key={index} onClick={(e) => toggleFilter(e)}>{tag}</li>
+                    <li data-attribute="tag" key={index} onClick={(e) => toggleFilter(e)}>{tag}</li>
                 ))}
             </ul>
         )
@@ -58,7 +55,18 @@ export default function Filter({ recipes, showFilter, handleFilterShow }: IFilte
     // Handlers
     const handleFilter = () => {
         // Get all Filter Values
-
+        let filters = {
+            type: [],
+            diet: [],
+            tag: []
+        }
+        let activeFilters = Array.from(document.getElementsByClassName(styles.active) as HTMLCollection);
+        activeFilters.forEach(item => {
+            filters[item.attributes["data-attribute"].value].push(item.textContent.toLowerCase());
+        })
+        handleFilterShow()
+        console.log(filters)
+        handleFilterApply(filters)
     }
 
 
@@ -85,7 +93,7 @@ export default function Filter({ recipes, showFilter, handleFilterShow }: IFilte
                         <h3>Meal Type</h3>
                         <ul className={styles.options}>
                             {mealTypes.map((type, index) => (
-                                <li key={index} onClick={(e) => toggleFilter(e)}>{type}</li>
+                                <li data-attribute="type" key={index} onClick={(e) => toggleFilter(e)}>{type}</li>
                             ))}
                         </ul>
                     </div>
@@ -93,7 +101,7 @@ export default function Filter({ recipes, showFilter, handleFilterShow }: IFilte
                         <h3>Dietary Requirements</h3>
                         <ul className={styles.options}>
                             {dietRequirements.map((item, index) => (
-                                <li key={index} onClick={(e) => toggleFilter(e)}>{item}</li>
+                                <li data-attribute="diet" key={index} onClick={(e) => toggleFilter(e)}>{item}</li>
                             ))}
                         </ul>
                     </div>
