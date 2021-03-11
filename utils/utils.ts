@@ -126,13 +126,6 @@ export const searchRecipes = (allRecipes: any[], searchTerm: string) => {
     return results
 }
 
-export const clearSearch = () => {
-    const searchBar = document.getElementById("search-bar") as HTMLInputElement;
-    searchBar.value = "";
-
-}
-
-
 // Sort
 
 export const sortRecipes = (recipes: any[], sortBy: string) => {

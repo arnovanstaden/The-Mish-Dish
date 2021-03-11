@@ -1,6 +1,6 @@
 import { GetStaticProps } from 'next';
 import { useState, useEffect } from "react";
-import { searchRecipes, sortRecipes, filterRecipes, clearSearch } from "../utils/utils"
+import { searchRecipes, sortRecipes, filterRecipes } from "../utils/utils"
 
 // Components
 import Layout from "../components/Layout/Layout";
@@ -15,6 +15,7 @@ import styles from "../styles/pages/recipes.module.scss";
 export default function Recipes({ allRecipes }) {
     const [showFilter, setShowFilter] = useState(false);
     const [recipes, setRecipes] = useState(allRecipes);
+    const [isSearch, setIsSearch] = useState(false)
 
     // Handlers
 
@@ -30,9 +31,14 @@ export default function Recipes({ allRecipes }) {
     }
 
     const cancelFilter = () => {
-        setRecipes(allRecipes);
-        clearSearch()
-        handleFilterShow()
+        setIsSearch(false)
+
+        let result;
+        let searchTerm = (document.getElementById("search-bar") as HTMLInputElement).value;
+        if (searchTerm.length > 0) {
+            result = searchRecipes(allRecipes, searchTerm)
+        }
+        setRecipes(result);
     }
 
     // Search
@@ -41,6 +47,7 @@ export default function Recipes({ allRecipes }) {
             const searchTerm = location.search.replace("?", "").toLowerCase();
             const result = searchRecipes(allRecipes, searchTerm);
             setRecipes(result);
+            setIsSearch(true)
         }
     }
 
@@ -58,11 +65,9 @@ export default function Recipes({ allRecipes }) {
         }
     }
 
-
     useEffect(() => {
         executeSearch();
     }, []);
-
 
 
     return (
@@ -97,7 +102,7 @@ export default function Recipes({ allRecipes }) {
                     <Recipe recipe={recipe} key={index} />
                 ))}
             </div>
-            <Filter recipes={recipes} showFilter={showFilter} handleFilterShow={handleFilterShow} handleFilterApply={handleFilterApply} cancelFilter={cancelFilter} />
+            <Filter recipes={allRecipes} showFilter={showFilter} handleFilterShow={handleFilterShow} handleFilterApply={handleFilterApply} cancelFilter={cancelFilter} />
         </Layout >
     )
 }

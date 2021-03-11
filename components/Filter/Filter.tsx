@@ -30,6 +30,21 @@ export default function Filter({ recipes, showFilter, handleFilterShow, handleFi
         showFilter ? styles.show : null
     );
 
+    const MealTypes = () => {
+        let mealTypes = [];
+        recipes.forEach(recipe => {
+            mealTypes.includes(recipe.type) ? null : mealTypes.push(recipe.type)
+
+        })
+        return (
+            <ul className={styles.options}>
+                {mealTypes.map((type, index) => (
+                    <li data-attribute="type" key={index} onClick={(e) => toggleFilter(e)}>{capitalize(type)}</li>
+                ))}
+            </ul>
+        )
+    }
+
     const Tags = () => {
         let tags = [];
         recipes.forEach(recipe => {
@@ -83,11 +98,7 @@ export default function Filter({ recipes, showFilter, handleFilterShow, handleFi
                     <h2>Filter Recipes</h2>
                     <div className={styles.group}>
                         <h3>Meal Type</h3>
-                        <ul className={styles.options}>
-                            {mealTypes.map((type, index) => (
-                                <li data-attribute="type" key={index} onClick={(e) => toggleFilter(e)}>{type}</li>
-                            ))}
-                        </ul>
+                        <MealTypes />
                     </div>
                     <div className={styles.group}>
                         <h3>Dietary Requirements</h3>
