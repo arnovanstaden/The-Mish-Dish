@@ -6,17 +6,25 @@ import { useEffect, useState } from "react"
 // Components
 import Layout from "../components/Layout/Layout";
 import Search from "../components/UI/Search/Search";
-import Carousel from '../components/Carousel/Carousel'
+import Carousel from '../components/Carousel/Carousel';
+import TypeSlider from "../components/UI/TypeSlider/TypeSlider";
 
 // Styles
 import styles from '../styles/pages/home.module.scss';
 
 export default function Home({ recipes }) {
   const [recent, setRecent] = useState(null);
+  const [typeCarousel, setTypeCarousel] = useState("Popular");
 
   useEffect(() => {
     setRecent(recentlyViewed.get())
-  }, [])
+  }, []);
+
+  // Handlers
+
+  const handleTypeCarousel = (type) => {
+    setTypeCarousel(type)
+  }
 
   return (
     <Layout
@@ -43,13 +51,9 @@ export default function Home({ recipes }) {
       </section>
 
       <section className={styles.group}>
-        <div className={styles.options}>
-          <h3>Popular</h3>
-          <Link href="/recipes">
-            <a>View All</a>
-          </Link>
-        </div>
+        <TypeSlider handleTypeCarousel={handleTypeCarousel} />
         <div className={styles.carousel}>
+          <Carousel type="Meal Types" mealType={typeCarousel} recipes={recipes} />
         </div>
       </section>
 

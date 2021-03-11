@@ -37,6 +37,6 @@ export default function Head(props: IHead) {
             <meta property="og:image:width" content="500" />
             <meta property="og:image:height" content="500" />
             <meta property="og:image:alt" content="C-DOC Logo" />
-        </NextHead>
+        </NextHead >
     )
 }

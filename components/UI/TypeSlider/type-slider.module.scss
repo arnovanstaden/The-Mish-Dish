@@ -1,0 +1,30 @@
+@import "../../../styles/variables.scss";
+
+.list {
+    display: flex;
+    overflow-x: scroll;
+    column-gap: 1.5rem;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    align-items: center;
+    min-height: 3rem;
+    margin-bottom: 1rem;
+
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+
+    .type {
+        margin: 0;
+        font-size: 1rem;
+        color: $blue-grey;
+        font-weight: 500;
+        transition: 0.3s ease-in-out;
+
+        &.active {
+            font-size: 1.25rem;
+            color: $blue;
+        }
+    }
+}
