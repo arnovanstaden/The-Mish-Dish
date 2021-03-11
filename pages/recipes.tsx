@@ -15,7 +15,7 @@ import styles from "../styles/pages/recipes.module.scss";
 export default function Recipes({ allRecipes }) {
     const [showFilter, setShowFilter] = useState(false);
     const [recipes, setRecipes] = useState(allRecipes);
-    const [isSearch, setIsSearch] = useState(false)
+    const [currentFilters, setCurrentFilters] = useState(null)
 
     // Handlers
 
@@ -26,19 +26,21 @@ export default function Recipes({ allRecipes }) {
 
     const handleFilterApply = (activeFilters) => {
         // Apply Filters
+        setCurrentFilters(activeFilters);
         const result = filterRecipes(allRecipes, activeFilters);
         setRecipes(result)
     }
 
     const cancelFilter = () => {
-        setIsSearch(false)
-
         let result;
         let searchTerm = (document.getElementById("search-bar") as HTMLInputElement).value;
         if (searchTerm.length > 0) {
             result = searchRecipes(allRecipes, searchTerm)
+            setRecipes(result);
+        } else {
+            setRecipes(allRecipes)
         }
-        setRecipes(result);
+        setCurrentFilters(null);
     }
 
     // Search
@@ -47,7 +49,6 @@ export default function Recipes({ allRecipes }) {
             const searchTerm = location.search.replace("?", "").toLowerCase();
             const result = searchRecipes(allRecipes, searchTerm);
             setRecipes(result);
-            setIsSearch(true)
         }
     }
 
@@ -102,7 +103,7 @@ export default function Recipes({ allRecipes }) {
                     <Recipe recipe={recipe} key={index} />
                 ))}
             </div>
-            <Filter recipes={allRecipes} showFilter={showFilter} handleFilterShow={handleFilterShow} handleFilterApply={handleFilterApply} cancelFilter={cancelFilter} />
+            <Filter currentFilters={currentFilters} recipes={allRecipes} showFilter={showFilter} handleFilterShow={handleFilterShow} handleFilterApply={handleFilterApply} cancelFilter={cancelFilter} />
         </Layout >
     )
 }

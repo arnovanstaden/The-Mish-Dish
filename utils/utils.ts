@@ -61,21 +61,6 @@ export const getIngredientCount = (ingredients) => {
     }
 }
 
-
-// Get Cooking Times
-export const getCookingTimes = (recipes) => {
-    let times = {
-        min: 100,
-        max: 0
-    };
-    recipes.forEach(recipe => {
-        times.min = recipe.cookTime < times.min ? recipe.cookTime : times.min
-        times.max = recipe.cookTime > times.max ? recipe.cookTime : times.max
-    });
-    return times
-}
-
-
 // Search
 
 export const searchRecipes = (allRecipes: any[], searchTerm: string) => {
@@ -181,30 +166,22 @@ export const filterRecipes = (recipes: any[], activeFilters: string[]) => {
     recipes.forEach(recipe => {
         isMatch = [];
         filterOptions.forEach(option => {
-            if (option === "cookingTime") {
-                if (recipe[option] <= activeFilters[option]) {
-                    isMatch.push(true)
-                } else {
-                    isMatch.push(false)
-                }
-            } else {
-                activeFilters[option].forEach(item => {
-                    if (typeof recipe[option] === "string") {
-                        if (recipe[option] && recipe[option].includes(item)) {
-                            isMatch.push(true)
-                        } else {
-                            isMatch.push(false)
-                        }
+            activeFilters[option].forEach(item => {
+                if (typeof recipe[option] === "string") {
+                    if (recipe[option] && recipe[option].includes(item)) {
+                        isMatch.push(true)
                     } else {
-                        let array = recipe[option].map(item => item.toLowerCase());
-                        if (array.includes(item)) {
-                            isMatch.push(true)
-                        } else {
-                            isMatch.push(false)
-                        }
+                        isMatch.push(false)
                     }
-                })
-            }
+                } else {
+                    let array = recipe[option].map(item => item.toLowerCase());
+                    if (array.includes(item)) {
+                        isMatch.push(true)
+                    } else {
+                        isMatch.push(false)
+                    }
+                }
+            })
         });
 
         // Check if all filters match

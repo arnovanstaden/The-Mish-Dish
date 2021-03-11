@@ -1,34 +1,79 @@
 import ClassNames from "classnames";
-import { useState } from "react";
-import { getCookingTimes, capitalize } from "../../utils/utils";
+import { useEffect } from "react";
+import { capitalize } from "../../utils/utils";
 // Styles
 import styles from "./filter.module.scss";
 
 interface IFilter {
     recipes: any
     showFilter?: boolean,
+    currentFilters: null | {
+        type: string[],
+        tags: string[],
+        diet: string[],
+        cookingTime: number,
+    }
     handleFilterShow: () => void,
     handleFilterApply: (filters) => void,
     cancelFilter: () => void
 }
 
-export default function Filter({ recipes, showFilter, handleFilterShow, handleFilterApply, cancelFilter }: IFilter) {
-    const recipeTimes = getCookingTimes(recipes);
-    const [sliderValue, setSliderValue] = useState(recipeTimes.min)
+export default function Filter({ recipes, showFilter, currentFilters, handleFilterShow, handleFilterApply, cancelFilter }: IFilter) {
+    const mealTypes = ["Main Meal", "Light Meal", "Side Dish", "Breakfast"];
+    const dietRequirements = ["Vegetarian", "Vegan"];
+
+    // Handlers
+
+    useEffect(() => {
+        loadFilters()
+    }, [showFilter])
 
     const toggleFilter = (e) => {
         let item = e.target as HTMLElement;
         item.classList.toggle(styles.active);
-
     }
 
-    const mealTypes = ["Main Meal", "Light Meal", "Side Dish", "Breakfast"];
-    const dietRequirements = ["Vegetarian", "Vegan"];
+    const handleFilter = () => {
+        // Get all Filter Values
+        let filters = {
+            type: [],
+            diet: [],
+            tags: [],
+        }
+        let activeFilters = Array.from(document.getElementsByClassName(styles.active) as HTMLCollection);
+        activeFilters.forEach(item => {
+            filters[item.attributes["data-type"].value].push(item.textContent.toLowerCase());
+        })
+        handleFilterShow()
+        handleFilterApply(filters)
+    }
+
+
+    const handleClear = () => {
+        let activeFilters = Array.from(document.getElementsByClassName(styles.active) as HTMLCollection);
+        activeFilters.forEach(element => element.classList.remove(styles.active))
+        cancelFilter()
+    }
+
+    const loadFilters = () => {
+        if (currentFilters) {
+            let filterOptions = Object.keys(currentFilters);
+            filterOptions.forEach(option => {
+                // Find Element
+                currentFilters[option].forEach(filterItem => {
+                    let matchingElement = document.querySelector(`li[data-type="${option}"][data-value="${filterItem}"]`) as HTMLElement;
+                    matchingElement.classList.add(styles.active);
+                })
+            });
+        }
+    }
+    // Components
 
     const filterClasses = ClassNames(
         styles.filter,
         showFilter ? styles.show : null
     );
+
 
     const MealTypes = () => {
         let mealTypes = [];
@@ -39,7 +84,7 @@ export default function Filter({ recipes, showFilter, handleFilterShow, handleFi
         return (
             <ul className={styles.options}>
                 {mealTypes.map((type, index) => (
-                    <li data-attribute="type" key={index} onClick={(e) => toggleFilter(e)}>{capitalize(type)}</li>
+                    <li data-type="type" data-value={type} key={index} onClick={(e) => toggleFilter(e)}>{capitalize(type)}</li>
                 ))}
             </ul>
         )
@@ -57,34 +102,10 @@ export default function Filter({ recipes, showFilter, handleFilterShow, handleFi
         return (
             <ul className={styles.options}>
                 {tags.map((tag, index) => (
-                    <li data-attribute="tags" key={index} onClick={(e) => toggleFilter(e)}>{capitalize(tag)}</li>
+                    <li data-type="tags" data-value={tag.toLowerCase()} key={index} onClick={(e) => toggleFilter(e)}>{capitalize(tag)}</li>
                 ))}
             </ul>
         )
-    }
-
-    // Handlers
-    const handleFilter = () => {
-        // Get all Filter Values
-        let filters = {
-            type: [],
-            diet: [],
-            tags: [],
-        }
-        let activeFilters = Array.from(document.getElementsByClassName(styles.active) as HTMLCollection);
-        activeFilters.forEach(item => {
-            filters[item.attributes["data-attribute"].value].push(item.textContent.toLowerCase());
-        })
-        handleFilterShow()
-        handleFilterApply(filters)
-    }
-
-
-    const handleClear = () => {
-        let activeFilters = Array.from(document.getElementsByClassName(styles.active) as HTMLCollection);
-        activeFilters.forEach(element => element.classList.remove(styles.active))
-        setSliderValue(recipeTimes.min);
-        cancelFilter()
     }
 
     return (
@@ -103,8 +124,8 @@ export default function Filter({ recipes, showFilter, handleFilterShow, handleFi
                     <div className={styles.group}>
                         <h3>Dietary Requirements</h3>
                         <ul className={styles.options}>
-                            {dietRequirements.map((item, index) => (
-                                <li data-attribute="diet" key={index} onClick={(e) => toggleFilter(e)}>{item}</li>
+                            {dietRequirements.map((diet, index) => (
+                                <li data-type="diet" data-value={diet} key={index} onClick={(e) => toggleFilter(e)}>{diet}</li>
                             ))}
                         </ul>
                     </div>
