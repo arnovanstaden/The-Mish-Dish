@@ -1,4 +1,5 @@
 import Slider from "react-slick";
+import { useEffect } from "react";
 
 // Components
 import Recipe from "../Recipe/Recipe";
@@ -17,6 +18,18 @@ interface ISlider {
 
 export default function Carousel({ type, mealType, recipes }: ISlider) {
     let recipesToRender = [];
+    const carouselClass = `carousel-${type.replace(" ", "").toLowerCase()}`
+
+    useEffect(() => {
+        // Same Height Carousels
+        let carousalTrack = document.querySelector(`.${carouselClass} .slick-list .slick-track`) as HTMLElement;
+        let stHeight = carousalTrack.offsetHeight;
+        let slides = Array.from(carousalTrack.getElementsByClassName(`slick-slide`) as HTMLCollectionOf<HTMLElement>);
+        slides.forEach(slide => {
+            slide.style.height = `${stHeight.toString()}px`
+        });
+    }, [])
+
 
     switch (type) {
         case "Recommended":
@@ -52,6 +65,7 @@ export default function Carousel({ type, mealType, recipes }: ISlider) {
         pauseOnHover: true,
         speed: 500,
         initialSlide: 0,
+        className: carouselClass
     };
     return (
         <div className={styles.carousel}>

@@ -104,13 +104,18 @@ input {
 
 
 // Slick
-.slick-track {
-  display: flex !important;
-  height: 100%;
-}
+
+.slick-track {}
 
 .slick-slide {
-  height: auto;
+  height: 100%;
+
+  >div {
+    height: 100%;
+    padding-bottom: 0.5rem;
+
+  }
+
 }
 
 

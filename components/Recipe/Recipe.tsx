@@ -28,8 +28,8 @@ export default function Recipe({ recipe, carouselItem }: IRecipeProps) {
 
     return (
         <Link href={`/recipes/${recipe.id}`}>
-            <a>
-                <article className={recipeClasses}>
+            <a className={recipeClasses}>
+                <article >
                     <div className={styles.image}>
                         <img loading="lazy" src={recipeImage} alt={`${recipe.name} Thumbnail`} />
                     </div>
