@@ -1,11 +1,6 @@
 import ClassNames from "classnames";
 import { useState } from "react";
 import { getCookingTimes, capitalize } from "../../utils/utils";
-
-
-// Components
-import FilterSlider from "../UI/FilterSlider/FilterSlider";
-
 // Styles
 import styles from "./filter.module.scss";
 
@@ -59,7 +54,7 @@ export default function Filter({ recipes, showFilter, handleFilterShow, handleFi
         let filters = {
             type: [],
             diet: [],
-            tags: []
+            tags: [],
         }
         let activeFilters = Array.from(document.getElementsByClassName(styles.active) as HTMLCollection);
         activeFilters.forEach(item => {
@@ -75,10 +70,6 @@ export default function Filter({ recipes, showFilter, handleFilterShow, handleFi
         activeFilters.forEach(element => element.classList.remove(styles.active))
         setSliderValue(recipeTimes.min);
         cancelFilter()
-    }
-
-    const handleSliderChange = (value) => {
-        setSliderValue(value);
     }
 
     return (
@@ -105,13 +96,6 @@ export default function Filter({ recipes, showFilter, handleFilterShow, handleFi
                                 <li data-attribute="diet" key={index} onClick={(e) => toggleFilter(e)}>{item}</li>
                             ))}
                         </ul>
-                    </div>
-                    <div className={styles.group}>
-                        <h3>Cooking Time</h3>
-                        <FilterSlider
-                            recipeTimes={recipeTimes}
-                            value={sliderValue}
-                            handleSliderChange={(value) => handleSliderChange(value)} />
                     </div>
                     <div className={styles.group}>
                         <h3>Additional Preferences</h3>

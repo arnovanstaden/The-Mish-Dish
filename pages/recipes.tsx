@@ -12,8 +12,6 @@ import Filter from "../components/Filter/Filter";
 // Styles
 import styles from "../styles/pages/recipes.module.scss";
 
-import loaclRecipes from "../recipes.json";
-
 export default function Recipes({ allRecipes }) {
     const [showFilter, setShowFilter] = useState(false);
     const [recipes, setRecipes] = useState(allRecipes);
@@ -105,10 +103,10 @@ export default function Recipes({ allRecipes }) {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-    // const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/recipes`);
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/recipes`);
 
-    // let allRecipes = await response.json();
-    let allRecipes = [...loaclRecipes].reverse()
+    let allRecipes = await response.json();
+    allRecipes = [...allRecipes].reverse()
 
     return {
         props: {

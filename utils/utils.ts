@@ -4,9 +4,7 @@ export const convertImage = (image: string, width: number): string => {
         const covertedImage = image.replace("upload/v", `upload/w_${width},c_scale/f_auto/v`);
         return covertedImage
     } else {
-        const covertedImage = image.replace("upload/v", `upload/w_${width},c_scale/f_auto/v`);
-        return covertedImage
-        // return image
+        return image
     }
 }
 
@@ -181,29 +179,34 @@ export const filterRecipes = (recipes: any[], activeFilters: string[]) => {
     let isMatch: boolean[];
     let filterOptions = Object.keys(activeFilters);
 
-    console.log(activeFilters)
-
     recipes.forEach(recipe => {
         isMatch = [];
         filterOptions.forEach(option => {
-            activeFilters[option].forEach(item => {
-                if (typeof recipe[option] === "string") {
-                    if (recipe[option] && recipe[option].includes(item)) {
-                        isMatch.push(true)
-                    } else {
-                        isMatch.push(false)
-                    }
+            if (option === "cookingTime") {
+                if (recipe[option] <= activeFilters[option]) {
+                    isMatch.push(true)
                 } else {
-                    let array = recipe[option].map(item => item.toLowerCase());
-                    if (array.includes(item)) {
-                        isMatch.push(true)
-                    } else {
-                        isMatch.push(false)
-                    }
+                    isMatch.push(false)
                 }
-            })
+            } else {
+                activeFilters[option].forEach(item => {
+                    if (typeof recipe[option] === "string") {
+                        if (recipe[option] && recipe[option].includes(item)) {
+                            isMatch.push(true)
+                        } else {
+                            isMatch.push(false)
+                        }
+                    } else {
+                        let array = recipe[option].map(item => item.toLowerCase());
+                        if (array.includes(item)) {
+                            isMatch.push(true)
+                        } else {
+                            isMatch.push(false)
+                        }
+                    }
+                })
+            }
         });
-
 
         // Check if all filters match
         if (!isMatch.includes(false)) {
