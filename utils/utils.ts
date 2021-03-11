@@ -179,6 +179,12 @@ export const filterRecipes = (recipes: any[], activeFilters: string[]) => {
     let isMatch: boolean[];
     let filterOptions = Object.keys(activeFilters);
 
+    // Check if currently searching
+    let searchTerm = (document.getElementById("search-bar") as HTMLInputElement).value;
+    if (searchTerm.length > 0) {
+        recipes = searchRecipes(recipes, searchTerm)
+    }
+
     recipes.forEach(recipe => {
         isMatch = [];
         filterOptions.forEach(option => {

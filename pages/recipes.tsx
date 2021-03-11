@@ -15,7 +15,6 @@ import styles from "../styles/pages/recipes.module.scss";
 export default function Recipes({ allRecipes }) {
     const [showFilter, setShowFilter] = useState(false);
     const [recipes, setRecipes] = useState(allRecipes);
-    const [filters, setFilters] = useState(null);
 
     // Handlers
 
@@ -33,6 +32,7 @@ export default function Recipes({ allRecipes }) {
     const cancelFilter = () => {
         setRecipes(allRecipes);
         clearSearch()
+        handleFilterShow()
     }
 
     // Search
