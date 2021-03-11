@@ -1,6 +1,6 @@
 import { GetStaticProps } from 'next';
 import { useState, useEffect } from "react";
-import { filterSearch, sortRecipes } from "../utils/utils"
+import { searchRecipes, sortRecipes, filterRecipes, clearSearch } from "../utils/utils"
 
 // Components
 import Layout from "../components/Layout/Layout";
@@ -10,7 +10,9 @@ import Recipe from "../components/Recipe/Recipe";
 import Filter from "../components/Filter/Filter";
 
 // Styles
-import styles from "../styles/pages/recipes.module.scss"
+import styles from "../styles/pages/recipes.module.scss";
+
+import loaclRecipes from "../recipes.json";
 
 export default function Recipes({ allRecipes }) {
     const [showFilter, setShowFilter] = useState(false);
@@ -26,29 +28,26 @@ export default function Recipes({ allRecipes }) {
 
     const handleFilterApply = (activeFilters) => {
         // Apply Filters
-        let matchingRecipes = [];
-        let options = Object.keys(activeFilters);
+        const result = filterRecipes(allRecipes, activeFilters);
+        setRecipes(result)
+    }
 
-        options.forEach(option => {
-            options[option].forEach(item => {
-                if (item) {
-
-                }
-            })
-        })
+    const cancelFilter = () => {
+        setRecipes(allRecipes);
+        clearSearch()
     }
 
     // Search
     const executeSearch = () => {
         if (location.search) {
             const searchTerm = location.search.replace("?", "").toLowerCase();
-            const result = filterSearch(allRecipes, searchTerm);
+            const result = searchRecipes(allRecipes, searchTerm);
             setRecipes(result);
         }
     }
 
-    const handleSearch = (searchTerm: string) => {
-        const result = filterSearch(allRecipes, searchTerm);
+    const handleInstantSearch = (searchTerm: string) => {
+        const result = searchRecipes(allRecipes, searchTerm);
         setRecipes(result);
     }
 
@@ -78,7 +77,7 @@ export default function Recipes({ allRecipes }) {
             classNameProp={styles.recipes}
         >
             <h1>Find Recipes</h1>
-            <Search handleSearch={(searchTerm) => handleSearch(searchTerm)} />
+            <Search handleInstantSearch={(searchTerm) => handleInstantSearch(searchTerm)} />
 
             <div className={styles.options}>
                 <div className={styles.option} onClick={handleFilterShow}>
@@ -100,15 +99,16 @@ export default function Recipes({ allRecipes }) {
                     <Recipe recipe={recipe} key={index} />
                 ))}
             </div>
-            <Filter recipes={recipes} showFilter={showFilter} handleFilterShow={handleFilterShow} handleFilterApply={handleFilterApply} />
+            <Filter recipes={recipes} showFilter={showFilter} handleFilterShow={handleFilterShow} handleFilterApply={handleFilterApply} cancelFilter={cancelFilter} />
         </Layout >
     )
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/recipes`);
-    let allRecipes = await response.json();
-    allRecipes = [...allRecipes].reverse()
+    // const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/recipes`);
+
+    // let allRecipes = await response.json();
+    let allRecipes = [...loaclRecipes].reverse()
 
     return {
         props: {

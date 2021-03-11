@@ -1,5 +1,5 @@
 import { GetStaticProps, GetStaticPaths } from 'next';
-import { handleRecipeShare, recentlyViewed } from "../../utils/utils";
+import { handleRecipeShare, recentlyViewed, capitalize } from "../../utils/utils";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
@@ -89,7 +89,7 @@ export default function Recipe({ recipe }) {
                 recipe.tags.map((tag, index) => (
                     <li key={index} >
                         <Link href={`/recipes?${tag.toLowerCase()}`}>
-                            {tag}
+                            {capitalize(tag)}
                         </Link>
                     </li>
                 ))

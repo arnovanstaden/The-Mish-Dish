@@ -4,8 +4,16 @@ export const convertImage = (image: string, width: number): string => {
         const covertedImage = image.replace("upload/v", `upload/w_${width},c_scale/f_auto/v`);
         return covertedImage
     } else {
-        return image
+        const covertedImage = image.replace("upload/v", `upload/w_${width},c_scale/f_auto/v`);
+        return covertedImage
+        // return image
     }
+}
+
+// Text Manipulation
+export const capitalize = (word: string) => {
+    if (typeof word !== 'string') return ''
+    return word.charAt(0).toUpperCase() + word.slice(1)
 }
 
 // Sharing
@@ -72,7 +80,7 @@ export const getCookingTimes = (recipes) => {
 
 // Search
 
-export const filterSearch = (allRecipes: any[], searchTerm: string) => {
+export const searchRecipes = (allRecipes: any[], searchTerm: string) => {
     let results = [];
     const searchKeys = ["name", "description", "recipeType"];
 
@@ -120,6 +128,12 @@ export const filterSearch = (allRecipes: any[], searchTerm: string) => {
     return results
 }
 
+export const clearSearch = () => {
+    const searchBar = document.getElementById("search-bar") as HTMLInputElement;
+    searchBar.value = "";
+
+}
+
 
 // Sort
 
@@ -157,4 +171,45 @@ export const sortRecipes = (recipes: any[], sortBy: string) => {
     }
 
     return sortedRecipes
+}
+
+
+// Filter
+
+export const filterRecipes = (recipes: any[], activeFilters: string[]) => {
+    let matchingRecipes = [];
+    let isMatch: boolean[];
+    let filterOptions = Object.keys(activeFilters);
+
+    console.log(activeFilters)
+
+    recipes.forEach(recipe => {
+        isMatch = [];
+        filterOptions.forEach(option => {
+            activeFilters[option].forEach(item => {
+                if (typeof recipe[option] === "string") {
+                    if (recipe[option] && recipe[option].includes(item)) {
+                        isMatch.push(true)
+                    } else {
+                        isMatch.push(false)
+                    }
+                } else {
+                    let array = recipe[option].map(item => item.toLowerCase());
+                    if (array.includes(item)) {
+                        isMatch.push(true)
+                    } else {
+                        isMatch.push(false)
+                    }
+                }
+            })
+        });
+
+
+        // Check if all filters match
+        if (!isMatch.includes(false)) {
+            matchingRecipes.push(recipe)
+        }
+    })
+
+    return matchingRecipes
 }

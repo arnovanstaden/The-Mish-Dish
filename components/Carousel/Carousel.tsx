@@ -17,8 +17,10 @@ interface ISlider {
 
 
 export default function Carousel({ type, mealType, recipes }: ISlider) {
+
     let recipesToRender = [];
     const carouselClass = `carousel-${type.replace(" ", "").toLowerCase()}`
+
 
     useEffect(() => {
         // Same Height Carousels
@@ -65,7 +67,7 @@ export default function Carousel({ type, mealType, recipes }: ISlider) {
         pauseOnHover: true,
         speed: 500,
         initialSlide: 0,
-        className: carouselClass
+        className: carouselClass,
     };
     return (
         <div className={styles.carousel}>

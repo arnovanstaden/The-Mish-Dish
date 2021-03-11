@@ -1,6 +1,6 @@
 import ClassNames from "classnames";
 import { useState } from "react";
-import { getCookingTimes } from "../../utils/utils";
+import { getCookingTimes, capitalize } from "../../utils/utils";
 
 
 // Components
@@ -13,10 +13,11 @@ interface IFilter {
     recipes: any
     showFilter?: boolean,
     handleFilterShow: () => void,
-    handleFilterApply: (filters) => void
+    handleFilterApply: (filters) => void,
+    cancelFilter: () => void
 }
 
-export default function Filter({ recipes, showFilter, handleFilterShow, handleFilterApply }: IFilter) {
+export default function Filter({ recipes, showFilter, handleFilterShow, handleFilterApply, cancelFilter }: IFilter) {
     const recipeTimes = getCookingTimes(recipes);
     const [sliderValue, setSliderValue] = useState(recipeTimes.min)
 
@@ -46,7 +47,7 @@ export default function Filter({ recipes, showFilter, handleFilterShow, handleFi
         return (
             <ul className={styles.options}>
                 {tags.map((tag, index) => (
-                    <li data-attribute="tag" key={index} onClick={(e) => toggleFilter(e)}>{tag}</li>
+                    <li data-attribute="tags" key={index} onClick={(e) => toggleFilter(e)}>{capitalize(tag)}</li>
                 ))}
             </ul>
         )
@@ -58,14 +59,13 @@ export default function Filter({ recipes, showFilter, handleFilterShow, handleFi
         let filters = {
             type: [],
             diet: [],
-            tag: []
+            tags: []
         }
         let activeFilters = Array.from(document.getElementsByClassName(styles.active) as HTMLCollection);
         activeFilters.forEach(item => {
             filters[item.attributes["data-attribute"].value].push(item.textContent.toLowerCase());
         })
         handleFilterShow()
-        console.log(filters)
         handleFilterApply(filters)
     }
 
@@ -73,7 +73,8 @@ export default function Filter({ recipes, showFilter, handleFilterShow, handleFi
     const handleClear = () => {
         let activeFilters = Array.from(document.getElementsByClassName(styles.active) as HTMLCollection);
         activeFilters.forEach(element => element.classList.remove(styles.active))
-        setSliderValue(recipeTimes.min)
+        setSliderValue(recipeTimes.min);
+        cancelFilter()
     }
 
     const handleSliderChange = (value) => {

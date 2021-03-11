@@ -6,15 +6,15 @@ import styles from "./search.module.scss";
 
 interface ISearchProps {
     reroute?: boolean,
-    handleSearch?: (searchTerm: string) => void
+    handleInstantSearch?: (searchTerm: string) => void
 }
 
-export default function Search({ reroute, handleSearch }: ISearchProps) {
+export default function Search({ reroute, handleInstantSearch }: ISearchProps) {
     const router = useRouter()
 
     const instantSearch = (e) => {
         let searchTerm = e.target.value.toLowerCase();
-        handleSearch(searchTerm)
+        handleInstantSearch(searchTerm)
     }
 
     const submitSearch = (e) => {
@@ -33,7 +33,7 @@ export default function Search({ reroute, handleSearch }: ISearchProps) {
     }
 
     const updatePlaceholder = (e) => {
-        let searchBar = e.target as HTMLElement;
+        const searchBar = e.target as HTMLElement;
         searchBar.setAttribute("placeholder", "Name, type, ingredient...")
     }
 
