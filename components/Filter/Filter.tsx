@@ -62,7 +62,9 @@ export default function Filter({ recipes, showFilter, currentFilters, handleFilt
                 // Find Element
                 currentFilters[option].forEach(filterItem => {
                     let matchingElement = document.querySelector(`li[data-type="${option}"][data-value="${filterItem}"]`) as HTMLElement;
-                    matchingElement.classList.add(styles.active);
+                    if (matchingElement) {
+                        matchingElement.classList.add(styles.active)
+                    }
                 })
             });
         }
@@ -125,7 +127,7 @@ export default function Filter({ recipes, showFilter, currentFilters, handleFilt
                         <h3>Dietary Requirements</h3>
                         <ul className={styles.options}>
                             {dietRequirements.map((diet, index) => (
-                                <li data-type="diet" data-value={diet} key={index} onClick={(e) => toggleFilter(e)}>{diet}</li>
+                                <li data-type="diet" data-value={diet.toLowerCase()} key={index} onClick={(e) => toggleFilter(e)}>{diet}</li>
                             ))}
                         </ul>
                     </div>
