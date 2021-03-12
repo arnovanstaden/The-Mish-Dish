@@ -141,6 +141,16 @@ export default function Recipe({ recipe }) {
                         </div>
                     </div>
                     <ul className={styles.tags}>
+                        <li>
+                            <Link href={`/recipes?${recipe.type.toLowerCase()}`}>
+                                {capitalize(recipe.type)}
+                            </Link>
+                        </li>
+                        <li>
+                            <Link href={`/recipes?${recipe.diet.toLowerCase()}`}>
+                                {capitalize(recipe.diet)}
+                            </Link>
+                        </li>
                         <Tags />
                     </ul>
                     <div className={styles.description}>
