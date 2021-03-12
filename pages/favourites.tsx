@@ -16,9 +16,10 @@ export default function Favourites({ allRecipes }) {
     return (
         <Layout
             head={{
-                title: "Recipes | The Mish Dish",
+                title: "Favourites | The Mish Dish",
                 description: "A personal catalogue of some of Mish's personally created, go-to dishes - no life story included.",
-                canonical: "/"
+                canonical: "/favourites",
+                robots: false
             }}
             classNameProp={styles.recipes}
         >

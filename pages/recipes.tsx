@@ -76,7 +76,7 @@ export default function Recipes({ allRecipes }) {
             head={{
                 title: "Recipes | The Mish Dish",
                 description: "A personal catalogue of some of Mish's personally created, go-to dishes - no life story included.",
-                canonical: "/"
+                canonical: "/recipes"
             }}
             classNameProp={styles.recipes}
         >

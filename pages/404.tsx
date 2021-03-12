@@ -6,7 +6,7 @@ export default function PageNotFound() {
             head={{
                 title: "Recipes | The Mish Dish",
                 description: "A personal catalogue of some of Mish's personally created, go-to dishes - no life story included.",
-                canonical: "/",
+                canonical: "/404",
                 robots: false
             }}
         >
