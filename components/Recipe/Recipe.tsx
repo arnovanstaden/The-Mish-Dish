@@ -11,10 +11,11 @@ interface IRecipeProps {
         name: string
         id: string
         cookTime: number
-        thumbnail: string
+        thumbnail: string,
+        favourites: number,
         ingredients: {
             [key: number]: string[]
-        }
+        },
     }
     carouselItem?: boolean
 }
@@ -45,7 +46,7 @@ export default function Recipe({ recipe, carouselItem }: IRecipeProps) {
                                 </div>
                                 <div className={styles.stat}>
                                     <i className="icon-favorite_outline"></i>
-                                    <p>10</p>
+                                    <p>{recipe.favourites} </p>
                                 </div>
                             </div>
                         </div>

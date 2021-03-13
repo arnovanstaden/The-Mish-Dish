@@ -1,5 +1,6 @@
 import { GetStaticProps, GetStaticPaths } from 'next';
 import { handleRecipeShare, capitalize } from "../../utils/general";
+import { checkLoggedIn, updateFavourite } from "../../utils/user";
 import { useState } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
@@ -32,6 +33,13 @@ export default function Recipe({ recipe }) {
         } else {
             setCurrentImage(imageArray[0])
         }
+    }
+
+    const handleFavourite = (id) => {
+        if (checkLoggedIn()) {
+            return updateFavourite(id)
+        }
+        return alert("Log in to manage favourites")
     }
 
     // Components
@@ -144,7 +152,7 @@ export default function Recipe({ recipe }) {
                     <h1>{recipe.name}</h1>
                     <div className={styles.icons}>
                         <i className="icon-share" onClick={() => handleRecipeShare(recipe.name, recipe.id)}></i>
-                        <i className="icon-favorite_outline"></i>
+                        <i className="icon-favorite_outline" onClick={() => handleFavourite(recipe.id)}></i>
                     </div>
                 </div>
                 <ul className={styles.tags}>
@@ -176,7 +184,7 @@ export default function Recipe({ recipe }) {
                     </div>
                     <div className={styles.stat}>
                         <i className="icon-favorite_outline"></i>
-                        <p>10 Favourites</p>
+                        <p>{recipe.favourites} Favourites</p>
                     </div>
                 </div>
             </div>

@@ -1,4 +1,5 @@
-import { loginUser } from "../../../utils/user"
+import { useState } from "react";
+import { loginUser, registerUser } from "../../../utils/user";
 
 // Styles
 import styles from "./login.module.scss";
@@ -8,8 +9,10 @@ interface ILogin {
 }
 
 export default function Login({ handleLoginSuccess }: ILogin) {
+    const [register, setRegister] = useState(false);
+    const [forgotPassword, setforgotPassword] = useState(false);
 
-    const handleLogin = (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
 
         const showMessage = (message: string, status: string) => {
@@ -24,27 +27,45 @@ export default function Login({ handleLoginSuccess }: ILogin) {
             return showMessage("Please complete all fields.", "error")
         }
         else {
-            const loginData = {
+            const credentials = {
                 email: (document.querySelector(`.${styles.form} input[name="email"]`) as HTMLInputElement).value.toLowerCase(),
-                password: (document.querySelector(`.${styles.form} input[name="password"]`) as HTMLInputElement).value
+                password: (document.querySelector(`.${styles.form} input[name="password"]`) as HTMLInputElement).value,
+                name: register ? (document.querySelector(`.${styles.form} input[name="name"]`) as HTMLInputElement).value : undefined
             }
 
-            loginUser(loginData)
-                .then(result => {
-                    if (result.status.toString().charAt(0) === "4") {
-                        showMessage(result.data.message, "error")
-                    } else {
-                        handleLoginSuccess()
-                    }
-                })
+            if (register) {
+                registerUser(credentials)
+                    .then(result => {
+                        if (result.status.toString().charAt(0) === "4") {
+                            showMessage(result.data.message, "error")
+                        } else {
+                            handleLoginSuccess()
+                        }
+                    })
+            } else {
+                loginUser(credentials)
+                    .then(result => {
+                        if (result.status.toString().charAt(0) === "4") {
+                            showMessage(result.data.message, "error")
+                        } else {
+                            handleLoginSuccess()
+                        }
+                    })
+            }
         }
     }
 
     return (
         <div className={styles.login}>
-            <h1>Login</h1>
-            <p>Login to save your favourite recipes.</p>
+            <h1>{register ? "Register" : "Login"}</h1>
+            <p>{register ? "Register" : "Login"} to save your favourite recipes.</p>
             <form className={styles.form} name="login-form" id="login-form">
+                {register ?
+                    <div className={styles.group}>
+                        <label>Your Name</label>
+                        <input type="text" name="name" />
+                    </div>
+                    : null}
                 <div className={styles.group}>
                     <label>Email Address</label>
                     <input type="email" name="email" />
@@ -54,8 +75,17 @@ export default function Login({ handleLoginSuccess }: ILogin) {
                     <input type="password" name="password" />
                 </div>
                 <p className={styles.message}></p>
-                <button type="submit" onClick={handleLogin}>Login</button>
+                <button type="submit" onClick={handleSubmit}>{register ? "Register" : "Login"}</button>
             </form>
+            <div className={styles.options}>
+                <p onClick={() => setRegister(!register)}>{register ? "Login" : "Register"}</p>
+                {register ? null :
+                    <>
+                        <span>|</span>
+                        <p onClick={() => setRegister(!register)}>Forgot Password?</p>
+                    </>
+                }
+            </div>
         </div>
     )
 }

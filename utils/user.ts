@@ -19,8 +19,21 @@ export const loginUser = async (user) => {
     return loginResult
 }
 
-export const registerUser = () => {
-
+export const registerUser = async (user) => {
+    let registerResult = await axios({
+        method: "post",
+        url: `${process.env.NEXT_PUBLIC_LOCAL_API_URL}/profile/register`,
+        data: user
+    }).then(result => {
+        // Save Login
+        document.cookie = `TMDToken=${result.data.token};path=/`;
+        document.cookie = `TMDName=${result.data.name};path=/`;
+        return result
+    }).catch(err => {
+        console.log(err)
+        return err.response
+    });
+    return registerResult
 }
 
 export const checkLoggedIn = (): boolean => {
@@ -43,11 +56,33 @@ export const getFavourites = async () => {
             Authorization: `BEARER ${getCookie("TMDToken")}`
         }
     }).then(result => {
-        return result.data.favourites
+        if (result.data.favourites.length > 0) {
+            return result.data.favourites
+        }
+        return undefined
     }).catch(err => {
         console.log(err)
     });
     return response
+}
+
+
+export const updateFavourite = (id) => {
+
+    axios({
+        method: "post",
+        url: `${process.env.NEXT_PUBLIC_LOCAL_API_URL}/profile/handleFavourite`,
+        headers: {
+            Authorization: `BEARER ${getCookie("TMDToken")}`
+        },
+        data: {
+            recipeID: id,
+        }
+    }).then(result => {
+        console.log(result)
+    }).catch(err => {
+        console.log(err)
+    });
 }
 
 const getCookie = (name): string => {
@@ -62,4 +97,5 @@ const getCookie = (name): string => {
         }
     }
 }
+
 

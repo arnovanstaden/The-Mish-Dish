@@ -10,7 +10,7 @@ import Recipe from "../components/Recipe/Recipe";
 import Login from "../components/UI/Login/Login";
 
 // Styles
-import styles from "../styles/pages/recipes.module.scss"
+import styles from "../styles/pages/favourites.module.scss"
 
 export default function Favourites({ allRecipes }) {
     const [loggedIn, setLoggedIn] = useState(false);
@@ -27,8 +27,8 @@ export default function Favourites({ allRecipes }) {
     }
 
     const getRecipe = (id) => {
-        let recipe = allRecipes.filter(recipe => recipe.id === id);
-        return recipe[0]
+        let recipe = allRecipes.find(recipe => recipe.id === id);
+        return recipe
     }
 
     // Handlers
@@ -65,24 +65,17 @@ export default function Favourites({ allRecipes }) {
                 canonical: "/favourites",
                 robots: false
             }}
-            classNameProp={styles.recipes}
+            classNameProp={styles.favourites}
         >
 
             <h1>{userName} Favourites</h1>
             <Search reroute />
-            <div className={styles.options}>
-                <div className={styles.option}>
-                    <p>Sort by: <span>Recently Added</span></p>
-                    <i className="icon-carrot_down"></i>
-                </div>
-            </div>
-
             <div className={styles.grid}>
                 {favourites ?
                     favourites.map((favourite, index) => (
                         <Recipe recipe={getRecipe(favourite)} key={index} />
                     ))
-                    : null
+                    : <p> You don't have any favourites yet :(</p>
                 }
             </div>
             {loggedIn ? null : <Login handleLoginSuccess={handleLoginSuccess} />}
