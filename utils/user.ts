@@ -63,7 +63,7 @@ export const getFavouritesList = () => {
 
 export const checkIfFavourite = (id): boolean => {
     const favouritesList = getFavouritesList()
-    if (favouritesList.includes(id)) {
+    if (favouritesList && favouritesList.includes(id)) {
         return true
     }
     return false
@@ -72,10 +72,14 @@ export const checkIfFavourite = (id): boolean => {
 export const updateFavourite = (id: string) => {
     const favouritesList = getFavouritesList()
     let newFavourites = [];
-    if (favouritesList.includes(id)) {
-        newFavourites = [...favouritesList].filter(favourite => favourite != id);
+    if (favouritesList) {
+        if (favouritesList.includes(id)) {
+            newFavourites = [...favouritesList].filter(favourite => favourite != id);
+        } else {
+            newFavourites = [...favouritesList, id];
+        }
     } else {
-        newFavourites = [...favouritesList, id];
+        newFavourites.push(id)
     }
     localStorage.setItem("favourites", JSON.stringify(newFavourites))
 
