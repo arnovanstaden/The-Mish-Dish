@@ -1,4 +1,3 @@
-
 // Components
 import PageTemplate from "../components/PageTemplate/PageTemplate";
 
@@ -6,6 +5,7 @@ import PageTemplate from "../components/PageTemplate/PageTemplate";
 import '../styles/global.scss';
 import "typeface-poppins";
 import "../assets/icons/style.css";
+
 
 
 function MyApp({ Component, pageProps }) {

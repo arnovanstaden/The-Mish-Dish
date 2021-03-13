@@ -26,3 +26,10 @@ export const handleRecipeShare = (name: string, id: string) => {
             .catch((error) => console.log('Error sharing', error));
     }
 }
+
+// Loader
+export const toggleLoader = () => {
+    let loader = document.getElementsByClassName("loader")[0] as HTMLElement;
+    loader.classList.toggle("hide")
+    console.log("hidden")
+}

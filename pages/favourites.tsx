@@ -31,7 +31,7 @@ export default function Favourites({ allRecipes }) {
         if (favouritesList) {
             setFavourites(getFullRecipes(allRecipes, favouritesList))
         }
-    })
+    }, [])
 
     // Utils
     const transformUserName = (): string => {
@@ -90,18 +90,6 @@ export default function Favourites({ allRecipes }) {
         </Layout >
     )
 }
-
-// export const getStaticProps: GetStaticProps = async () => {
-//     const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/recipes`);
-//     let allRecipes = await response.json();
-//     allRecipes = [...allRecipes].reverse()
-
-//     return {
-//         props: {
-//             allRecipes
-//         },
-//     }
-// }
 
 export const getServerSideProps: GetServerSideProps = async () => {
     const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/recipes`);
