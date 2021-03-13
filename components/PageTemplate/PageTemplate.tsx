@@ -10,7 +10,6 @@ import Loader from "../UI/Loader/Loader";
 // Page Loader
 
 Router.events.on('routeChangeStart', () => {
-    console.log("start")
     toggleLoader();
 });
 

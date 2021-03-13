@@ -31,5 +31,4 @@ export const handleRecipeShare = (name: string, id: string) => {
 export const toggleLoader = () => {
     let loader = document.getElementsByClassName("loader")[0] as HTMLElement;
     loader.classList.toggle("hide")
-    console.log("hidden")
 }

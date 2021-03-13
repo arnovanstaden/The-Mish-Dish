@@ -162,20 +162,21 @@ input {
   top: 0;
   left: 0;
   z-index: 1000;
-
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 1rem;
   box-sizing: border-box;
   flex-direction: column;
+  transition: 0.3s ease;
 
   img {
-    width: 4rem;
+    width: 12rem;
     animation: spin;
-    animation-duration: 2s;
+    animation-duration: 3s;
     animation-timing-function: ease;
     animation-iteration-count: infinite;
+    max-width: 80%;
   }
 
   @keyframes spin {

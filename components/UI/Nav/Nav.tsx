@@ -8,7 +8,7 @@ export default function Nav() {
         <nav className={styles.nav}>
             <Link href="/">
                 <a>
-                    <img src="/Logo-wide.svg" alt="The Mish Dish Logo" />
+                    <img src="/images/logo-wide.svg" alt="The Mish Dish Logo" />
                 </a>
             </Link>
             <button>
