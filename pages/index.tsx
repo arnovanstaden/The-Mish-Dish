@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { GetStaticProps } from 'next';
+import { GetStaticProps, GetServerSideProps } from 'next';
 import { useEffect, useState } from "react"
 
 // Components
@@ -67,13 +67,26 @@ export default function Home({ recipes }) {
 }
 
 
-export const getStaticProps: GetStaticProps = async () => {
+// export const getStaticProps: GetStaticProps = async () => {
+//   const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/recipes`);
+//   const recipes = await response.json();
+
+//   return {
+//     props: {
+//       recipes
+//     },
+//   }
+// }
+
+export const getServerSideProps: GetServerSideProps = async () => {
   const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/recipes`);
-  const recipes = await response.json();
+
+  let allRecipes = await response.json();
+  allRecipes = [...allRecipes].reverse()
 
   return {
     props: {
-      recipes
+      allRecipes
     },
   }
 }

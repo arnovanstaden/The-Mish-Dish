@@ -1,4 +1,4 @@
-import { GetStaticProps } from 'next';
+import { GetStaticProps, GetServerSideProps } from 'next';
 import { useState, useEffect } from "react";
 import { searchRecipes, sortRecipes, filterRecipes, resetSort } from "../utils/recipes"
 
@@ -111,7 +111,19 @@ export default function Recipes({ allRecipes }) {
     )
 }
 
-export const getStaticProps: GetStaticProps = async () => {
+// export const getStaticProps: GetStaticProps = async () => {
+//     const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/recipes`);
+
+//     let allRecipes = await response.json();
+//     allRecipes = [...allRecipes].reverse()
+
+//     return {
+//         props: {
+//             allRecipes
+//         },
+//     }
+// }
+export const getServerSideProps: GetServerSideProps = async () => {
     const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/recipes`);
 
     let allRecipes = await response.json();
