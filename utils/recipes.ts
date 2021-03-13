@@ -59,9 +59,6 @@ export const searchRecipes = (allRecipes: any[], searchTerm: string) => {
 
     // Remove Duplicates
     results = [...new Set(results)]
-
-    resetSort();
-
     return results
 }
 
@@ -106,7 +103,7 @@ export const sortRecipes = (recipes: any[], sortBy: string) => {
     return sortedRecipes
 }
 
-function resetSort() {
+export const resetSort = () => {
     // Reset Sort
     let sort = document.getElementsByClassName("Dropdown-placeholder is-selected")[0] as HTMLElement;
     sort.innerHTML = "Recently Added"
@@ -158,4 +155,13 @@ export const filterRecipes = (recipes: any[], activeFilters: string[]) => {
     return matchingRecipes
 }
 
+
+export const getFullRecipes = (allRecipes, ids) => {
+    let fullRecipes = [];
+    ids.forEach(id => {
+        let recipe = allRecipes.find(recipe => recipe.id === id);
+        fullRecipes.push(recipe)
+    })
+    return fullRecipes
+}
 

@@ -1,6 +1,6 @@
 import { GetStaticProps } from 'next';
 import { useState, useEffect } from "react";
-import { searchRecipes, sortRecipes, filterRecipes } from "../utils/recipes"
+import { searchRecipes, sortRecipes, filterRecipes, resetSort } from "../utils/recipes"
 
 // Components
 import Layout from "../components/Layout/Layout";
@@ -51,6 +51,7 @@ export default function Recipes({ allRecipes }) {
             const searchTerm = location.search.replace("?", "").toLowerCase();
             const result = searchRecipes(allRecipes, searchTerm);
             setRecipes(result);
+            resetSort();
         }
     }
 

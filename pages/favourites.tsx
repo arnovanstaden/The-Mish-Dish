@@ -1,7 +1,7 @@
 import { GetStaticProps } from 'next';
 import { useState, useEffect } from "react";
-import { checkLoggedIn, getUserName, getFavourites } from "../utils/user";
-
+import { checkLoggedIn, getUserName, getFavouritesList } from "../utils/user";
+import { searchRecipes, getFullRecipes } from "../utils/recipes"
 
 // Components
 import Layout from "../components/Layout/Layout";
@@ -16,35 +16,10 @@ export default function Favourites({ allRecipes }) {
     const [loggedIn, setLoggedIn] = useState(false);
     const [favourites, setFavourites] = useState(undefined);
     const [userName, setUserName] = useState(undefined);
-
-    const transformUserName = (): string => {
-        let savedUsername = getUserName()
-        let lastChar = savedUsername.charAt(savedUsername.length - 1);
-        if (lastChar === "s") {
-            return `${savedUsername}'`
-        }
-        return `${savedUsername}'s`
-    }
-
-    const getRecipe = (id) => {
-        let recipe = allRecipes.find(recipe => recipe.id === id);
-        return recipe
-    }
-
-    // Handlers
-
-    const handleLoginSuccess = () => {
-        setLoggedIn(true);
-        setUserName(transformUserName())
-        // Get Favourites
-        setFavourites(getFavourites())
-    }
+    const [searchResults, setSearchResults] = useState(undefined)
 
     useEffect(() => {
-        let localFavourites = getFavourites()
-        if (localFavourites) {
-            setFavourites(localFavourites)
-        }
+        setFavourites(getFullRecipes(allRecipes, getFavouritesList()))
     }, [])
 
     useEffect(() => {
@@ -55,6 +30,30 @@ export default function Favourites({ allRecipes }) {
             }
         }
     })
+
+    // Utils
+    const transformUserName = (): string => {
+        let savedUsername = getUserName()
+        let lastChar = savedUsername.charAt(savedUsername.length - 1);
+        if (lastChar === "s") {
+            return `${savedUsername}'`
+        }
+        return `${savedUsername}'s`
+    }
+
+    // Handlers
+
+    const handleLoginSuccess = () => {
+        setLoggedIn(true);
+        setUserName(transformUserName())
+        getFullRecipes(allRecipes, getFavouritesList())
+    }
+
+    const handleInstantSearch = (searchTerm: string) => {
+        const result = searchRecipes(favourites, searchTerm);
+        console.log(result)
+        return setSearchResults(result);
+    }
 
     return (
         <Layout
@@ -68,14 +67,19 @@ export default function Favourites({ allRecipes }) {
         >
 
             <h1>{userName} Favourites</h1>
-            <Search reroute />
+            <Search handleInstantSearch={(searchTerm) => handleInstantSearch(searchTerm)} />
             <div className={styles.grid}>
+                {/* {searchResults
+                    ? searchResults.map((result, index) => (
+                        <Recipe recipe={result} key={index} />
+                    ))
+                    : null
+                } */}
                 {favourites ?
                     favourites.map((favourite, index) => (
-                        <Recipe recipe={getRecipe(favourite)} key={index} />
+                        <Recipe recipe={favourite} key={index} />
                     ))
-                    : <p> You don't have any favourites yet :(</p>
-                }
+                    : <p> You don't have any favourites yet :(</p>}
             </div>
             {loggedIn ? null : <Login handleLoginSuccess={handleLoginSuccess} />}
         </Layout >

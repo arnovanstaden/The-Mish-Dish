@@ -1,4 +1,5 @@
-import axios from "axios"
+import axios from "axios";
+import { getFullRecipes } from "./recipes"
 
 // Authentication
 export const loginUser = async (user) => {
@@ -52,25 +53,29 @@ export const getUserName = (): string => {
 // Favourites
 
 
-export const getFavourites = () => {
-    return JSON.parse(localStorage.getItem("favourites"))
+export const getFavouritesList = () => {
+    const favourites = localStorage.getItem("favourites");
+    if (favourites) {
+        return JSON.parse(favourites)
+    }
+    return undefined
 }
 
 export const checkIfFavourite = (id): boolean => {
-    const favourites = getFavourites()
-    if (favourites.includes(id)) {
+    const favouritesList = getFavouritesList()
+    if (favouritesList.includes(id)) {
         return true
     }
     return false
 }
 
 export const updateFavourite = (id: string) => {
-    const favourites = getFavourites()
+    const favouritesList = getFavouritesList()
     let newFavourites = [];
-    if (favourites.includes(id)) {
-        newFavourites = [...favourites].filter(favourite => favourite != id);
+    if (favouritesList.includes(id)) {
+        newFavourites = [...favouritesList].filter(favourite => favourite != id);
     } else {
-        newFavourites = [...favourites, id];
+        newFavourites = [...favouritesList, id];
     }
     localStorage.setItem("favourites", JSON.stringify(newFavourites))
 
