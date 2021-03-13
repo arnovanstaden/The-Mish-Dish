@@ -22,15 +22,15 @@ export default function Carousel({ type, mealType, recipes }: ISlider) {
     const carouselClass = `carousel-${type.replace(" ", "").toLowerCase()}`
 
 
-    useEffect(() => {
-        // Same Height Carousels
-        let carousalTrack = document.querySelector(`.${carouselClass} .slick-list .slick-track`) as HTMLElement;
-        let stHeight = carousalTrack.offsetHeight;
-        let slides = Array.from(carousalTrack.getElementsByClassName(`slick-slide`) as HTMLCollectionOf<HTMLElement>);
-        slides.forEach(slide => {
-            slide.style.height = `${stHeight.toString()}px`
-        });
-    }, [])
+    // useEffect(() => {
+    //     // Same Height Carousels
+    //     let carousalTrack = document.querySelector(`.${carouselClass} .slick-list .slick-track`) as HTMLElement;
+    //     let stHeight = carousalTrack.offsetHeight;
+    //     let slides = Array.from(carousalTrack.getElementsByClassName(`slick-slide`) as HTMLCollectionOf<HTMLElement>);
+    //     slides.forEach(slide => {
+    //         slide.style.height = `${stHeight.toString()}px`
+    //     });
+    // }, [])
 
 
     switch (type) {
@@ -39,7 +39,7 @@ export default function Carousel({ type, mealType, recipes }: ISlider) {
             break;
         case "Meal Types":
             if (mealType === "Popular") {
-                recipesToRender = [...recipes].reverse().splice(0, 6);
+                recipesToRender = [...recipes].sort((a, b) => b.favourites - a.favourites).splice(0, 6);
                 // Fix this
             } else {
                 recipesToRender = recipes.filter(recipe => recipe.diet === mealType.toLowerCase());
@@ -48,9 +48,6 @@ export default function Carousel({ type, mealType, recipes }: ISlider) {
             break;
         case "Recently Added":
             recipesToRender = [...recipes].reverse().splice(0, 6);
-            break;
-        case "Recently Viewed":
-            recipesToRender = [...recipes]
             break;
     }
 
