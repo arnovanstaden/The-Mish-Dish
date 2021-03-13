@@ -1,6 +1,6 @@
 import { GetStaticProps } from 'next';
 import { useState, useEffect } from "react";
-import { checkLoggedIn, getCookie } from "../utils/auth";
+import { checkLoggedIn, getUserName, getFavourites } from "../utils/user";
 
 
 // Components
@@ -14,11 +14,11 @@ import styles from "../styles/pages/recipes.module.scss"
 
 export default function Favourites({ allRecipes }) {
     const [loggedIn, setLoggedIn] = useState(false);
-    const [favourites, setfavourites] = useState([false]);
-    const [username, setUsername] = useState(undefined);
+    const [favourites, setFavourites] = useState(undefined);
+    const [userName, setUserName] = useState(undefined);
 
-    const getUserName = (): string => {
-        let savedUsername = getCookie("TMDName");
+    const transformUserName = (): string => {
+        let savedUsername = getUserName()
         let lastChar = savedUsername.charAt(savedUsername.length - 1);
         if (lastChar === "s") {
             return `${savedUsername}'`
@@ -26,19 +26,36 @@ export default function Favourites({ allRecipes }) {
         return `${savedUsername}'s`
     }
 
-    useEffect(() => {
-        setLoggedIn(checkLoggedIn());
-        if (loggedIn && !username) {
-            setUsername(getUserName())
-        }
-    })
+    const getRecipe = (id) => {
+        let recipe = allRecipes.filter(recipe => recipe.id === id);
+        return recipe[0]
+    }
+
+    // Handlers
 
     const handleLoginSuccess = () => {
         setLoggedIn(true);
-        setUsername(getUserName())
+        setUserName(transformUserName())
         // Get Favourites
+        getFavourites().then(result => {
+            setFavourites(result)
+        })
     }
 
+    useEffect(() => {
+        getFavourites().then(result => {
+            setFavourites(result)
+        })
+    }, [])
+
+    useEffect(() => {
+        setLoggedIn(checkLoggedIn());
+        if (loggedIn) {
+            if (!userName) {
+                setUserName(transformUserName());
+            }
+        }
+    })
 
     return (
         <Layout
@@ -51,7 +68,7 @@ export default function Favourites({ allRecipes }) {
             classNameProp={styles.recipes}
         >
 
-            <h1>{username} Favourites</h1>
+            <h1>{userName} Favourites</h1>
             <Search reroute />
             <div className={styles.options}>
                 <div className={styles.option}>
@@ -61,7 +78,12 @@ export default function Favourites({ allRecipes }) {
             </div>
 
             <div className={styles.grid}>
-
+                {favourites ?
+                    favourites.map((favourite, index) => (
+                        <Recipe recipe={getRecipe(favourite)} key={index} />
+                    ))
+                    : null
+                }
             </div>
             {loggedIn ? null : <Login handleLoginSuccess={handleLoginSuccess} />}
         </Layout >

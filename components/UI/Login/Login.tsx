@@ -1,4 +1,4 @@
-import { loginUser } from "../../../utils/auth"
+import { loginUser } from "../../../utils/user"
 
 // Styles
 import styles from "./login.module.scss";

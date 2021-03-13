@@ -23,7 +23,7 @@ export const registerUser = () => {
 
 }
 
-export const checkLoggedIn = () => {
+export const checkLoggedIn = (): boolean => {
     const loggedIn = getCookie("TMDToken");
     if (!loggedIn) {
         return false
@@ -31,7 +31,26 @@ export const checkLoggedIn = () => {
     return true
 }
 
-export const getCookie = (name) => {
+export const getUserName = (): string => {
+    return getCookie("TMDName");
+}
+
+export const getFavourites = async () => {
+    let response = await axios({
+        method: "get",
+        url: `${process.env.NEXT_PUBLIC_LOCAL_API_URL}/profile/`,
+        headers: {
+            Authorization: `BEARER ${getCookie("TMDToken")}`
+        }
+    }).then(result => {
+        return result.data.favourites
+    }).catch(err => {
+        console.log(err)
+    });
+    return response
+}
+
+const getCookie = (name): string => {
     var cookieArr = document.cookie.split(";");
 
     // Loop through the array elements
@@ -43,3 +62,4 @@ export const getCookie = (name) => {
         }
     }
 }
+
