@@ -7,15 +7,23 @@ import { checkLoggedIn } from "../utils/auth";
 import Layout from "../components/Layout/Layout";
 import Search from "../components/UI/Search/Search";
 import Recipe from "../components/Recipe/Recipe";
+import Login from "../components/UI/Login/Login";
 
 // Styles
 import styles from "../styles/pages/recipes.module.scss"
 
 export default function Favourites({ allRecipes }) {
+    const [loggedIn, setLoggedIn] = useState(false);
+    const [favourites, setfavourites] = useState([false]);
 
     useEffect(() => {
+        setLoggedIn(checkLoggedIn())
+    }, [])
 
-    })
+    const handleLoginSuccess = () => {
+        setLoggedIn(true);
+        // Get Favourites
+    }
 
 
     return (
@@ -28,6 +36,7 @@ export default function Favourites({ allRecipes }) {
             }}
             classNameProp={styles.recipes}
         >
+
             <h1>Arno's Favourites</h1>
             <Search reroute />
             <div className={styles.options}>
@@ -40,7 +49,7 @@ export default function Favourites({ allRecipes }) {
             <div className={styles.grid}>
 
             </div>
-
+            {loggedIn ? null : <Login handleLoginSuccess={handleLoginSuccess} />}
         </Layout >
     )
 }

@@ -1,7 +1,38 @@
+import axios from "axios"
+
 // Authentication
+export const loginUser = async (user) => {
+    let loginResult = await axios({
+        method: "post",
+        url: `${process.env.NEXT_PUBLIC_API_URL}/profile/login`,
+        data: user
+    }).then(result => {
+
+        // Save Login
+
+        return result
+    }).catch(err => {
+        console.log(err)
+        return err.response
+    });
+    return loginResult
+}
+
+export const registerUser = () => {
+
+}
+
+export const getUserName = () => {
+
+}
+
+
 export const checkLoggedIn = () => {
     const loggedIn = getCookie("TMDToken");
-    console.log(loggedIn)
+    if (!loggedIn) {
+        return false
+    }
+    return true
 }
 
 const getCookie = (name) => {
