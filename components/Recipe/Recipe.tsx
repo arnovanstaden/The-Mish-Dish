@@ -1,8 +1,9 @@
 import Link from "next/link";
 import { convertImage } from "../../utils/general";
 import { getIngredientCount } from "../../utils/recipes";
+import { checkIfFavourite } from "../../utils/user"
 import ClassNames from "classnames";
-
+import { useEffect, useState } from "react"
 // Styles
 import styles from "./recipe.module.scss";
 
@@ -21,12 +22,17 @@ interface IRecipeProps {
 }
 
 export default function Recipe({ recipe, carouselItem }: IRecipeProps) {
+    let [isFavourite, setIsFavourite] = useState(undefined)
     const recipeImage = convertImage(recipe.thumbnail, 600);
 
     const recipeClasses = ClassNames(
         styles.recipe,
         carouselItem ? styles.carouselItem : null
     )
+
+    useEffect(() => {
+        setIsFavourite(checkIfFavourite(recipe.id));
+    }, [])
 
     return (
         <Link href={`/recipes/${recipe.id}`}>
@@ -45,7 +51,7 @@ export default function Recipe({ recipe, carouselItem }: IRecipeProps) {
                                     <p>{recipe.cookTime}</p>
                                 </div>
                                 <div className={styles.stat}>
-                                    <i className="icon-favorite_outline"></i>
+                                    {isFavourite ? <i className="icon-favorite"></i> : <i className="icon-favorite_outline"></i>}
                                     <p>{recipe.favourites} </p>
                                 </div>
                             </div>

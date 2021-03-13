@@ -1,7 +1,7 @@
 import { GetStaticProps, GetStaticPaths } from 'next';
 import { handleRecipeShare, capitalize } from "../../utils/general";
-import { checkLoggedIn, updateFavourite } from "../../utils/user";
-import { useState } from "react";
+import { checkLoggedIn, updateFavourite, checkIfFavourite } from "../../utils/user";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { useMediaQuery } from 'react-responsive'
@@ -13,11 +13,16 @@ import Layout from "../../components/Layout/Layout"
 import styles from "../../styles/pages/recipes/[id].module.scss"
 
 export default function Recipe({ recipe }) {
-
-    const isMobileDevice = useMediaQuery({ query: '(max-width: 768px)' })
+    let [isFavourite, setIsFavourite] = useState(undefined)
+    const [currentImage, setCurrentImage] = useState(recipe.images[0]);
 
     const router = useRouter();
-    const [currentImage, setCurrentImage] = useState(recipe.images[0]);
+
+    const isMobileDevice = useMediaQuery({ query: '(max-width: 768px)' });
+
+    useEffect(() => {
+        setIsFavourite(checkIfFavourite(recipe.id));
+    }, [])
 
     // Handlers
     const handleNavigateBack = () => {
@@ -37,7 +42,9 @@ export default function Recipe({ recipe }) {
 
     const handleFavourite = (id) => {
         if (checkLoggedIn()) {
-            return updateFavourite(id)
+            updateFavourite(id);
+            setIsFavourite(!isFavourite);
+            return
         }
         return alert("Log in to manage favourites")
     }
@@ -152,7 +159,9 @@ export default function Recipe({ recipe }) {
                     <h1>{recipe.name}</h1>
                     <div className={styles.icons}>
                         <i className="icon-share" onClick={() => handleRecipeShare(recipe.name, recipe.id)}></i>
-                        <i className="icon-favorite_outline" onClick={() => handleFavourite(recipe.id)}></i>
+                        {isFavourite
+                            ? <i className="icon-favorite" onClick={() => handleFavourite(recipe.id)}></i>
+                            : <i className="icon-favorite_outline" onClick={() => handleFavourite(recipe.id)}></i>}
                     </div>
                 </div>
                 <ul className={styles.tags}>
@@ -190,12 +199,6 @@ export default function Recipe({ recipe }) {
             </div>
         )
     }
-
-
-
-
-
-
 
     return (
         <Layout
