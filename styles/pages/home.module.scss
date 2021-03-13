@@ -8,7 +8,7 @@
   }
 
   .group {
-    margin: 2rem 0;
+    padding: 2rem 0;
 
     .options {
       display: flex;
@@ -26,6 +26,12 @@
         font-size: 0.9rem;
         color: $blue-grey;
       }
+    }
+  }
+
+  @media screen and (max-width: 991px) {
+    .group {
+      padding: 4rem;
     }
   }
 }

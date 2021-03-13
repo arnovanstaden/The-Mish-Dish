@@ -1,6 +1,6 @@
 import { GetStaticProps, GetStaticPaths } from 'next';
-import { handleRecipeShare, recentlyViewed, capitalize } from "../../utils/utils";
-import { useEffect, useState } from "react";
+import { handleRecipeShare, capitalize } from "../../utils/general";
+import { useState } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { useMediaQuery } from 'react-responsive'
@@ -12,12 +12,29 @@ import Layout from "../../components/Layout/Layout"
 import styles from "../../styles/pages/recipes/[id].module.scss"
 
 export default function Recipe({ recipe }) {
+
+    const isMobileDevice = useMediaQuery({ query: '(max-width: 768px)' })
+
     const router = useRouter();
     const [currentImage, setCurrentImage] = useState(recipe.images[0]);
 
-    useEffect(() => {
-        recentlyViewed.set(recipe.id)
-    }, [])
+    // Handlers
+    const handleNavigateBack = () => {
+        router.back()
+    }
+
+    const handleNextImage = () => {
+        const imageArray = recipe.images
+        const imageCount = imageArray.length;
+        const currentImagePosition = imageArray.indexOf(currentImage);
+        if (currentImagePosition < (imageCount - 1)) {
+            setCurrentImage(imageArray[currentImagePosition + 1])
+        } else {
+            setCurrentImage(imageArray[0])
+        }
+    }
+
+    // Components
 
     const Ingredients = () => {
         let ingredients = null;
@@ -48,8 +65,15 @@ export default function Recipe({ recipe }) {
                     </div>
                 ))
         }
-        return ingredients
+        return (
+            <div className={styles.ingredients}>
+                <h3>Ingredients</h3>
+                {ingredients}
+            </div>
+        )
     }
+
+
 
     const Method = () => {
         let method = null;
@@ -80,7 +104,12 @@ export default function Recipe({ recipe }) {
                     </div>
                 ))
         }
-        return method
+        return (
+            <div className={styles.method}>
+                <h3>Method</h3>
+                {method}
+            </div>
+        )
     }
 
     const Tags = () => {
@@ -99,21 +128,65 @@ export default function Recipe({ recipe }) {
         }
     }
 
-    // Handlers
-    const handleNavigateBack = () => {
-        router.back()
+    const Images = () => {
+        return (
+            <div className={styles.image}>
+                <i className="icon-carrot_down" onClick={handleNavigateBack}></i>
+                <img src={currentImage} alt={recipe.name} onClick={handleNextImage} onTouchEnd={handleNextImage} />
+            </div>
+        )
     }
 
-    const handleNextImage = () => {
-        const imageArray = recipe.images
-        const imageCount = imageArray.length;
-        const currentImagePosition = imageArray.indexOf(currentImage);
-        if (currentImagePosition < (imageCount - 1)) {
-            setCurrentImage(imageArray[currentImagePosition + 1])
-        } else {
-            setCurrentImage(imageArray[0])
-        }
+    const Details = () => {
+        return (
+            <div className={styles.details}>
+                <div className={styles.intro}>
+                    <h1>{recipe.name}</h1>
+                    <div className={styles.icons}>
+                        <i className="icon-share" onClick={() => handleRecipeShare(recipe.name, recipe.id)}></i>
+                        <i className="icon-favorite_outline"></i>
+                    </div>
+                </div>
+                <ul className={styles.tags}>
+                    <li>
+                        <Link href={`/recipes?${recipe.type.toLowerCase()}`}>
+                            {capitalize(recipe.type)}
+                        </Link>
+                    </li>
+                    <li>
+                        <Link href={`/recipes?${recipe.diet.toLowerCase()}`}>
+                            {capitalize(recipe.diet)}
+                        </Link>
+                    </li>
+                    <Tags />
+                </ul>
+                <div className={styles.description}>
+                    <h3>Description</h3>
+                    <p>{recipe.description}</p>
+                    {recipe.servingSuggestion ? <p className={styles.suggestion}> {recipe.servingSuggestion} </p> : null}
+                </div>
+                <div className={styles.stats}>
+                    <div className={styles.stat}>
+                        <i className="icon-servings"></i>
+                        <p>{recipe.servings} Servings</p>
+                    </div>
+                    <div className={styles.stat}>
+                        <i className="icon-servings"></i>
+                        <p>{recipe.cookTime} Minutes</p>
+                    </div>
+                    <div className={styles.stat}>
+                        <i className="icon-favorite_outline"></i>
+                        <p>10 Favourites</p>
+                    </div>
+                </div>
+            </div>
+        )
     }
+
+
+
+
+
 
 
     return (
@@ -127,61 +200,29 @@ export default function Recipe({ recipe }) {
             classNameProp={styles.recipe}
             noContainer={true}
         >
-            <div className={styles.image}>
-                <i className="icon-carrot_down" onClick={handleNavigateBack}></i>
-                <img src={currentImage} alt={recipe.name} onClick={handleNextImage} onTouchEnd={handleNextImage} />
-            </div>
-            <div className={styles.content}>
+
+            {isMobileDevice
+                ?
+                <>
+                    <Images />
+                    <div className={styles.content}>
+                        <div className="container">
+                            <Details />
+                            <Ingredients />
+                            <Method />
+                        </div>
+                    </div>
+                </>
+                :
                 <div className="container">
-                    <div className={styles.intro}>
-                        <h1>{recipe.name}</h1>
-                        <div className={styles.icons}>
-                            <i className="icon-share" onClick={() => handleRecipeShare(recipe.name, recipe.id)}></i>
-                            <i className="icon-favorite_outline"></i>
-                        </div>
-                    </div>
-                    <ul className={styles.tags}>
-                        <li>
-                            <Link href={`/recipes?${recipe.type.toLowerCase()}`}>
-                                {capitalize(recipe.type)}
-                            </Link>
-                        </li>
-                        <li>
-                            <Link href={`/recipes?${recipe.diet.toLowerCase()}`}>
-                                {capitalize(recipe.diet)}
-                            </Link>
-                        </li>
-                        <Tags />
-                    </ul>
-                    <div className={styles.description}>
-                        <h3>Description</h3>
-                        <p>{recipe.description}</p>
-                        {recipe.servingSuggestion ? <p className={styles.suggestion}> {recipe.servingSuggestion} </p> : null}
-                    </div>
-                    <div className={styles.stats}>
-                        <div className={styles.stat}>
-                            <i className="icon-servings"></i>
-                            <p>{recipe.servings} Servings</p>
-                        </div>
-                        <div className={styles.stat}>
-                            <i className="icon-servings"></i>
-                            <p>{recipe.cookTime} Minutes</p>
-                        </div>
-                        <div className={styles.stat}>
-                            <i className="icon-favorite_outline"></i>
-                            <p>10 Favourites</p>
-                        </div>
-                    </div>
-                    <div className={styles.ingredients}>
-                        <h3>Ingredients</h3>
+                    <div className={styles.grid}>
+                        <Details />
+                        <Images />
                         <Ingredients />
-                    </div>
-                    <div className={styles.method}>
-                        <h3>Method</h3>
                         <Method />
                     </div>
                 </div>
-            </div>
+            }
         </Layout >
     )
 }

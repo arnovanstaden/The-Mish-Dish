@@ -3,7 +3,7 @@
 .nav {
     width: 100%;
     position: fixed;
-    display: flex;
+    display: none;
     background-color: $white;
     bottom: 0;
     left: 0;
@@ -26,5 +26,9 @@
                 color: $yellow;
             }
         }
+    }
+
+    @media screen and (max-width: 768px) {
+        display: flex;
     }
 }

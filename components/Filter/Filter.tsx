@@ -1,6 +1,6 @@
 import ClassNames from "classnames";
 import { useEffect } from "react";
-import { capitalize } from "../../utils/utils";
+import { capitalize } from "../../utils/general";
 // Styles
 import styles from "./filter.module.scss";
 
@@ -29,18 +29,18 @@ export default function Filter({ recipes, showFilter, currentFilters, handleFilt
     }, [showFilter])
 
     const toggleFilter = (e) => {
-        let item = e.target as HTMLElement;
+        const item = e.target as HTMLElement;
         item.classList.toggle(styles.active);
     }
 
     const handleFilter = () => {
         // Get all Filter Values
-        let filters = {
+        const filters = {
             type: [],
             diet: [],
             tags: [],
         }
-        let activeFilters = Array.from(document.getElementsByClassName(styles.active) as HTMLCollection);
+        const activeFilters = Array.from(document.getElementsByClassName(styles.active) as HTMLCollection);
         activeFilters.forEach(item => {
             filters[item.attributes["data-type"].value].push(item.textContent.toLowerCase());
         })

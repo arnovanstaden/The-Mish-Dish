@@ -1,6 +1,6 @@
 import { GetStaticProps } from 'next';
 import { useState, useEffect } from "react";
-import { searchRecipes, sortRecipes, filterRecipes } from "../utils/utils"
+import { searchRecipes, sortRecipes, filterRecipes } from "../utils/recipes"
 
 // Components
 import Layout from "../components/Layout/Layout";
@@ -21,7 +21,9 @@ export default function Recipes({ allRecipes }) {
 
     // Filters
     const handleFilterShow = () => {
-        setShowFilter(!showFilter)
+        setShowFilter(!showFilter);
+        const body = document.body;
+        body.classList.toggle("no-scroll");
     }
 
     const handleFilterApply = (activeFilters) => {

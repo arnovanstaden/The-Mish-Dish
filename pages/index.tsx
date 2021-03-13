@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { GetStaticProps } from 'next';
-import { recentlyViewed } from "../utils/utils";
 import { useEffect, useState } from "react"
 
 // Components
@@ -13,12 +12,7 @@ import TypeSlider from "../components/UI/TypeSlider/TypeSlider";
 import styles from '../styles/pages/home.module.scss';
 
 export default function Home({ recipes }) {
-  const [recent, setRecent] = useState(null);
   const [typeCarousel, setTypeCarousel] = useState("Popular");
-
-  useEffect(() => {
-    setRecent(recentlyViewed.get())
-  }, []);
 
   // Handlers
 
@@ -68,18 +62,6 @@ export default function Home({ recipes }) {
           <Carousel type="Recently Added" recipes={recipes} />
         </div>
       </section>
-
-      {recent ?
-        <section className={styles.group}>
-          <div className={styles.options}>
-            <h3>Recently Viewed</h3>
-          </div>
-          <div className={styles.carousel}>
-            <Carousel type="Recently Viewed" recipes={recipes.filter(recipe => recent.includes(recipe.id))} />
-          </div>
-        </section>
-        : null}
-
     </Layout >
   )
 }

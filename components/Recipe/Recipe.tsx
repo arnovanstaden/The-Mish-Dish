@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { convertImage, getIngredientCount } from "../../utils/utils";
+import { convertImage } from "../../utils/general";
+import { getIngredientCount } from "../../utils/recipes";
 import ClassNames from "classnames";
 
 // Styles

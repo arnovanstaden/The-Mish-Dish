@@ -58,8 +58,8 @@ export default function Carousel({ type, mealType, recipes }: ISlider) {
         dots: false,
         arrows: false,
         infinite: false,
-        slidesToShow: 1.25,
-        slidesToScroll: 1,
+        slidesToShow: 4.25,
+        // slidesToScroll: 1,
         swipeToSlide: true,
         draggable: true,
         autoplay: false,
@@ -67,6 +67,26 @@ export default function Carousel({ type, mealType, recipes }: ISlider) {
         pauseOnHover: true,
         initialSlide: 0,
         className: carouselClass,
+        responsive: [
+            {
+                breakpoint: 1600,
+                settings: {
+                    slidesToShow: 3.25,
+                }
+            },
+            {
+                breakpoint: 991,
+                settings: {
+                    slidesToShow: 2.25,
+                }
+            },
+            {
+                breakpoint: 768,
+                settings: {
+                    slidesToShow: 1.25,
+                }
+            }
+        ]
     };
     return (
         <div className={styles.carousel}>

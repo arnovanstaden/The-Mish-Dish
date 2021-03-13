@@ -1,5 +1,6 @@
 import { GetStaticProps } from 'next';
 import { useState, useEffect } from "react";
+import { checkLoggedIn } from "../utils/auth";
 
 
 // Components
@@ -11,6 +12,10 @@ import Recipe from "../components/Recipe/Recipe";
 import styles from "../styles/pages/recipes.module.scss"
 
 export default function Favourites({ allRecipes }) {
+
+    useEffect(() => {
+
+    })
 
 
     return (

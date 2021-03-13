@@ -1,0 +1,28 @@
+@import "../../../styles/variables.scss";
+
+.nav {
+    background-color: $white;
+    padding: 0.5rem 2rem;
+    z-index: 5000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    img {
+        width: 10rem;
+    }
+
+    button {
+        border: none;
+        border-radius: 0.25rem;
+        background-color: transparent;
+
+        i {
+            font-size: 1.4rem;
+        }
+    }
+
+    @media screen and (max-width: 768px) {
+        display: none;
+    }
+}
