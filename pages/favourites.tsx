@@ -19,7 +19,10 @@ export default function Favourites({ allRecipes }) {
     const [searchResults, setSearchResults] = useState(undefined)
 
     useEffect(() => {
-        setFavourites(getFullRecipes(allRecipes, getFavouritesList()))
+        const favouritesList = getFavouritesList()
+        if (favouritesList) {
+            setFavourites(getFullRecipes(allRecipes, favouritesList))
+        }
     }, [])
 
     useEffect(() => {
