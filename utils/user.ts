@@ -4,7 +4,7 @@ import axios from "axios"
 export const loginUser = async (user) => {
     let loginResult = await axios({
         method: "post",
-        url: `${process.env.NEXT_PUBLIC_LOCAL_API_URL}/profile/login`,
+        url: `${process.env.NEXT_PUBLIC_API_URL}/profile/login`,
         data: user
     }).then(result => {
 
@@ -22,7 +22,7 @@ export const loginUser = async (user) => {
 export const registerUser = async (user) => {
     let registerResult = await axios({
         method: "post",
-        url: `${process.env.NEXT_PUBLIC_LOCAL_API_URL}/profile/register`,
+        url: `${process.env.NEXT_PUBLIC_API_URL}/profile/register`,
         data: user
     }).then(result => {
         // Save Login
@@ -51,7 +51,7 @@ export const getUserName = (): string => {
 export const getFavourites = async () => {
     let response = await axios({
         method: "get",
-        url: `${process.env.NEXT_PUBLIC_LOCAL_API_URL}/profile/`,
+        url: `${process.env.NEXT_PUBLIC_API_URL}/profile/`,
         headers: {
             Authorization: `BEARER ${getCookie("TMDToken")}`
         }
@@ -71,7 +71,7 @@ export const updateFavourite = (id) => {
 
     axios({
         method: "post",
-        url: `${process.env.NEXT_PUBLIC_LOCAL_API_URL}/profile/handleFavourite`,
+        url: `${process.env.NEXT_PUBLIC_API_URL}/profile/handleFavourite`,
         headers: {
             Authorization: `BEARER ${getCookie("TMDToken")}`
         },

@@ -75,17 +75,19 @@ export const sortRecipes = (recipes: any[], sortBy: string) => {
             break;
         case "Name A-Z":
             sortedRecipes = recipes.sort((a, b) => {
-                if (a.name < b.name) {
+                return b - a;
+            })
+            break;
+        case "Popularity":
+            sortedRecipes = recipes.sort((a, b) => {
+                if (a.favourites > b.favourites) {
                     return -1;
                 }
-                if (a.name > b.name) {
+                if (a.favourites < b.favourites) {
                     return 1;
                 }
                 return 0;
             })
-            break;
-        case "Popularity":
-
             break;
         case "Cooking Time":
             sortedRecipes = recipes.sort((a, b) => {
