@@ -109,7 +109,9 @@ input {
 
 // Slick
 
-.slick-track {}
+.slick-track {
+  margin: unset !important;
+}
 
 .slick-slide {
   height: 100%;

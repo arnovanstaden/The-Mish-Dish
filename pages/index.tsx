@@ -29,6 +29,8 @@ export default function Home({ recipes }) {
       }}
       classNameProp={styles.home}
     >
+      <img src="/Logo-wide.svg" alt="The Mish DIsh Logo" className={styles.logo} />
+
       <Search reroute />
 
       <section className={styles.group}>
