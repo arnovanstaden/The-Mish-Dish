@@ -29,7 +29,7 @@ export default function Home({ recipes }) {
       }}
       classNameProp={styles.home}
     >
-      <img src="/images/logo-wide.svg" alt="The Mish DIsh Logo" className={styles.logo} />
+      <img src="/images/Logo-wide.svg" alt="The Mish DIsh Logo" className={styles.logo} />
 
       <Search reroute />
 

@@ -38,6 +38,10 @@ export const registerUser = async (user) => {
     return registerResult
 }
 
+const LogoutUser = () => {
+    localStorage.clear()
+}
+
 export const checkLoggedIn = (): boolean => {
     const loggedIn = getCookie("TMDToken");
     if (!loggedIn) {

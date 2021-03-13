@@ -87,6 +87,8 @@ export default function Favourites({ allRecipes }) {
                     </div>
                 </>
                 : <Login handleLoginSuccess={handleLoginSuccess} />}
+            {/* <button className="styles.logout"></button>
+                {loggedIn ? } */}
         </Layout >
     )
 }
