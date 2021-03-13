@@ -18,12 +18,7 @@ export default function Favourites({ allRecipes }) {
     const [userName, setUserName] = useState(undefined);
     const [searchResults, setSearchResults] = useState(undefined)
 
-    useEffect(() => {
-        const favouritesList = getFavouritesList()
-        if (favouritesList) {
-            setFavourites(getFullRecipes(allRecipes, favouritesList))
-        }
-    }, [])
+
 
     useEffect(() => {
         setLoggedIn(checkLoggedIn());
@@ -31,6 +26,10 @@ export default function Favourites({ allRecipes }) {
             if (!userName) {
                 setUserName(transformUserName());
             }
+        }
+        const favouritesList = getFavouritesList()
+        if (favouritesList) {
+            setFavourites(getFullRecipes(allRecipes, favouritesList))
         }
     })
 
@@ -68,23 +67,26 @@ export default function Favourites({ allRecipes }) {
             }}
             classNameProp={styles.favourites}
         >
-
-            <h1>{userName} Favourites</h1>
-            <Search handleInstantSearch={(searchTerm) => handleInstantSearch(searchTerm)} />
-            <div className={styles.grid}>
-                {/* {searchResults
-                    ? searchResults.map((result, index) => (
-                        <Recipe recipe={result} key={index} />
-                    ))
-                    : null
-                } */}
-                {favourites ?
-                    favourites.map((favourite, index) => (
-                        <Recipe recipe={favourite} key={index} />
-                    ))
-                    : <p> You don't have any favourites yet :(</p>}
-            </div>
-            {loggedIn ? null : <Login handleLoginSuccess={handleLoginSuccess} />}
+            {loggedIn ?
+                <>
+                    <h1>{userName} Favourites</h1>
+                    <Search handleInstantSearch={(searchTerm) => handleInstantSearch(searchTerm)} />
+                    <div className={styles.grid}>
+                        {searchResults
+                            ? searchResults.map((result, index) => (
+                                <Recipe recipe={result} key={index} />
+                            ))
+                            : null
+                        }
+                        {!searchResults && favourites ?
+                            favourites.map((favourite, index) => (
+                                <Recipe recipe={favourite} key={index} />
+                            ))
+                            : null}
+                        {favourites ? null : <p> You don't have any favourites yet :(</p>}
+                    </div>
+                </>
+                : <Login handleLoginSuccess={handleLoginSuccess} />}
         </Layout >
     )
 }
