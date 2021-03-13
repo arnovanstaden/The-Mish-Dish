@@ -37,15 +37,14 @@ export default function Favourites({ allRecipes }) {
         setLoggedIn(true);
         setUserName(transformUserName())
         // Get Favourites
-        getFavourites().then(result => {
-            setFavourites(result)
-        })
+        setFavourites(getFavourites())
     }
 
     useEffect(() => {
-        getFavourites().then(result => {
-            setFavourites(result)
-        })
+        let localFavourites = getFavourites()
+        if (localFavourites) {
+            setFavourites(localFavourites)
+        }
     }, [])
 
     useEffect(() => {

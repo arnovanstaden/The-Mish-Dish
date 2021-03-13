@@ -4,8 +4,8 @@
     padding-top: 2rem;
 
     .grid {
+        display: grid;
         margin-top: 2rem;
-        grid-gap: 2rem;
-
+        row-gap: 2rem;
     }
 }

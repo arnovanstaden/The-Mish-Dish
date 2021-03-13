@@ -11,6 +11,7 @@ export const loginUser = async (user) => {
         // Save Login
         document.cookie = `TMDToken=${result.data.token};path=/`;
         document.cookie = `TMDName=${result.data.name};path=/`;
+        localStorage.setItem("favourites", JSON.stringify(result.data.favourites))
         return result
     }).catch(err => {
         console.log(err)
@@ -48,26 +49,30 @@ export const getUserName = (): string => {
     return getCookie("TMDName");
 }
 
-export const getFavourites = async () => {
-    let response = await axios({
-        method: "get",
-        url: `${process.env.NEXT_PUBLIC_API_URL}/profile/`,
-        headers: {
-            Authorization: `BEARER ${getCookie("TMDToken")}`
-        }
-    }).then(result => {
-        if (result.data.favourites.length > 0) {
-            return result.data.favourites
-        }
-        return undefined
-    }).catch(err => {
-        console.log(err)
-    });
-    return response
+// Favourites
+
+
+export const getFavourites = () => {
+    return JSON.parse(localStorage.getItem("favourites"))
 }
 
+export const checkIfFavourite = (id): boolean => {
+    const favourites = getFavourites()
+    if (favourites.includes(id)) {
+        return true
+    }
+    return false
+}
 
-export const updateFavourite = (id) => {
+export const updateFavourite = (id: string) => {
+    const favourites = getFavourites()
+    let newFavourites = [];
+    if (favourites.includes(id)) {
+        newFavourites = [...favourites].filter(favourite => favourite != id);
+    } else {
+        newFavourites = [...favourites, id];
+    }
+    localStorage.setItem("favourites", JSON.stringify(newFavourites))
 
     axios({
         method: "post",
@@ -79,7 +84,7 @@ export const updateFavourite = (id) => {
             recipeID: id,
         }
     }).then(result => {
-        console.log(result)
+
     }).catch(err => {
         console.log(err)
     });
