@@ -51,7 +51,7 @@ export default function Recipe({ recipe, carouselItem }: IRecipeProps) {
                                     <p>{recipe.cookTime}</p>
                                 </div>
                                 <div className={styles.stat}>
-                                    {isFavourite ? <i className="icon-favorite"></i> : <i className="icon-favorite_outline"></i>}
+                                    {/* {isFavourite ? <i className="icon-favorite"></i> : <i className="icon-favorite_outline"></i>} */}
                                     <p>{recipe.favourites} </p>
                                 </div>
                             </div>
