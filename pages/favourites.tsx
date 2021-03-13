@@ -1,6 +1,6 @@
 import { GetStaticProps } from 'next';
 import { useState, useEffect } from "react";
-import { checkLoggedIn } from "../utils/auth";
+import { checkLoggedIn, getCookie } from "../utils/auth";
 
 
 // Components
@@ -15,13 +15,27 @@ import styles from "../styles/pages/recipes.module.scss"
 export default function Favourites({ allRecipes }) {
     const [loggedIn, setLoggedIn] = useState(false);
     const [favourites, setfavourites] = useState([false]);
+    const [username, setUsername] = useState(undefined);
+
+    const getUserName = (): string => {
+        let savedUsername = getCookie("TMDName");
+        let lastChar = savedUsername.charAt(savedUsername.length - 1);
+        if (lastChar === "s") {
+            return `${savedUsername}'`
+        }
+        return `${savedUsername}'s`
+    }
 
     useEffect(() => {
-        setLoggedIn(checkLoggedIn())
-    }, [])
+        setLoggedIn(checkLoggedIn());
+        if (loggedIn && !username) {
+            setUsername(getUserName())
+        }
+    })
 
     const handleLoginSuccess = () => {
         setLoggedIn(true);
+        setUsername(getUserName())
         // Get Favourites
     }
 
@@ -37,7 +51,7 @@ export default function Favourites({ allRecipes }) {
             classNameProp={styles.recipes}
         >
 
-            <h1>Arno's Favourites</h1>
+            <h1>{username} Favourites</h1>
             <Search reroute />
             <div className={styles.options}>
                 <div className={styles.option}>

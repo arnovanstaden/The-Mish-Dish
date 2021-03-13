@@ -4,12 +4,13 @@ import axios from "axios"
 export const loginUser = async (user) => {
     let loginResult = await axios({
         method: "post",
-        url: `${process.env.NEXT_PUBLIC_API_URL}/profile/login`,
+        url: `${process.env.NEXT_PUBLIC_LOCAL_API_URL}/profile/login`,
         data: user
     }).then(result => {
 
         // Save Login
-
+        document.cookie = `TMDToken=${result.data.token};path=/`;
+        document.cookie = `TMDName=${result.data.name};path=/`;
         return result
     }).catch(err => {
         console.log(err)
@@ -22,11 +23,6 @@ export const registerUser = () => {
 
 }
 
-export const getUserName = () => {
-
-}
-
-
 export const checkLoggedIn = () => {
     const loggedIn = getCookie("TMDToken");
     if (!loggedIn) {
@@ -35,7 +31,7 @@ export const checkLoggedIn = () => {
     return true
 }
 
-const getCookie = (name) => {
+export const getCookie = (name) => {
     var cookieArr = document.cookie.split(";");
 
     // Loop through the array elements
