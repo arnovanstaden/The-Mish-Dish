@@ -29,7 +29,6 @@ export default function Home({ recipes }) {
       }}
       classNameProp={styles.home}
     >
-      {/* <img src="/Logo-wide.svg" alt="The Mish DIsh Logo" className={styles.logo} /> */}
       <Search reroute />
 
       <section className={styles.group}>
@@ -80,13 +79,11 @@ export default function Home({ recipes }) {
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/recipes`);
-
-  let allRecipes = await response.json();
-  allRecipes = [...allRecipes].reverse()
+  const recipes = await response.json();
 
   return {
     props: {
-      allRecipes
+      recipes
     },
   }
 }
