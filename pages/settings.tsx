@@ -27,12 +27,17 @@ export default function settings() {
     const handleLogout = () => {
         logoutUser();
         setUser(undefined);
-        Router.reload()
+        // Router.reload()
     }
 
     const handleLoginSuccess = (profile) => {
         setShowLogin(false);
         setUser(profile)
+    }
+
+    const handleAccordion = (e) => {
+        let content = e.target.parentNode.nextElementSibling as HTMLElement;
+        content.classList.toggle(styles.closed)
     }
 
     // Components
@@ -60,10 +65,20 @@ export default function settings() {
                 <h1>Settings</h1>
                 <h3>Profile</h3>
                 {user ? <User /> : null}
-                {user ? <button onClick={logoutUser}>Logout</button> : <button onClick={() => setShowLogin(true)}>Login</button>}
+                {user ? <button onClick={handleLogout}>Logout</button> : <button onClick={() => setShowLogin(true)}>Login</button>}
 
             </div>
-            {showLogin ? <Login handleLoginSuccess={handleLoginSuccess} /> : null}
-        </Layout>
+
+            <div className={styles.accordion}>
+                <div className={styles.heading} onClick={(e) => handleAccordion(e)}>
+                    <p>About The Mish Dish</p>
+                </div>
+                <div className={`${styles.content} ${styles.closed}`}>
+                    <p>My name is Mish. I am not a professional chef and I have no education or background in either cooking or nutrition. I am merely your every day gal with a passion for cooking and creating dishes  which are: affordable, easy to make, my personal opinion of healthy, made from your every day fridge ingredients and full of flavor.  That is why I created ‘The Mish Dish’ - a personal catalogue of some of my favorite, personally created, go-to dishes. Enjoy!</p>
+                </div>
+            </div>
+
+            { showLogin ? <Login handleLoginSuccess={handleLoginSuccess} /> : null}
+        </Layout >
     )
 }

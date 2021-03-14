@@ -32,7 +32,7 @@ export const registerUser = async (user) => {
     }).then(result => {
         // Save Login
         document.cookie = `TMDToken=${result.data.token};path=/`;
-        document.cookie = `TMDName=${result.data.name};path=/`;
+        document.cookie = `TMDName=${result.data.profile.name};path=/`;
         return result
     }).catch(err => {
         console.log(err)
@@ -62,7 +62,6 @@ export const getUser = async () => {
         console.log(err)
         return err.response
     });
-    console.log(userResult.data)
     return userResult.data
 }
 

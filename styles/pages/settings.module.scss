@@ -26,4 +26,33 @@
         padding: 0.25rem 1rem;
     }
 
+    .accordion {
+        padding-top: 2rem;
+        border-bottom: 1px solid $blue-grey;
+
+
+        .heading {
+            padding: 1rem 0;
+
+            p {
+                margin: 0;
+                font-weight: 500;
+            }
+        }
+
+        .content {
+            transition: 0.5s ease;
+            overflow: hidden;
+
+            p {
+                font-size: 0.9rem;
+                margin: 0;
+                padding: 1rem 0;
+            }
+
+            &.closed {
+                height: 0;
+            }
+        }
+    }
 }
