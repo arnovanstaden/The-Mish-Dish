@@ -1,18 +1,21 @@
 import axios from "axios";
 import { getFullRecipes } from "./recipes"
 
+// API URL
+const API_URL = process.env.NEXT_PUBLIC_ENVIRONMENT === "development" ? process.env.NEXT_PUBLIC_LOCAL_API_URL : process.env.NEXT_PUBLIC_API_URL;
+
 // Authentication
 export const loginUser = async (user) => {
     let loginResult = await axios({
         method: "post",
-        url: `${process.env.NEXT_PUBLIC_API_URL}/profile/login`,
+        url: `${API_URL}/profile/login`,
         data: user
     }).then(result => {
 
         // Save Login
         document.cookie = `TMDToken=${result.data.token};path=/`;
-        document.cookie = `TMDName=${result.data.name};path=/`;
-        localStorage.setItem("favourites", JSON.stringify(result.data.favourites))
+        document.cookie = `TMDName=${result.data.profile.name};path=/`;
+        localStorage.setItem("favourites", JSON.stringify(result.data.profile.favourites))
         return result
     }).catch(err => {
         console.log(err)
@@ -24,7 +27,7 @@ export const loginUser = async (user) => {
 export const registerUser = async (user) => {
     let registerResult = await axios({
         method: "post",
-        url: `${process.env.NEXT_PUBLIC_API_URL}/profile/register`,
+        url: `${API_URL}/profile/register`,
         data: user
     }).then(result => {
         // Save Login
@@ -38,8 +41,29 @@ export const registerUser = async (user) => {
     return registerResult
 }
 
-const LogoutUser = () => {
-    localStorage.clear()
+export const logoutUser = () => {
+    localStorage.clear();
+    let tokenCookie = getCookie("TMDToken");
+    let nameCookie = getCookie("TMDToken");
+    document.cookie = `TMDToken=${tokenCookie}; expires= Thu, 21 Aug 2014 20:00:00 UTC; path=/`
+    document.cookie = `TMDName=${nameCookie}; expires= Thu, 21 Aug 2014 20:00:00 UTC; path=/`
+}
+
+export const getUser = async () => {
+    let userResult = await axios({
+        method: "get",
+        url: `${API_URL}/profile/`,
+        headers: {
+            Authorization: `BEARER ${getCookie("TMDToken")}`
+        }
+    }).then(result => {
+        return result
+    }).catch(err => {
+        console.log(err)
+        return err.response
+    });
+    console.log(userResult.data)
+    return userResult.data
 }
 
 export const checkLoggedIn = (): boolean => {
@@ -89,7 +113,7 @@ export const updateFavourite = (id: string) => {
 
     axios({
         method: "post",
-        url: `${process.env.NEXT_PUBLIC_API_URL}/profile/handleFavourite`,
+        url: `${API_URL}/profile/handleFavourite`,
         headers: {
             Authorization: `BEARER ${getCookie("TMDToken")}`
         },

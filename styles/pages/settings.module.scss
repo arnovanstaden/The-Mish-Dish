@@ -1,0 +1,29 @@
+@import "../variables.scss";
+
+.settings {
+    padding-top: 3rem;
+
+    h1 {
+        font-weight: 600;
+        margin: 0;
+        margin-bottom: 1rem;
+    }
+
+    .profile {
+        p {
+            span {
+                font-weight: 500;
+            }
+        }
+    }
+
+    button {
+        background-color: $blue;
+        font-weight: 500;
+        border: none;
+        color: $white;
+        border-radius: 0.25rem;
+        padding: 0.25rem 1rem;
+    }
+
+}

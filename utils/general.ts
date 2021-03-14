@@ -1,6 +1,6 @@
 // Image Conversion
 export const convertImage = (image: string, width: number): string => {
-    if (process.env.ENVIRONMENT === "production") {
+    if (process.env.NEXT_PUBLIC_ENVIRONMENT === "production") {
         const covertedImage = image.replace("upload/v", `upload/w_${width},c_scale/f_auto/v`);
         return covertedImage
     } else {

@@ -5,7 +5,7 @@ import { loginUser, registerUser } from "../../../utils/user";
 import styles from "./login.module.scss";
 
 interface ILogin {
-    handleLoginSuccess: () => void
+    handleLoginSuccess: (profile) => void
 }
 
 export default function Login({ handleLoginSuccess }: ILogin) {
@@ -39,7 +39,7 @@ export default function Login({ handleLoginSuccess }: ILogin) {
                         if (result.status.toString().charAt(0) === "4") {
                             showMessage(result.data.message, "error")
                         } else {
-                            handleLoginSuccess()
+                            handleLoginSuccess(result.data.profile)
                         }
                     })
             } else {
@@ -48,7 +48,7 @@ export default function Login({ handleLoginSuccess }: ILogin) {
                         if (result.status.toString().charAt(0) === "4") {
                             showMessage(result.data.message, "error")
                         } else {
-                            handleLoginSuccess()
+                            handleLoginSuccess(result.data.profile)
                         }
                     })
             }

@@ -48,6 +48,12 @@ export default function MobileNav() {
                 </a>
             </Link>
 
+            <Link href="/settings">
+                <a className={styles.link}>
+                    <i className="icon-profile"></i>
+                </a>
+            </Link>
+
         </nav>
     )
 }

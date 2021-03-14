@@ -21,11 +21,10 @@ export default function Favourites({ allRecipes }) {
 
 
     useEffect(() => {
-        setLoggedIn(checkLoggedIn());
-        if (loggedIn) {
-            if (!userName) {
-                setUserName(transformUserName());
-            }
+        const isLoggedIn = checkLoggedIn()
+        setLoggedIn(isLoggedIn);
+        if (isLoggedIn) {
+            setUserName(transformUserName());
         }
         const favouritesList = getFavouritesList()
         if (favouritesList) {
@@ -45,10 +44,10 @@ export default function Favourites({ allRecipes }) {
 
     // Handlers
 
-    const handleLoginSuccess = () => {
+    const handleLoginSuccess = (profile) => {
         setLoggedIn(true);
         setUserName(transformUserName())
-        getFullRecipes(allRecipes, getFavouritesList())
+        setFavourites(getFullRecipes(allRecipes, profile.favourites))
     }
 
     const handleInstantSearch = (searchTerm: string) => {
@@ -83,12 +82,10 @@ export default function Favourites({ allRecipes }) {
                                 <Recipe recipe={favourite} key={index} />
                             ))
                             : null}
-                        {favourites ? null : <p> You don't have any favourites yet :(</p>}
+                        {favourites && favourites.length > 0 ? null : <p> You don't have any favourites yet :(</p>}
                     </div>
                 </>
                 : <Login handleLoginSuccess={handleLoginSuccess} />}
-            {/* <button className="styles.logout"></button>
-                {loggedIn ? } */}
         </Layout >
     )
 }
