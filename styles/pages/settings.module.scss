@@ -23,7 +23,8 @@
         border: none;
         color: $white;
         border-radius: 0.25rem;
-        padding: 0.25rem 1rem;
+        display: block;
+        padding: 0.5rem 1rem;
     }
 
     .accordion {
@@ -52,6 +53,20 @@
 
             &.closed {
                 height: 0;
+            }
+
+            button {
+                margin: 1rem 0;
+                padding: 0;
+
+                a {
+                    padding: 0.5rem 1rem;
+                    display: block;
+
+                    i {
+                        margin-right: 0.5rem;
+                    }
+                }
             }
         }
     }

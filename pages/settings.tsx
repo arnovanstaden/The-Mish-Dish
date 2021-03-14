@@ -75,6 +75,12 @@ export default function settings() {
                 </div>
                 <div className={`${styles.content} ${styles.closed}`}>
                     <p>My name is Mish. I am not a professional chef and I have no education or background in either cooking or nutrition. I am merely your every day gal with a passion for cooking and creating dishes  which are: affordable, easy to make, my personal opinion of healthy, made from your every day fridge ingredients and full of flavor.  That is why I created ‘The Mish Dish’ - a personal catalogue of some of my favorite, personally created, go-to dishes. Enjoy!</p>
+                    <button>
+                        <a href="https://www.instagram.com/_themishdish_" target="blank">
+                            <i className="icon-instagram"></i>
+                            Follow Me
+                        </a>
+                    </button>
                 </div>
             </div>
 
