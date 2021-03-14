@@ -6,7 +6,7 @@ module.exports = withPWA({
         dest: 'public',
         runtimeCaching,
         register: true,
-        scope: '/app',
+        scope: '/',
         sw: 'service-worker.js',
     },
 })
