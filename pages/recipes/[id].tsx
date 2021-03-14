@@ -8,6 +8,7 @@ import { useMediaQuery } from 'react-responsive'
 
 // Components
 import Layout from "../../components/Layout/Layout"
+import Login from "../../components/UI/Login/Login"
 
 // Styles
 import styles from "../../styles/pages/recipes/[id].module.scss"
@@ -15,6 +16,7 @@ import styles from "../../styles/pages/recipes/[id].module.scss"
 export default function Recipe({ recipe }) {
     let [isFavourite, setIsFavourite] = useState(undefined)
     const [currentImage, setCurrentImage] = useState(recipe.images[0]);
+    const [showLogin, setShowLogin] = useState(false)
 
     const router = useRouter();
 
@@ -46,7 +48,13 @@ export default function Recipe({ recipe }) {
             setIsFavourite(!isFavourite);
             return
         }
-        return alert("Log in to manage favourites")
+        return setShowLogin(true)
+    }
+
+
+    const handleLoginSuccess = () => {
+        setShowLogin(false);
+        handleFavourite(recipe.id)
     }
 
     // Components
@@ -234,6 +242,7 @@ export default function Recipe({ recipe }) {
                     </div>
                 </div>
             }
+            {showLogin ? <Login handleLoginSuccess={handleLoginSuccess} /> : null}
         </Layout >
     )
 }
