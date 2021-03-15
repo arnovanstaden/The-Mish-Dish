@@ -6,6 +6,7 @@ import { toggleLoader } from "../../utils/general";
 import Nav from "../UI/Nav/Nav"
 import MobileNav from "../UI/MobileNav/MobileNav";
 import Loader from "../UI/Loader/Loader";
+import Install from "../UI/Install/Install";
 
 // Page Loader
 
@@ -31,6 +32,7 @@ export default function PageTemplate({ children }) {
             {children}
             <MobileNav />
             <Loader />
+            <Install />
         </>
     )
 }

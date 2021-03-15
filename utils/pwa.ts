@@ -1,3 +1,4 @@
+import installStyles from "../components/UI/Install/install.module.scss"
 
 export const installPrompt = () => {
     console.log("Checking: PWA Install Prompt")
@@ -15,7 +16,17 @@ export const installPrompt = () => {
 
     const showInstallModal = () => {
         // Show Install Modal
-        alert("showing install modal")
+        let modal = document.getElementsByClassName(installStyles.install)[0] as HTMLElement;
+        modal.classList.add(installStyles.show);
 
+        let installButton = document.getElementById("install-button") as HTMLElement;
+        installButton.addEventListener('click', (e) => {
+
+            // Show the prompt
+            deferredPrompt.prompt();
+            // Wait for the user to respond to the prompt
+            modal.classList.remove(installStyles.show);
+            deferredPrompt = null;
+        });
     }
 }

@@ -83,10 +83,7 @@ export default function settings() {
                     </button>
                 </div>
             </div>
-            <button className={styles.installButton} id="install-button">
-                <i className="icon-install"></i>
-                Install App
-            </button>
+
 
             { showLogin ? <Login handleLoginSuccess={handleLoginSuccess} /> : null}
         </Layout >
