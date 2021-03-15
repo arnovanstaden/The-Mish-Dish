@@ -16,7 +16,6 @@ function MyApp({ Component, pageProps }) {
 
   useEffect(() => {
     installPrompt();
-    console.log("render")
   }, [])
 
   return (

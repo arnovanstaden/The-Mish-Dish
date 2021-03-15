@@ -1,6 +1,7 @@
 import { GetStaticProps, GetStaticPaths } from 'next';
 import { handleRecipeShare, capitalize } from "../../utils/general";
 import { checkLoggedIn, updateFavourite, checkIfFavourite } from "../../utils/user";
+import { initiateScreenLock } from "../../utils/pwa";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
@@ -24,6 +25,7 @@ export default function Recipe({ recipe }) {
 
     useEffect(() => {
         setIsFavourite(checkIfFavourite(recipe.id));
+        initiateScreenLock();
     }, [])
 
     // Handlers

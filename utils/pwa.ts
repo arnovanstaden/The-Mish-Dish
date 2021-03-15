@@ -21,12 +21,33 @@ export const installPrompt = () => {
 
         let installButton = document.getElementById("install-button") as HTMLElement;
         installButton.addEventListener('click', (e) => {
-
             // Show the prompt
             deferredPrompt.prompt();
             // Wait for the user to respond to the prompt
             modal.classList.remove(installStyles.show);
             deferredPrompt = null;
         });
+    }
+}
+
+
+
+export const initiateScreenLock = async () => {
+    if ('wakeLock' in navigator) {
+        const requestWakeLock = async () => {
+            let wakeLock = null;
+
+            try {
+                wakeLock = await navigator.wakeLock.request();
+                wakeLock.addEventListener('release', () => {
+                    console.log('Screen Wake Lock released:', wakeLock.released);
+                });
+                console.log('Screen Wake Lock released:', wakeLock.released);
+            } catch (err) {
+                console.error(`${err.name}, ${err.message}`);
+            }
+        };
+
+        await requestWakeLock();
     }
 }
