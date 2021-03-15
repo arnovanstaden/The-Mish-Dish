@@ -1,11 +1,12 @@
 import { GetStaticProps, GetStaticPaths } from 'next';
-import { handleRecipeShare, capitalize } from "../../utils/general";
+import { handleRecipeShare, capitalize, convertImage } from "../../utils/general";
 import { checkLoggedIn, updateFavourite, checkIfFavourite } from "../../utils/user";
 import { initiateScreenLock } from "../../utils/pwa";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { useMediaQuery } from 'react-responsive';
+import Image from "next/image"
 
 
 // Components
@@ -43,6 +44,7 @@ export default function Recipe({ recipe }) {
         } else {
             setCurrentImage(imageArray[0])
         }
+        console.log(currentImage)
     }
 
     const handleFavourite = (id) => {
@@ -158,7 +160,9 @@ export default function Recipe({ recipe }) {
         return (
             <div className={styles.image}>
                 <i className="icon-carrot_down" onClick={handleNavigateBack}></i>
-                <img src={currentImage} alt={recipe.name} onClick={handleNextImage} onTouchEnd={handleNextImage} />
+                {!isMobileDevice ?
+                    <Image onClick={handleNextImage} src={currentImage} alt={recipe.name} layout="fill" objectFit="cover" objectPosition="center center" priority />
+                    : <img src={convertImage(currentImage, "auto")} alt={recipe.name} onClick={handleNextImage} onTouchEnd={handleNextImage} />}
             </div>
         )
     }
@@ -238,10 +242,14 @@ export default function Recipe({ recipe }) {
                 :
                 <div className="container">
                     <div className={styles.grid}>
-                        <Details />
-                        <Images />
-                        <Ingredients />
-                        <Method />
+                        <div className={styles.row}>
+                            <Details />
+                            <Images />
+                        </div>
+                        <div className={styles.row}>
+                            <Ingredients />
+                            <Method />
+                        </div>
                     </div>
                 </div>
             }
