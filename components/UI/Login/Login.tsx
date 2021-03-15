@@ -79,12 +79,12 @@ export default function Login({ handleLoginSuccess }: ILogin) {
             </form>
             <div className={styles.options}>
                 <p onClick={() => setRegister(!register)}>{register ? "Login" : "Register"}</p>
-                {register ? null :
+                {/* {register ? null :
                     <>
                         <span>|</span>
                         <p onClick={() => setRegister(!register)}>Forgot Password?</p>
                     </>
-                }
+                } */}
             </div>
         </div>
     )
