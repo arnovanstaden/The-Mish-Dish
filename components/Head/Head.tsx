@@ -25,6 +25,7 @@ export default function Head(props: IHead) {
             <meta name="copyright" content={`C-DOC © ${currentYear}`} />
             <meta name="theme-color" content="#ffffff" />
             <link rel="manifest" href="/manifest.json" />
+            <link rel="apple-touch-icon" href="/images/icon.png" />
 
             {/* Open Graph */}
             <meta property="og:site_name" content="C-DOC" />

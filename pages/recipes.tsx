@@ -111,19 +111,7 @@ export default function Recipes({ allRecipes }) {
     )
 }
 
-// export const getStaticProps: GetStaticProps = async () => {
-//     const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/recipes`);
-
-//     let allRecipes = await response.json();
-//     allRecipes = [...allRecipes].reverse()
-
-//     return {
-//         props: {
-//             allRecipes
-//         },
-//     }
-// }
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getStaticProps: GetStaticProps = async () => {
     const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/recipes`);
 
     let allRecipes = await response.json();
@@ -135,3 +123,16 @@ export const getServerSideProps: GetServerSideProps = async () => {
         },
     }
 }
+
+// export const getServerSideProps: GetServerSideProps = async () => {
+//     const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/recipes`);
+
+//     let allRecipes = await response.json();
+//     allRecipes = [...allRecipes].reverse()
+
+//     return {
+//         props: {
+//             allRecipes
+//         },
+//     }
+// }

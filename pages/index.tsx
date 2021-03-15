@@ -68,18 +68,7 @@ export default function Home({ recipes }) {
 }
 
 
-// export const getStaticProps: GetStaticProps = async () => {
-//   const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/recipes`);
-//   const recipes = await response.json();
-
-//   return {
-//     props: {
-//       recipes
-//     },
-//   }
-// }
-
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getStaticProps: GetStaticProps = async () => {
   const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/recipes`);
   const recipes = await response.json();
 
@@ -89,3 +78,14 @@ export const getServerSideProps: GetServerSideProps = async () => {
     },
   }
 }
+
+// export const getServerSideProps: GetServerSideProps = async () => {
+//   const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/recipes`);
+//   const recipes = await response.json();
+
+//   return {
+//     props: {
+//       recipes
+//     },
+//   }
+// }
