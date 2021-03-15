@@ -32,22 +32,22 @@ export const installPrompt = () => {
 
 
 
-export const initiateScreenLock = async () => {
-    if ('wakeLock' in navigator) {
-        const requestWakeLock = async () => {
-            let wakeLock = null;
+// export const initiateScreenLock = async () => {
+//     if ('wakeLock' in navigator) {
+//         const requestWakeLock = async () => {
+//             let wakeLock = null;
 
-            try {
-                wakeLock = await navigator.wakeLock.request();
-                wakeLock.addEventListener('release', () => {
-                    console.log('Screen Wake Lock released:', wakeLock.released);
-                });
-                console.log('Screen Wake Lock released:', wakeLock.released);
-            } catch (err) {
-                console.error(`${err.name}, ${err.message}`);
-            }
-        };
+//             try {
+//                 wakeLock = await navigator.wakeLock.request();
+//                 wakeLock.addEventListener('release', () => {
+//                     console.log('Screen Wake Lock released:', wakeLock.released);
+//                 });
+//                 console.log('Screen Wake Lock released:', wakeLock.released);
+//             } catch (err) {
+//                 console.error(`${err.name}, ${err.message}`);
+//             }
+//         };
 
-        await requestWakeLock();
-    }
-}
+//         await requestWakeLock();
+//     }
+// }
