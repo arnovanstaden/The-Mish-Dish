@@ -1,3 +1,7 @@
+import { installPrompt } from "../utils/pwa";
+import { useEffect } from "react";
+
+
 // Components
 import PageTemplate from "../components/PageTemplate/PageTemplate";
 
@@ -9,6 +13,11 @@ import "../assets/icons/style.css";
 
 
 function MyApp({ Component, pageProps }) {
+
+  useEffect(() => {
+    installPrompt();
+    console.log("render")
+  }, [])
 
   return (
     <PageTemplate>

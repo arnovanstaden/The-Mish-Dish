@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'icomoon';
-  src:  url('fonts/icomoon.eot?mesa71');
-  src:  url('fonts/icomoon.eot?mesa71#iefix') format('embedded-opentype'),
-    url('fonts/icomoon.ttf?mesa71') format('truetype'),
-    url('fonts/icomoon.woff?mesa71') format('woff'),
-    url('fonts/icomoon.svg?mesa71#icomoon') format('svg');
+  src:  url('fonts/icomoon.eot?6na5y');
+  src:  url('fonts/icomoon.eot?6na5y#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?6na5y') format('truetype'),
+    url('fonts/icomoon.woff?6na5y') format('woff'),
+    url('fonts/icomoon.svg?6na5y#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -27,6 +27,9 @@
 
 .icon-instagram:before {
   content: "\e90b";
+}
+.icon-install:before {
+  content: "\e90f";
 }
 .icon-local_restaurant:before {
   content: "\e90d";
