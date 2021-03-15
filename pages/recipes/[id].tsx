@@ -5,7 +5,8 @@ import { initiateScreenLock } from "../../utils/pwa";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
-import { useMediaQuery } from 'react-responsive'
+import { useMediaQuery } from 'react-responsive';
+
 
 // Components
 import Layout from "../../components/Layout/Layout"

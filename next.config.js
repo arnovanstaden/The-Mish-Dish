@@ -9,4 +9,5 @@ module.exports = withPWA({
         scope: '/',
         sw: 'service-worker.js',
     },
+    domains: ['cloudinary.com'],
 })

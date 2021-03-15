@@ -4,16 +4,14 @@ export default function Loader() {
 
     const phrases = [
         "Adding some more salt...",
-        "This needs more chilli...",
+        "Adding some fresh chilli...",
         "Spotify: Play Fleetwood",
+        "Pouring another glass of wine...",
     ]
 
     function chooseRandom(): string {
         return phrases[Math.floor(Math.random() * phrases.length)];
     }
-
-
-
 
     return (
         <div className="loader">
