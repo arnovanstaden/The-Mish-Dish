@@ -23,7 +23,7 @@ interface IRecipeProps {
 
 export default function Recipe({ recipe, carouselItem }: IRecipeProps) {
     let [isFavourite, setIsFavourite] = useState(undefined)
-    const recipeImage = convertImage(recipe.thumbnail, "auto");
+    const recipeImage = convertImage(recipe.thumbnail, "800");
 
     const recipeClasses = ClassNames(
         styles.recipe,
