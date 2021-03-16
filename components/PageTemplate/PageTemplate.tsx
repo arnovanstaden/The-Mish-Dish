@@ -14,12 +14,6 @@ Router.events.on('routeChangeStart', () => {
     toggleLoader();
 });
 
-// Router.events.on('routeChangeComplete', () => {
-//     console.log("end")
-//     toggleLoader();
-// });
-
-
 export default function PageTemplate({ children }) {
 
     useEffect(() => {

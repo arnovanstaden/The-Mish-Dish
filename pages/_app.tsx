@@ -1,7 +1,5 @@
 import { installPrompt, registerServiceWorker } from "../utils/pwa";
 import { useEffect } from "react";
-
-
 // Components
 import PageTemplate from "../components/PageTemplate/PageTemplate";
 

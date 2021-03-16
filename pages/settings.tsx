@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
-import Router from "next/router"
-import { getUserName, getUser, logoutUser, checkLoggedIn } from "../utils/user";
+import { getUser, logoutUser, checkLoggedIn } from "../utils/user";
 
 // Components
 import Layout from "../components/Layout/Layout";
 import Login from "../components/UI/Login/Login";
+import InstallPromt from "../components/UI/InstallPromt/InstallPromt";
 
 // Styles
 import styles from "../styles/pages/settings.module.scss"
@@ -27,7 +27,6 @@ export default function settings() {
     const handleLogout = () => {
         logoutUser();
         setUser(undefined);
-        // Router.reload()
     }
 
     const handleLoginSuccess = (profile) => {
@@ -83,6 +82,8 @@ export default function settings() {
                     </button>
                 </div>
             </div>
+
+            <InstallPromt />
 
 
             { showLogin ? <Login handleLoginSuccess={handleLoginSuccess} /> : null}
