@@ -24,8 +24,14 @@ export default function Head(props: IHead) {
             <meta name="author" content="Webdacity" />
             <meta name="copyright" content={`The Mish Dish © ${currentYear}`} />
             <meta name="theme-color" content="#ffffff" />
+
+            {/* PWA */}
             <link rel="manifest" href="/manifest.json" />
             <link rel="apple-touch-icon" href="/images/icon.png" />
+            <link rel="apple-touch-startup-icon" href="/images/icon.png" />
+            <meta name="apple-mobile-web-app-capable" content="yes" />
+            <meta name="apple-mobile-web-app-status-bar-style" content="white" />
+            <meta name="apple-mobile-web-app-title" content="The Mish Dish" />
 
             {/* Open Graph */}
             <meta property="og:site_name" content="The Mish Dish" />
