@@ -61,9 +61,9 @@ export default function settings() {
     return (
         <Layout
             head={{
-                title: "Recipes | The Mish Dish",
-                description: "A personal catalogue of some of Mish's personally created, go-to dishes - no life story included.",
-                canonical: "/recipes",
+                title: "Settings | The Mish Dish",
+                description: "Your Profile Settings",
+                canonical: "/settings",
                 robots: false
             }}
             classNameProp={styles.settings}
