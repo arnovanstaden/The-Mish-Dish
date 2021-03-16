@@ -22,7 +22,7 @@ export default function InstallPrompt({ handlePromptClose }: IPrompt) {
                     <ul className={styles.instructions}>
                         <li>
                             <i className="icon-ios_share"></i>
-                            <p>1. Press the 'Share' Button</p>
+                            <p>1. Press the 'Share' Button (Safari)</p>
                         </li>
                         <li>
                             <i className="icon-add"></i>
