@@ -1,7 +1,6 @@
 import installStyles from "../components/UI/Install/install.module.scss"
 
 export const installPrompt = () => {
-    console.log("Checking: PWA Install Prompt")
     let deferredPrompt;
 
     window.addEventListener('beforeinstallprompt', (e) => {
@@ -51,3 +50,9 @@ export const installPrompt = () => {
 //         await requestWakeLock();
 //     }
 // }
+
+export const registerServiceWorker = () => {
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/service-worker.js')
+    }
+}

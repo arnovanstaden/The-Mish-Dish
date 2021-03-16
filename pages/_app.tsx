@@ -1,4 +1,4 @@
-import { installPrompt } from "../utils/pwa";
+import { installPrompt, registerServiceWorker } from "../utils/pwa";
 import { useEffect } from "react";
 
 
@@ -15,6 +15,7 @@ import "../assets/icons/style.css";
 function MyApp({ Component, pageProps }) {
   useEffect(() => {
     installPrompt();
+    registerServiceWorker()
   }, [])
 
   return (
