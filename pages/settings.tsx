@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import { getUser, logoutUser, checkLoggedIn } from "../utils/user";
+import { isMobileSafari } from "react-device-detect";
+
 
 // Components
 import Layout from "../components/Layout/Layout";
@@ -11,7 +13,8 @@ import styles from "../styles/pages/settings.module.scss"
 
 export default function settings() {
     const [user, setUser] = useState(undefined);
-    const [showLogin, setShowLogin] = useState(false)
+    const [showLogin, setShowLogin] = useState(false);
+    const [showPrompt, setShowPrompt] = useState(false);
 
     useEffect(() => {
         if (checkLoggedIn()) {
@@ -39,6 +42,10 @@ export default function settings() {
         content.classList.toggle(styles.closed)
     }
 
+    const handlePromptClose = () => {
+        setShowPrompt(false)
+    }
+
     // Components
     const User = () => {
         return (
@@ -56,7 +63,8 @@ export default function settings() {
             head={{
                 title: "Recipes | The Mish Dish",
                 description: "A personal catalogue of some of Mish's personally created, go-to dishes - no life story included.",
-                canonical: "/recipes"
+                canonical: "/recipes",
+                robots: false
             }}
             classNameProp={styles.settings}
         >
@@ -83,9 +91,17 @@ export default function settings() {
                 </div>
             </div>
 
-            <InstallPrompt />
 
+            {/* iOS Install prompt */}
 
+            {isMobileSafari
+                ? <button className={styles.installButton} onClick={() => setShowPrompt(true)}>
+                    <i className="icon-install"></i>
+                        Install App
+                    </button>
+                : null}
+
+            {showPrompt ? <InstallPrompt handlePromptClose={handlePromptClose} /> : null}
             { showLogin ? <Login handleLoginSuccess={handleLoginSuccess} /> : null}
         </Layout >
     )

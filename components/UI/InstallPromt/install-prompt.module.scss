@@ -1,1 +1,66 @@
-@import "../../../styles/variables.scss"
+@import "../../../styles/variables.scss";
+
+.prompt {
+    display: flex;
+    align-items: flex-end;
+    position: fixed;
+    z-index: 15000;
+    background-color: rgba($color: $blue, $alpha: 0.9);
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+
+    .content {
+        background-color: white;
+        padding: 1.5rem 1.25rem 1rem 1.25rem;
+        border-radius: 2.5rem 2.5rem 0 0;
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            h4 {
+                font-size: 1.1rem;
+                font-weight: 600;
+            }
+
+            p {
+                color: $yellow;
+            }
+        }
+
+        .description {
+            font-size: 0.9rem;
+            text-align: center;
+            border-top: 1px solid $blue-grey;
+            border-bottom: 1px solid $blue-grey;
+            padding: 1rem 0;
+
+            p {
+                margin: 0;
+            }
+        }
+
+        .instructions {
+            padding: 0;
+            list-style: none;
+
+            li {
+                display: flex;
+                align-items: center;
+                margin: 0.5rem;
+
+                i {
+                    font-size: 1.75rem;
+                    margin-right: 1rem;
+                }
+
+                p {
+                    margin: 0;
+                }
+            }
+        }
+    }
+}
