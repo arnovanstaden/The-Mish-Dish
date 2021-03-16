@@ -1,0 +1,26 @@
+@import "../../styles/variables.scss";
+
+.arrows {
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+    padding-top: 0.75rem;
+
+    i {
+        font-size: 1.1rem;
+        padding: 0.5rem;
+        font-weight: 700;
+        border-radius: 0.25rem;
+        background-color: $light-grey;
+        cursor: pointer;
+
+        &:first-child {
+            transform: rotate(90deg);
+        }
+
+        &:last-child {
+            transform: rotate(-90deg);
+            margin-left: 0.75rem;
+        }
+    }
+}
