@@ -157,10 +157,11 @@ export default function Recipe({ recipe }) {
     const Images = () => {
         return (
             <div className={styles.image}>
-                <i className="icon-carrot_down" onClick={handleNavigateBack}></i>
-                {!isMobileDevice ?
-                    <Image onClick={handleNextImage} src={currentImage} alt={recipe.name} layout="fill" objectFit="cover" objectPosition="center center" priority />
-                    : <img src={convertImage(currentImage, 600)} alt={recipe.name} onClick={handleNextImage} onTouchEnd={handleNextImage} />}
+                {isMobileDevice
+                    ? <img src={convertImage(currentImage, 600)} alt={recipe.name} onClick={handleNextImage} onTouchEnd={handleNextImage} />
+                    : <Image src={currentImage} alt={recipe.name} layout="fill" objectFit="cover" objectPosition="center center" priority quality={60} />
+                }
+                <i className="icon-carrot_down" onClick={isMobileDevice ? handleNavigateBack : handleNextImage}></i>
             </div>
         )
     }

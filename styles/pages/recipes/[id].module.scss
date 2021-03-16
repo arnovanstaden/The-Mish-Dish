@@ -159,6 +159,10 @@
         }
     }
 
+    .ingredients {
+        padding-right: 2rem;
+    }
+
     .method {
         ul {
             li {
@@ -225,7 +229,11 @@
                 }
 
                 i {
-                    display: none;
+                    bottom: 1rem;
+                    right: 1rem;
+                    left: unset;
+                    top: unset;
+                    transform: rotate(-90deg);
                 }
             }
 

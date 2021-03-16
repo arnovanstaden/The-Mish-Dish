@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { convertImage } from "../../utils/general";
 import { getIngredientCount } from "../../utils/recipes";
 import { checkIfFavourite } from "../../utils/user"
 import ClassNames from "classnames";
