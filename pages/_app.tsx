@@ -13,7 +13,6 @@ import "../assets/icons/style.css";
 
 
 function MyApp({ Component, pageProps }) {
-
   useEffect(() => {
     installPrompt();
   }, [])
