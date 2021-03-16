@@ -4,7 +4,7 @@ import { getUser, logoutUser, checkLoggedIn } from "../utils/user";
 // Components
 import Layout from "../components/Layout/Layout";
 import Login from "../components/UI/Login/Login";
-import InstallPromt from "../components/UI/InstallPromt/InstallPromt";
+import InstallPrompt from "../components/UI/InstallPromt/InstallPrompt";
 
 // Styles
 import styles from "../styles/pages/settings.module.scss"
@@ -83,7 +83,7 @@ export default function settings() {
                 </div>
             </div>
 
-            <InstallPromt />
+            <InstallPrompt />
 
 
             { showLogin ? <Login handleLoginSuccess={handleLoginSuccess} /> : null}
