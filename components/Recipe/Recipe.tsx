@@ -23,7 +23,6 @@ interface IRecipeProps {
 
 export default function Recipe({ recipe, carouselItem }: IRecipeProps) {
     let [isFavourite, setIsFavourite] = useState(undefined)
-    const recipeImage = convertImage(recipe.thumbnail, "800");
 
     const recipeClasses = ClassNames(
         styles.recipe,
@@ -39,7 +38,7 @@ export default function Recipe({ recipe, carouselItem }: IRecipeProps) {
             <a className={recipeClasses}>
                 <article >
                     <div className={styles.image}>
-                        <img loading="lazy" src={recipeImage} alt={`${recipe.name} Thumbnail`} />
+                        <img loading="lazy" src={recipe.thumbnail} alt={`${recipe.name} Thumbnail`} />
                     </div>
                     <div className={styles.details}>
                         <h3 className={styles.name}>{recipe.name}</h3>
