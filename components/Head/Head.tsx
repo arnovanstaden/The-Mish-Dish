@@ -22,13 +22,13 @@ export default function Head(props: IHead) {
 
 
             <meta name="author" content="Webdacity" />
-            <meta name="copyright" content={`C-DOC © ${currentYear}`} />
+            <meta name="copyright" content={`The Mish Dish © ${currentYear}`} />
             <meta name="theme-color" content="#ffffff" />
             <link rel="manifest" href="/manifest.json" />
             <link rel="apple-touch-icon" href="/images/icon.png" />
 
             {/* Open Graph */}
-            <meta property="og:site_name" content="C-DOC" />
+            <meta property="og:site_name" content="The Mish Dish" />
             <meta property="og:title" content={props.title} />
             <meta property="og:description" content={props.description} />
             <meta property="og:type" content="Website" />
@@ -37,7 +37,7 @@ export default function Head(props: IHead) {
             <meta property="og:image:type" content="image/png" />
             <meta property="og:image:width" content="500" />
             <meta property="og:image:height" content="500" />
-            <meta property="og:image:alt" content="C-DOC Logo" />
+            <meta property="og:image:alt" content="The Mish Dish Logo" />
         </NextHead >
     )
 }
