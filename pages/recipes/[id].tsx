@@ -158,7 +158,8 @@ export default function Recipe({ recipe }) {
         return (
             <div className={styles.image}>
                 {isMobileDevice
-                    ? <img src={convertImage(currentImage, 600)} alt={recipe.name} onClick={handleNextImage} onTouchEnd={handleNextImage} />
+                    // ? <img src={convertImage(currentImage, 600)} alt={recipe.name} onClick={handleNextImage} onTouchEnd={handleNextImage} />
+                    ? <Image src={currentImage} alt={recipe.name} width={500} height={"auto"} priority quality={60} onClick={handleNextImage} />
                     : <Image src={currentImage} alt={recipe.name} layout="fill" objectFit="cover" objectPosition="center center" priority quality={60} />
                 }
                 <i className="icon-carrot_down" onClick={isMobileDevice ? handleNavigateBack : handleNextImage}></i>

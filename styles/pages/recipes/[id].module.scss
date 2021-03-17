@@ -3,13 +3,24 @@
 .recipe {
     .image {
         width: 100%;
-        max-height: 65vh;
+        height: auto;
         z-index: 1;
         transition: 0.5s ease;
         overflow: hidden;
 
+        // next-image fix
+        >div {
+            min-height: 100%;
+
+            >div {
+                display: none !important;
+            }
+        }
+
         img {
-            width: 100%;
+            width: 100% !important;
+            height: 100% !important;
+            position: relative !important;
             object-fit: contain;
             transition: 0.5s ease;
             object-position: center center;
