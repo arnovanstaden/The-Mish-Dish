@@ -33,10 +33,9 @@ export default function Carousel(props) {
             recipesToRender = [...recipes].reverse().splice(0, sliderItemsCount);
             break;
     }
-
     return (
         <div className={styles.carousel}>
-            <RecipeSlider recipes={recipesToRender} isDesktop />
+            <RecipeSlider recipes={recipesToRender} isDesktop={isDesktop} />
         </div>
     );
 
@@ -50,6 +49,7 @@ class RecipeSlider extends Component {
         this.previous = this.previous.bind(this);
     }
 
+
     next() {
         this.slider.slickNext();
     }
@@ -58,6 +58,8 @@ class RecipeSlider extends Component {
     }
 
     render() {
+        console.log(this.props.isDesktop)
+
         const settings = {
             dots: false,
             arrows: false,

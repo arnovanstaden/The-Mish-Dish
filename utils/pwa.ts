@@ -35,8 +35,6 @@ export const registerServiceWorker = () => {
     }
 }
 
-
-
 export const requestNotificationPermission = () => {
     Notification.requestPermission(function (status) {
         sendWelcomeNotification()
@@ -55,7 +53,7 @@ function sendWelcomeNotification() {
     }
 }
 
-export const getNotificationPermission = () => {
+export const notificationsPermitted = () => {
     if (Notification.permission == 'granted') {
         return true
     } else {
@@ -76,7 +74,7 @@ export const displayNotification = ({ title, text, action }: INotification) => {
     navigator.serviceWorker.getRegistration().then(function (reg) {
         const options = {
             body: text,
-            icon: '/images/logo-transparent-small.png',
+            icon: '/images/icon.png',
             vibrate: [100, 50, 100],
             data: {
                 dateOfArrival: Date.now(),
