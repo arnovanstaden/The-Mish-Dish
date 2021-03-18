@@ -7,6 +7,7 @@ export default function Install() {
     const hide = () => {
         let modal = document.getElementsByClassName(styles.install)[0] as HTMLElement;
         modal.classList.remove(styles.show)
+        localStorage.setItem("showedAppInstallShow", JSON.stringify(true))
     }
 
     return (

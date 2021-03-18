@@ -14,7 +14,9 @@ export const installPrompt = () => {
         // Stash the event so it can be triggered later.
         deferredPrompt = e;
         if (deferredPrompt) {
-            showInstallModal()
+            if (!JSON.parse(localStorage.getItem("showedAppInstallShow"))) {
+                showInstallModal()
+            }
         }
     });
 
