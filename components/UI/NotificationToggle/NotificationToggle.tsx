@@ -22,7 +22,6 @@ export default function NotificationToggle() {
     }
 
     useEffect(() => {
-        console.log("checking app install")
         checkSubscription().then(currentStatus => {
             setStatus(currentStatus)
         })
