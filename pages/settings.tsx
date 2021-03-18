@@ -92,7 +92,7 @@ export default function settings() {
                 </div>
             </div>
 
-            {isMobile && !isIOS ? <NotificationToggle /> : null}
+            {!isIOS ? <NotificationToggle /> : null}
 
 
             {/* iOS Install prompt */}
