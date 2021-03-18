@@ -104,7 +104,7 @@ export default function settings() {
 
             {showPrompt ? <InstallPrompt handlePromptClose={handlePromptClose} /> : null}
             { showLogin ? <Login handleLoginSuccess={handleLoginSuccess} /> : null}
-            <button onClick={subscribeUserPush}>Notifications</button>
+            {/* <button onClick={subscribeUserPush}>Notifications</button> */}
         </Layout >
     )
 }
