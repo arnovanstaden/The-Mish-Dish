@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { getUser, logoutUser, checkLoggedIn } from "../utils/user";
-import { subscribeUserPush } from "../utils/pwa";
 import { isMobileSafari, isIOS, isMobile } from "react-device-detect";
 
 
