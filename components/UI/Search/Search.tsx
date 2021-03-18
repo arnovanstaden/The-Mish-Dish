@@ -13,12 +13,13 @@ export default function Search({ reroute, handleInstantSearch }: ISearchProps) {
     const router = useRouter()
 
     const instantSearch = (e) => {
-        let searchTerm = e.target.value.toLowerCase();
+        let searchTerm = e.target.value.toLowerCase().trim();
+        console.log(searchTerm)
         handleInstantSearch(searchTerm)
     }
 
     const submitSearch = (e) => {
-        let searchTerm = e.target.value.toLowerCase();
+        let searchTerm = e.target.value.toLowerCase().trim();
         if (e.key === "Enter") {
             router.push(`/recipes/?${searchTerm}`)
         }
