@@ -6,8 +6,7 @@ let urlsToCache = [
 // Offline
 
 self.addEventListener('install', function (event) {
-    // update
-    // Perform install steps
+    self.skipWaiting();
     event.waitUntil(
         caches.open(CACHE_NAME)
             .then(function (cache) {
@@ -56,11 +55,6 @@ self.addEventListener('notificationclick', function (e) {
     //     notification.close();
     // }
 });
-
-
-
-
-
 
 function displayNotification(notification) {
     const options = {
