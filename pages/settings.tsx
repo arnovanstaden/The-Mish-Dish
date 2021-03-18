@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { getUser, logoutUser, checkLoggedIn } from "../utils/user";
+import { getNotificationPermission } from "../utils/pwa";
 import { isMobileSafari } from "react-device-detect";
 
 
@@ -24,6 +25,7 @@ export default function settings() {
                 })
                 .catch(err => console.log(err))
         }
+        console.log(getNotificationPermission())
     }, [])
 
     // Handlers
