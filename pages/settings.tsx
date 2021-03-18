@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { getUser, logoutUser, checkLoggedIn } from "../utils/user";
+import { subscribeUserPush } from "../utils/pwa";
 import { isMobileSafari } from "react-device-detect";
 
 
@@ -103,7 +104,7 @@ export default function settings() {
 
             {showPrompt ? <InstallPrompt handlePromptClose={handlePromptClose} /> : null}
             { showLogin ? <Login handleLoginSuccess={handleLoginSuccess} /> : null}
-
+            <button onClick={subscribeUserPush}>Notifications</button>
         </Layout >
     )
 }

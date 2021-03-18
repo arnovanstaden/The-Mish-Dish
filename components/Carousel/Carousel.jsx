@@ -58,8 +58,6 @@ class RecipeSlider extends Component {
     }
 
     render() {
-        console.log(this.props.isDesktop)
-
         const settings = {
             dots: false,
             arrows: false,

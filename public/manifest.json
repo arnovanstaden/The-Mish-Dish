@@ -17,5 +17,7 @@
         "purpose": "maskable",
         "type": "image/svg"
     }],
-    "splash_pages": null
+    "splash_pages": null,
+    "gcm_sender_id": "173088408875",
+    "gcm_user_visible_only": true
 }
