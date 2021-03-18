@@ -78,11 +78,10 @@ export const checkSubscription = async () => {
                 return reg.pushManager.getSubscription()
                     .then(function (subscription) {
                         if (subscription === null) {
-                            subscribed = false;
                             return false
                         } else {
-                            subscribed = true;
-                            handleUserSubscription("subscribe", false)
+                            // Ensure Updated
+                            handleUserSubscription("subscribe", false);
                             return true
                         }
                     })
@@ -100,32 +99,49 @@ export const checkSubscription = async () => {
 export const handleUserSubscription = (status: string, notify: boolean) => {
     if ('serviceWorker' in navigator) {
         navigator.serviceWorker.ready.then(function (reg) {
-            reg.pushManager.subscribe({
-                userVisibleOnly: true,
-                applicationServerKey: urlBase64ToUint8Array(process.env.NEXT_PUBLIC_APPLICATION_SERVER_KEY)
-            }).then(function (pushSubscription) {
-                // Send Subscription
-                axios({
-                    method: "post",
-                    url: `${API_URL}/profile/subscribe`,
-                    data: {
-                        status,
-                        pushSubscription,
-                        notify
+            if (status === "subscribe") {
+                reg.pushManager.subscribe({
+                    userVisibleOnly: true,
+                    applicationServerKey: urlBase64ToUint8Array(process.env.NEXT_PUBLIC_APPLICATION_SERVER_KEY)
+                }).then(function (pushSubscription) {
+                    sendToServer(status, pushSubscription, notify)
+                }).catch(function (e) {
+                    if (Notification.permission === 'denied') {
+                        alert('You first need to enable notifications');
+                    } else {
+                        console.error('Unable to subscribe to push', e);
                     }
-                })
+                });
+            } else {
+                reg.pushManager.getSubscription()
+                    .then(function (subscription) {
+                        subscription.unsubscribe().then(function (successful) {
+                            sendToServer(status, subscription, notify)
+                            console.log("Unsubscribed from Push")
+                        })
+                            .catch(err => console.log(err))
+                    })
                     .catch(function (err) {
                         console.log(err)
                     });
+            }
 
-            }).catch(function (e) {
-                if (Notification.permission === 'denied') {
-                    console.warn('Permission for notifications was denied');
-                } else {
-                    console.error('Unable to subscribe to push', e);
-                }
-            });
         })
+    }
+
+    function sendToServer(status, pushSubscription, notify) {
+        axios({
+            method: "post",
+            url: `${API_URL}/profile/subscribe`,
+            data: {
+                status,
+                pushSubscription,
+                notify
+            }
+        })
+            .catch(function (err) {
+                console.log(err)
+            });
     }
 }
 

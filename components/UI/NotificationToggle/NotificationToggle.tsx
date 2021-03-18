@@ -22,10 +22,8 @@ export default function NotificationToggle() {
     }
 
     useEffect(() => {
-        checkSubscription().then(subscribedStatus => {
-            if (subscribedStatus) {
-                setStatus(true)
-            }
+        checkSubscription().then(currentStatus => {
+            setStatus(currentStatus)
         })
     }, [])
 
