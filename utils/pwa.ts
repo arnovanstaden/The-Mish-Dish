@@ -56,19 +56,19 @@ export const registerServiceWorker = () => {
 // Notifications - Setup
 
 export const requestNotificationPermission = () => {
-    if (Notification) {
-        Notification.requestPermission()
-    }
+    // if (Notification) {
+    //     Notification.requestPermission()
+    // }
 }
 
 
-export const notificationsPermitted = () => {
-    if (Notification.permission == 'granted') {
-        return true
-    } else {
-        return false
-    }
-}
+// export const notificationsPermitted = () => {
+//     if (Notification.permission == 'granted') {
+//         return true
+//     } else {
+//         return false
+//     }
+// }
 
 function checkSubscription() {
     if ('serviceWorker' in navigator) {
