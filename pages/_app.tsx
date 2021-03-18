@@ -1,4 +1,4 @@
-import { installPrompt, registerServiceWorker, notificationPermission } from "../utils/pwa";
+import { installPrompt, registerServiceWorker, requestNotificationPermission } from "../utils/pwa";
 import { useEffect } from "react";
 // Components
 import PageTemplate from "../components/PageTemplate/PageTemplate";
@@ -14,7 +14,7 @@ function MyApp({ Component, pageProps }) {
   useEffect(() => {
     installPrompt();
     registerServiceWorker();
-    notificationPermission()
+    requestNotificationPermission()
   }, [])
 
   return (

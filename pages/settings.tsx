@@ -25,7 +25,6 @@ export default function settings() {
                 })
                 .catch(err => console.log(err))
         }
-        console.log(getNotificationPermission())
     }, [])
 
     // Handlers
@@ -105,6 +104,7 @@ export default function settings() {
 
             {showPrompt ? <InstallPrompt handlePromptClose={handlePromptClose} /> : null}
             { showLogin ? <Login handleLoginSuccess={handleLoginSuccess} /> : null}
+
         </Layout >
     )
 }

@@ -37,12 +37,24 @@ export const registerServiceWorker = () => {
     }
 }
 
-export const notificationPermission = () => {
+
+
+export const requestNotificationPermission = () => {
     Notification.requestPermission(function (status) {
-        // if (Notification.permission == 'granted') {
-        //     displayNotification()
-        // }
+        sendWelcomeNotification()
     });
+}
+
+function sendWelcomeNotification() {
+    let previouslySent = JSON.parse(localStorage.getItem("sendWelcomeNotification"))
+    if (Notification.permission == 'granted' && !previouslySent) {
+        let notification = {
+            title: "New Recipes",
+            text: "You will be notified when new recipes are added to The Mish Dish",
+        }
+        displayNotification(notification);
+        localStorage.setItem("sendWelcomeNotification", JSON.stringify(true))
+    }
 }
 
 export const getNotificationPermission = () => {
@@ -53,7 +65,16 @@ export const getNotificationPermission = () => {
     }
 }
 
-export const displayNotification = (text, action) => {
+interface INotification {
+    title: string;
+    text: string;
+    action?: {
+        action: string;
+        title: string;
+    }
+}
+
+export const displayNotification = ({ title, text, action }: INotification) => {
     navigator.serviceWorker.getRegistration().then(function (reg) {
         const options = {
             body: text,
@@ -63,11 +84,11 @@ export const displayNotification = (text, action) => {
                 dateOfArrival: Date.now(),
                 primaryKey: 1
             },
-            actions: [
-                action
-            ]
+            // actions: [
+            //     action
+            // ]
         };
-        reg.showNotification('New Recipes', options);
+        reg.showNotification(title, options);
     });
 }
 
