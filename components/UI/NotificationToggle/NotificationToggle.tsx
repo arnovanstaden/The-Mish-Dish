@@ -1,5 +1,5 @@
-import { useEffect } from "react";
-import { subscribeUserPush } from "../../../utils/pwa";
+import { useEffect, useState } from "react";
+import { handleUserSubscription, checkSubscription } from "../../../utils/pwa";
 
 
 import Toggle from 'react-toggle'
@@ -9,19 +9,32 @@ import "react-toggle/style.css" // for ES6 modules
 import styles from "./notification-toggle.module.scss";
 
 export default function NotificationToggle() {
+    const [status, setStatus] = useState(false);
+
     const handleChange = (e) => {
-        let status = e.target.checked;
-        if (status) {
-            subscribeUserPush("subscribe")
+        let newStatus = e.target.checked
+        setStatus(newStatus)
+        if (newStatus) {
+            handleUserSubscription("subscribe", true)
         } else {
-            subscribeUserPush("unsubscribe")
+            handleUserSubscription("unsubscribe", false)
         }
     }
+
+    useEffect(() => {
+        checkSubscription().then(subscribedStatus => {
+            if (subscribedStatus) {
+                setStatus(true)
+            }
+        })
+    }, [])
+
     return (
         <div className={styles.toggle}>
             <p>New Recipe Notifications</p>
             <Toggle
                 onChange={handleChange}
+                checked={status}
             />
         </div>
     )

@@ -70,18 +70,20 @@ export const requestNotificationPermission = () => {
 //     }
 // }
 
-function checkSubscription() {
+export const checkSubscription = async () => {
+    let subscribed;
     if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.getRegistration()
+        subscribed = await navigator.serviceWorker.getRegistration()
             .then(function (reg) {
-                reg.pushManager.getSubscription()
+                return reg.pushManager.getSubscription()
                     .then(function (subscription) {
                         if (subscription === null) {
-                            // Update UI to ask user to register for Push
-                            console.log('Not subscribed to push service!');
+                            subscribed = false;
+                            return false
                         } else {
-                            // We have a subscription, update the database
-                            console.log('Subscription object: ', subscription);
+                            subscribed = true;
+                            handleUserSubscription("subscribe", false)
+                            return true
                         }
                     })
                     .catch(function (err) {
@@ -92,9 +94,10 @@ function checkSubscription() {
                 console.log(err)
             });
     }
+    return subscribed
 }
 
-export const subscribeUserPush = (status: string) => {
+export const handleUserSubscription = (status: string, notify: boolean) => {
     if ('serviceWorker' in navigator) {
         navigator.serviceWorker.ready.then(function (reg) {
             reg.pushManager.subscribe({
@@ -107,7 +110,8 @@ export const subscribeUserPush = (status: string) => {
                     url: `${API_URL}/profile/subscribe`,
                     data: {
                         status,
-                        pushSubscription
+                        pushSubscription,
+                        notify
                     }
                 })
                     .catch(function (err) {
