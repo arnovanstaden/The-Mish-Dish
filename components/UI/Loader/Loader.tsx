@@ -5,7 +5,7 @@ export default function Loader() {
     const phrases = [
         "Adding some more salt...",
         "Adding some fresh chilli...",
-        "Spotify: Play Fleetwood",
+        "Spotify: Play Fleetwood Mac",
         "Pouring another glass of wine...",
     ]
 

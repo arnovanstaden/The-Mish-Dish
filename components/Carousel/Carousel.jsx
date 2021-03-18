@@ -1,6 +1,5 @@
 import { Component } from "react";
-import Slider from "react-slick";
-import { useEffect } from "react";
+import Slider, { Settings } from 'react-slick';
 import { useMediaQuery } from "react-responsive";
 
 // Components
@@ -11,13 +10,8 @@ import styles from "./carousel.module.scss";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-interface ISlider {
-    type: "Recommended" | "Meal Types" | "Recently Added" | "Recently Viewed";
-    mealType?: string;
-    recipes: any[]
-}
-
-export default function Carousel({ type, mealType, recipes }: ISlider) {
+export default function Carousel(props) {
+    const { type, recipes, mealType } = props
     const isDesktop = useMediaQuery({ query: '(min-width: 769px)' });
     let recipesToRender = [];
     const sliderItemsCount = isDesktop ? 9 : 6

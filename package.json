@@ -8,6 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@types/react-slick": "^0.23.4",
     "axios": "^0.21.1",
     "classnames": "^2.2.6",
     "i": "^0.3.6",

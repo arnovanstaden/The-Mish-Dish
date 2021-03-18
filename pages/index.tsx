@@ -48,7 +48,7 @@ export default function Home({ recipes }) {
       <section className={styles.group}>
         <TypeSlider handleTypeCarousel={handleTypeCarousel} />
         <div className={styles.carousel}>
-          <Carousel type="Meal Types" mealType={typeCarousel} recipes={recipes} />
+          <Carousel type="Meal Types" recipes={recipes} mealType={typeCarousel} />
         </div>
       </section>
 

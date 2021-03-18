@@ -11,4 +11,11 @@ module.exports = withPWA({
     images: {
         domains: ['res.cloudinary.com'],
     }
-})
+});
+
+// Old
+// module.exports = {
+//     images: {
+//         domains: ['res.cloudinary.com'],
+//     },
+// }
