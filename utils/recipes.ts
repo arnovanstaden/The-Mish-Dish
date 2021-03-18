@@ -17,7 +17,7 @@ export const getIngredientCount = (ingredients) => {
 
 export const searchRecipes = (allRecipes: any[], searchTerm: string) => {
     let results = [];
-    const searchKeys = ["name", "description", "recipeType"];
+    const searchKeys = ["name", "recipeType", "diet"];
 
     allRecipes.forEach(recipe => {
 
