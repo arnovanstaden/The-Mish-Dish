@@ -14,7 +14,6 @@ export default function Search({ reroute, handleInstantSearch }: ISearchProps) {
 
     const instantSearch = (e) => {
         let searchTerm = e.target.value.toLowerCase().trim();
-        console.log(searchTerm)
         handleInstantSearch(searchTerm)
     }
 
