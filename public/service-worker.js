@@ -37,13 +37,13 @@ self.addEventListener('notificationclick', function (e) {
     const primaryKey = notification.data.primaryKey;
     const action = e.action;
 
-    if (action === 'close') {
-        notification.close();
-    } else {
-        console.log("opening new recipe")
-        clients.openWindow('http://www.example.com');
-        notification.close();
-    }
+    // if (action === 'close') {
+    //     notification.close();
+    // } else {
+    //     console.log("opening new recipe")
+    //     clients.openWindow('http://www.example.com');
+    //     notification.close();
+    // }
 });
 
 
