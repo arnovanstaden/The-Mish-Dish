@@ -30,8 +30,34 @@ export const installPrompt = () => {
         });
     }
 }
+
 export const registerServiceWorker = () => {
     if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('/service-worker.js')
     }
 }
+
+export const notificationPermission = () => {
+    Notification.requestPermission(function (status) {
+        console.log('Notification permission status:', status);
+        if (Notification.permission == 'granted') {
+            displayNotification()
+        }
+    });
+}
+
+export const displayNotification = () => {
+    navigator.serviceWorker.getRegistration().then(function (reg) {
+        const options = {
+            body: 'You will be notified when new recipes are added to The Mish Dish.',
+            icon: '/images/Logo.png',
+            vibrate: [100, 50, 100],
+            data: {
+                dateOfArrival: Date.now(),
+                primaryKey: 1
+            }
+        };
+        reg.showNotification('New Recipes', options);
+    });
+}
+
