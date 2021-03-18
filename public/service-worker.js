@@ -21,7 +21,6 @@ self.addEventListener('fetch', function (event) {
     event.respondWith(
         caches.match(event.request)
             .then(function (response) {
-                // Cache hit - return response
                 if (response) {
                     return response;
                 }
@@ -66,6 +65,7 @@ self.addEventListener('notificationclick', function (e) {
 function displayNotification(notification) {
     const options = {
         body: notification.text,
+        badge: '/images/logo-transparent-small.png',
         icon: '/images/icon.png',
         vibrate: [100, 50, 100],
         data: {
