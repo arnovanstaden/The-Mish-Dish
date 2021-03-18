@@ -56,8 +56,9 @@ export const registerServiceWorker = () => {
 // Notifications - Setup
 
 export const requestNotificationPermission = () => {
-    Notification.requestPermission(function (status) {
-    });
+    if (Notification) {
+        Notification.requestPermission()
+    }
 }
 
 

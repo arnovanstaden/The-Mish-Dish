@@ -59,7 +59,7 @@ self.addEventListener('notificationclick', function (e) {
 function displayNotification(notification) {
     const options = {
         body: notification.text,
-        badge: '/images/logo-transparent-small.png',
+        badge: '/images/favicon.png',
         icon: '/images/icon.png',
         vibrate: [100, 50, 100],
         data: {
