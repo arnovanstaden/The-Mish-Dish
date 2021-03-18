@@ -42,7 +42,6 @@ export default function Recipe({ recipe }) {
         } else {
             setCurrentImage(imageArray[0])
         }
-        console.log(currentImage)
     }
 
     const handleFavourite = (id) => {

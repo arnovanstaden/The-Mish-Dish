@@ -263,5 +263,14 @@
         }
     }
 
+    @media screen and (min-height: 1200px) {
+        .grid {
+            .image {
+                min-height: 30vh;
+                max-height: 40vh;
+            }
+        }
+    }
+
 
 }
