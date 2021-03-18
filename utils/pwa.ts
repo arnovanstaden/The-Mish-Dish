@@ -1,7 +1,6 @@
 import installStyles from "../components/UI/Install/install.module.scss"
 
 export const installPrompt = () => {
-    console.log("Install Prompt")
     let deferredPrompt;
 
     window.addEventListener('beforeinstallprompt', (e) => {
@@ -15,7 +14,6 @@ export const installPrompt = () => {
     });
 
     const showInstallModal = () => {
-        console.log("Asking to Install")
         // Show Install Modal
         let modal = document.getElementsByClassName(installStyles.install)[0] as HTMLElement;
         modal.classList.add(installStyles.show);
