@@ -31,43 +31,44 @@ self.addEventListener('fetch', function (event) {
 
 // Notifications
 
-// self.addEventListener('push', function (e) {
-//     console.log(e.data)
-//     const notification = {
-//         title: "New Recipes",
-//         text: "You will be notified when new recipes are added to The Mish Dish!",
-//     }
-//     e.waitUntil(
-//         displayNotification(notification)
-//     );
-// });
+self.addEventListener('push', function (e) {
+    const notification = JSON.parse(e.data.text());
+    e.waitUntil(
+        displayNotification(notification)
+    );
+});
 
-// self.addEventListener('notificationclick', function (e) {
-//     const notification = e.notification;
-//     const primaryKey = notification.data.primaryKey;
-//     const action = e.action;
+function displayNotification(notification) {
+    const options = {
+        body: notification.text,
+        badge: '/images/favicon.png',
+        icon: '/images/icon.png',
+        vibrate: [100, 50, 100],
+        data: {
+            dateOfArrival: Date.now(),
+            primaryKey: notification.primaryKey,
+            url: notification.url
+        }
+    };
 
-//     // if (action === 'close') {
-//     //     notification.close();
-//     // } else {
-//     //     console.log("opening new recipe")
-//     //     clients.openWindow('http://www.example.com');
-//     //     notification.close();
-//     // }
-// });
+    notification.action ? options[actions] === notification.action : null;
+    self.registration.showNotification(notification.title, options)
+}
 
-// function displayNotification(notification) {
-//     const options = {
-//         body: notification.text,
-//         badge: '/images/favicon.png',
-//         icon: '/images/icon.png',
-//         vibrate: [100, 50, 100],
-//         data: {
-//             dateOfArrival: Date.now(),
-//             primaryKey: 1
-//         },
-//     };
 
-//     notification.action ? options[actions] === notification.action : null;
-//     self.registration.showNotification(notification.title, options)
-// }
+// New Recipes
+self.addEventListener('notificationclick', function (e) {
+    console.log(e)
+    const notification = e.notification;
+    const primaryKey = notification.data.primaryKey;
+    const action = e.action;
+
+    if (action === 'close') {
+        notification.close();
+    } else {
+        if (primaryKey === 2) {
+            clients.openWindow(notification.data.url);
+        }
+        notification.close();
+    }
+});

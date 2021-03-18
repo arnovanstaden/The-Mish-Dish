@@ -56,9 +56,9 @@ export const registerServiceWorker = () => {
 // Notifications - Setup
 
 export const requestNotificationPermission = () => {
-    // if (Notification) {
-    //     Notification.requestPermission()
-    // }
+    if ("Notification" in window) {
+        Notification.requestPermission()
+    }
 }
 
 
@@ -94,18 +94,21 @@ function checkSubscription() {
     }
 }
 
-export const subscribeUserPush = () => {
+export const subscribeUserPush = (status: string) => {
     if ('serviceWorker' in navigator) {
         navigator.serviceWorker.ready.then(function (reg) {
             reg.pushManager.subscribe({
                 userVisibleOnly: true,
                 applicationServerKey: urlBase64ToUint8Array(process.env.NEXT_PUBLIC_APPLICATION_SERVER_KEY)
-            }).then(function (sub) {
+            }).then(function (pushSubscription) {
                 // Send Subscription
                 axios({
                     method: "post",
                     url: `${API_URL}/profile/subscribe`,
-                    data: sub
+                    data: {
+                        status,
+                        pushSubscription
+                    }
                 })
                     .catch(function (err) {
                         console.log(err)
@@ -134,16 +137,4 @@ interface INotification {
     }
 }
 
-
-// function sendWelcomeNotification() {
-//     let previouslySent = JSON.parse(localStorage.getItem("sendWelcomeNotification"))
-//     if (Notification.permission == 'granted' && !previouslySent) {
-//         let notification = {
-//             title: "New Recipes",
-//             text: "You will be notified when new recipes are added to The Mish Dish",
-//         }
-//         displayNotification(notification);
-//         localStorage.setItem("sendWelcomeNotification", JSON.stringify(true))
-//     }
-// }
 

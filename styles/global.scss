@@ -200,3 +200,18 @@ input {
     display: none;
   }
 }
+
+
+// React Toggle 
+.react-toggle-track {
+  background-color: $blue !important;
+}
+
+.react-toggle--checked .react-toggle-track {
+  background-color: $yellow !important;
+}
+
+.react-toggle-thumb {
+  box-shadow: none !important;
+  border-color: transparent !important;
+}

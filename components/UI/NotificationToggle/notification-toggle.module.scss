@@ -1,0 +1,13 @@
+@import "../../../styles/variables.scss";
+
+.toggle {
+    display: flex;
+    justify-content: space-between;
+    margin: 1rem 0;
+    align-items: center;
+
+    p {
+        font-weight: 600;
+        font-size: 0.95rem;
+    }
+}

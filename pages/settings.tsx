@@ -1,13 +1,14 @@
 import { useState, useEffect } from "react";
 import { getUser, logoutUser, checkLoggedIn } from "../utils/user";
 import { subscribeUserPush } from "../utils/pwa";
-import { isMobileSafari } from "react-device-detect";
+import { isMobileSafari, isIOS, isMobile } from "react-device-detect";
 
 
 // Components
 import Layout from "../components/Layout/Layout";
 import Login from "../components/UI/Login/Login";
 import InstallPrompt from "../components/UI/InstallPromt/InstallPrompt";
+import NotificationToggle from "../components/UI/NotificationToggle/NotificationToggle";
 
 // Styles
 import styles from "../styles/pages/settings.module.scss"
@@ -92,6 +93,8 @@ export default function settings() {
                 </div>
             </div>
 
+            {isMobile && !isIOS ? <NotificationToggle /> : null}
+
 
             {/* iOS Install prompt */}
 
@@ -104,7 +107,6 @@ export default function settings() {
 
             {showPrompt ? <InstallPrompt handlePromptClose={handlePromptClose} /> : null}
             { showLogin ? <Login handleLoginSuccess={handleLoginSuccess} /> : null}
-            {/* <button onClick={subscribeUserPush}>Notifications</button> */}
         </Layout >
     )
 }
