@@ -1,5 +1,5 @@
 import Head from "../Head/Head";
-import { IHead } from "../Head/Head"
+import { IHead } from "../Head/Head";
 
 interface ILayout {
     children: React.ReactNode;
@@ -9,6 +9,7 @@ interface ILayout {
 }
 
 export default function Layout(props: ILayout) {
+
     return (
         <>
             <Head {...props.head} />

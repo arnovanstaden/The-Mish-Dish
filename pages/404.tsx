@@ -13,7 +13,7 @@ export default function PageNotFound() {
             <div className="not-found">
                 <div>
                     <h1>4</h1>
-                    <img src="images/favicon.svg" alt="" />
+                    <img src="/images/favicon.svg" alt="" />
                     <h1>4</h1>
                 </div>
                 <h3>This page does not exist</h3>
