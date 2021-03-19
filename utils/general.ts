@@ -22,7 +22,6 @@ export const handleRecipeShare = (name: string, id: string) => {
             text: `Check out this awesome recipe on The Mish Dish:\n ${name}\n`,
             url: `https://themishdish.co.za/recipes/${id}`,
         })
-            .then(() => console.log('Successful share'))
             .catch((error) => console.log('Error sharing', error));
     }
 }

@@ -43,15 +43,11 @@ export const registerServiceWorker = () => {
             .then(function (registration) {
                 registration.addEventListener('updatefound', function () {
                     var installingWorker = registration.installing;
-                    console.log('A new service worker is being installed:',
-                        installingWorker);
                 });
             })
             .catch(function (error) {
-                console.log('Service worker registration failed:', error);
+                console.log(error);
             });
-    } else {
-        console.log('Service workers are not supported.');
     }
 }
 
@@ -119,7 +115,6 @@ export const handleUserSubscription = (status: string, notify: boolean) => {
                     .then(function (subscription) {
                         subscription.unsubscribe().then(function (successful) {
                             sendToServer(status, subscription, notify)
-                            console.log("Unsubscribed from Push")
                         })
                             .catch(err => console.log(err))
                     })

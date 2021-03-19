@@ -52,7 +52,6 @@ export default function Favourites({ allRecipes }) {
 
     const handleInstantSearch = (searchTerm: string) => {
         const result = searchRecipes(favourites, searchTerm);
-        console.log(result)
         return setSearchResults(result);
     }
 

@@ -63,7 +63,6 @@ export default function Recipes({ allRecipes }) {
     // Sort
     const handleSort = (sortBy: string) => {
         const sortedRecipes = sortRecipes([...recipes], sortBy);
-        console.log(sortedRecipes);
         if (sortedRecipes) {
             setRecipes(sortedRecipes)
         }

@@ -10,7 +10,6 @@ self.addEventListener('install', function (event) {
     event.waitUntil(
         caches.open(CACHE_NAME)
             .then(function (cache) {
-                console.log('Opened cache');
                 return cache.addAll(urlsToCache);
             })
     );
@@ -58,7 +57,6 @@ function displayNotification(notification) {
 
 // New Recipes
 self.addEventListener('notificationclick', function (e) {
-    console.log(e)
     const notification = e.notification;
     const primaryKey = notification.data.primaryKey;
     const action = e.action;
