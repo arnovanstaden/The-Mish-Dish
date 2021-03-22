@@ -1,13 +1,3 @@
-// Image Conversion
-export const convertImage = (image: string, width: number | string): string => {
-    if (process.env.NEXT_PUBLIC_ENVIRONMENT === "production") {
-        const covertedImage = image.replace("upload/v", `upload/f_auto/v`);
-        return covertedImage
-    } else {
-        return image
-    }
-}
-
 // Text Manipulation
 export const capitalize = (word: string) => {
     if (typeof word !== 'string') return ''

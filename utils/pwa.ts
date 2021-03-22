@@ -142,16 +142,3 @@ export const handleUserSubscription = (status: string, notify: boolean) => {
     }
 }
 
-// Display Notification
-
-
-interface INotification {
-    title: string;
-    text: string;
-    action?: {
-        action: string;
-        title: string;
-    }
-}
-
-
