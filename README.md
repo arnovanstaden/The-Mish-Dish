@@ -14,19 +14,19 @@ You can visit the site [here](https://www.themishdish.co.za).
 
 ## Additional Information
 
-#### Type
+### Type
 Full Stack PWA
 
-#### Tech Stack
+### Tech Stack
 * React
 * SASS
 * NextJS
 * TypeScript
 
-#### Industry
+### Industry
 Food | Recipe Blog
 
-#### Date
+### Date
 February 2021
 
 
