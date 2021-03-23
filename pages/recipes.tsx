@@ -21,7 +21,7 @@ export default function Recipes({ allRecipes }) {
 
     // Filters
     const handleFilterShow = () => {
-        setShowFilter(!showFilter);
+        setShowFilter((showFilter) => !showFilter);
         const body = document.body;
         body.classList.toggle("no-scroll");
     }
