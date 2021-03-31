@@ -1,18 +1,8 @@
-let CACHE_NAME = 'my-cache';
-let urlsToCache = [
-    '.'
-];
-
 // Offline
 
 self.addEventListener('install', function (event) {
+
     self.skipWaiting();
-    event.waitUntil(
-        caches.open(CACHE_NAME)
-            .then(function (cache) {
-                return cache.addAll(urlsToCache);
-            })
-    );
 });
 
 self.addEventListener('fetch', function (event) {
