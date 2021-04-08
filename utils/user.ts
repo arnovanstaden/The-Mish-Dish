@@ -96,7 +96,7 @@ export const checkIfFavourite = (id): boolean => {
     return false
 }
 
-export const updateFavourite = (id: string, remove: boolean) => {
+export const updateFavourite = (id: string, remove?: boolean) => {
     const favouritesList = getFavouritesList()
     let newFavourites = [];
 
