@@ -96,18 +96,29 @@ export const checkIfFavourite = (id): boolean => {
     return false
 }
 
-export const updateFavourite = (id: string) => {
+export const updateFavourite = (id: string, remove: boolean) => {
     const favouritesList = getFavouritesList()
     let newFavourites = [];
+
+
+
     if (favouritesList) {
-        if (favouritesList.includes(id)) {
+        // Remove if recipe doesn't exist
+        if (remove) {
+            newFavourites = [...favouritesList].filter(favourite => favourite != id);
+        }
+        // Remove if already in
+        else if (favouritesList.includes(id)) {
             newFavourites = [...favouritesList].filter(favourite => favourite != id);
         } else {
+            // Add new to existing array
             newFavourites = [...favouritesList, id];
         }
     } else {
+        // Start new favourites array
         newFavourites.push(id)
     }
+
     localStorage.setItem("favourites", JSON.stringify(newFavourites))
 
     axios({

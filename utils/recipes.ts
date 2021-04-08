@@ -1,3 +1,5 @@
+import { updateFavourite } from "./user";
+
 // Get Ingredient Count
 export const getIngredientCount = (ingredients) => {
     let count = 0;
@@ -160,7 +162,12 @@ export const getFullRecipes = (allRecipes, ids) => {
     let fullRecipes = [];
     ids.forEach(id => {
         let recipe = allRecipes.find(recipe => recipe.id === id);
-        fullRecipes.push(recipe)
+        if (recipe) {
+            fullRecipes.push(recipe)
+        } else {
+            // remove from favourites
+            updateFavourite(id, true)
+        }
     })
     return fullRecipes
 }

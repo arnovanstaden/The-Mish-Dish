@@ -21,6 +21,7 @@ interface IRecipeProps {
 }
 
 export default function Recipe({ recipe, carouselItem }: IRecipeProps) {
+
     let [isFavourite, setIsFavourite] = useState(undefined)
 
     const recipeClasses = ClassNames(
