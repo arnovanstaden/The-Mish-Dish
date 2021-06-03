@@ -13,6 +13,8 @@ import Filter from "../components/Filter/Filter";
 import styles from "../styles/pages/recipes.module.scss";
 
 export default function Recipes({ allRecipes }) {
+    console.log(typeof allRecipes)
+
     const [showFilter, setShowFilter] = useState(false);
     const [recipes, setRecipes] = useState(allRecipes);
     const [currentFilters, setCurrentFilters] = useState(null)
